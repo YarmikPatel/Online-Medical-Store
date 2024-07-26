@@ -6,12 +6,12 @@ $dbname="medical_store";
 
 //create connection
 
-$con = new mysqli($servername,$username,$password,$dbname);
+$conn = new mysqli($servername,$username,$password,$dbname);
 
 //check connection
 
-if($con->connect_error){
-        die("commection failed :" .$con->connect_error);
+if($conn->connect_error){
+        die("commection failed :" .$conn->connect_error);
 }else{
     echo "Connection succesfully with apache server!";
 }
