@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include ('connection.php');
 
 // Fetch products from the database
 $sql = "SELECT * FROM products";
