@@ -1,5 +1,9 @@
 <?php
+<<<<<<< Updated upstream
 include ('connection.php');
+=======
+include 'xyz.php';
+>>>>>>> Stashed changes
 
 // Fetch products from the database
 $sql = "SELECT * FROM products";
