@@ -12,18 +12,18 @@ include ('connection.php');
 </head>
 <body>
     <header>
-        <h1>Welcome to Our Online Medical Store</h1>
+        <h1>Admin, welcome to our <strong>MedPlus Pharmacy</strong></h1>
     </header>
     <main>
-        <h2>Admin Sign in</h2>
+        <h2>Admin verification</h2>
         <div>
-            <form action="" method="post" class="login">
+            <form action="" method="post" class="verify">
                 <div class="inputBx" id="admincode">
                     Enter admin code
                     <input type="text" name="code" id="acode">
                 </div>
                 <div class="inputBx" id="submit">
-                    <input type="submit" value="Sign in">
+                    <input type="submit" value="Verify passcode">
                 </div>
             </form>
         </div>
