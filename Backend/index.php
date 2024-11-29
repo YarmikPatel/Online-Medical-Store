@@ -1,7 +1,5 @@
 <?php
 include ('connection.php');
-
-
 ?>
 
 <!DOCTYPE html>
@@ -16,13 +14,20 @@ include ('connection.php');
     <header>
         <h1>Welcome to Our Online Medical Store</h1>
     </header>
-
-    
-
     <main>
-        
+        <h2>Admin Sign in</h2>
+        <div>
+            <form action="" method="post" class="login">
+                <div class="inputBx" id="admincode">
+                    Enter admin code
+                    <input type="text" name="code" id="acode">
+                </div>
+                <div class="inputBx" id="submit">
+                    <input type="submit" value="Sign in">
+                </div>
+            </form>
+        </div>
     </main>
-
     <footer>
         <p>&copy; 2024 Online Medical Store. All rights reserved.</p>
     </footer>
@@ -30,5 +35,27 @@ include ('connection.php');
 </html>
 
 <?php
-//$conn->close();
+$login = false;
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $code = $_POST["code"];
+    //SQL query to post data into database.
+    $sql = "Select * from admin_info where code='$code'";
+    $result = mysqli_query($conn,$sql);
+    $num = mysqli_num_rows($result);
+    //Verifying the data from database.
+    if($num >= 1){
+        $login = true;
+        session_start();
+        $_SESSION['loggedin']=true;
+        $_SESSION['code']=$code;
+        header("location:adminlogin.php");
+    }
+    else{
+        ?>
+        <script>
+            alert("Invalid Credentials");
+        </script>
+<?php
+    }
+}
 ?>
