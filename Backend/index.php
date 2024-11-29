@@ -1,13 +1,9 @@
 <?php
-<<<<<<< Updated upstream
 include ('connection.php');
-=======
-include 'xyz.php';
->>>>>>> Stashed changes
 
 // Fetch products from the database
-$sql = "SELECT * FROM products";
-$result = $conn->query($sql);
+//$sql = "SELECT * FROM products";
+//$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +29,8 @@ $result = $conn->query($sql);
 
     <main>
         <h2>Products</h2>
-        <div class="product-list">
-            <?php
+        <!--<div class="product-list">
+            
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<div class='product'>";
@@ -46,9 +42,9 @@ $result = $conn->query($sql);
                 }
             } else {
                 echo "<p>No products available.</p>";
-            }
-            ?>
-        </div>
+            }/
+            
+        </div>-->
     </main>
 
     <footer>
@@ -58,5 +54,5 @@ $result = $conn->query($sql);
 </html>
 
 <?php
-$conn->close();
+//$conn->close();
 ?>
