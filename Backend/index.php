@@ -29,7 +29,7 @@ include ('connection.php');
         </div>
     </main>
     <footer>
-        <p>&copy; 2024 Online Medical Store. All rights reserved.</p>
+        <p>Copyright &copy; 2024 of MedPlus. All rights reserved.<br>Created by Tirth Barot and Yarmik Kansagara.</p>
     </footer>
 </body>
 </html>
@@ -49,6 +49,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         //Set session variables
         $_SESSION['is_admin_logged_in']=true;
         $_SESSION['code']=$code;
+        $_SESSION['admin_last_activity'] = time();
         header("location:adminlogin.php");
     }
     else{

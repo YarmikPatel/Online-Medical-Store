@@ -1,5 +1,6 @@
 <?php
     include("connection.php");
+    include("admin_session.php");
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
 </head>
 <body>
     <header>
-        <h1>Way to MedPlus Pharmacy admin Dashboard</h1>
+        <h1>Way to MedPlus Pharmacy admin dashboard</h1>
     </header>
     <main>
         <h4>
@@ -35,3 +36,28 @@
     </main>
 </body>
 </html>
+
+<?php
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $admin_name = $_POST["admin_name"];
+    $apass = $_POST["apass"];
+    //SQL query to post data into database.
+    $sql = "Select * from admin_info where admin_name='$admin_name' AND apass='$apass'";
+    $result = mysqli_query($conn,$sql);
+    $num = mysqli_num_rows($result);
+    //Verifying the data from database.
+    if($num >= 1){
+        //Set session variables
+        $_SESSION['admin_name']=$admin_name;
+        $_SESSION['apass']=$apass;
+        header("location:admin_dashboard.php");
+    }
+    else{
+        ?>
+        <script>
+            alert("Invalid Credentials");
+        </script>
+<?php
+    }
+}
+?>
