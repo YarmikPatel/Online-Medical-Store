@@ -46,7 +46,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if($num >= 1){
         $login = true;
         session_start();
-        $_SESSION['loggedin']=true;
+        //Set session variables
+        $_SESSION['is_admin_logged_in']=true;
         $_SESSION['code']=$code;
         header("location:adminlogin.php");
     }
