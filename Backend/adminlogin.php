@@ -1,6 +1,5 @@
 <?php
-    include("connection.php");
-    include("admin_session.php");
+    include('connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin login - MedPlus Pharmacy</title>
-</head>
+</head> 
 <body>
     <header>
         <h1>Way to MedPlus Pharmacy admin dashboard</h1>
@@ -47,9 +46,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $num = mysqli_num_rows($result);
     //Verifying the data from database.
     if($num >= 1){
+        session_start();
         //Set session variables
         $_SESSION['admin_name']=$admin_name;
         $_SESSION['apass']=$apass;
+        $_SESSION['is_admin_logged_in'] = true;
+        $_SESSION['admin_last_activity'] = time();
         header("location:admin_dashboard.php");
     }
     else{

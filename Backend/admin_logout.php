@@ -8,6 +8,7 @@
     // Destory the current session
     session_destroy();
 
+    echo $_SESSION . " your session is ended, you are logged out";
     // Redirect to admin login page
     header('location: index.php');
 ?>
