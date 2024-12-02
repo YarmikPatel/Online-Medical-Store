@@ -49,6 +49,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         session_start();
         $_SESSION['code'] = $code;
         $_SESSION['is_admin_logged_in'] = true;
+        $_SESSION['admin_last_activity'] = time();
         header("location:adminlogin.php");
     }
     else{

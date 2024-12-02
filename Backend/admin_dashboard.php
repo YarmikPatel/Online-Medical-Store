@@ -1,7 +1,6 @@
 <?php
-    session_start();
-    include("connection.php");
-    include("admin_session.php");
+    include('admin_session.php');
+    include('connection.php');
     
     //Check if admin is logged in
     // if(!isset($_SESSION['is_admin_logged_in']) || $_SESSION['is_admin_logged_in'] !==true){

@@ -52,7 +52,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $_SESSION['admin_name']=$admin_name;
         $_SESSION['apass']=$apass;
         
-        $_SESSION['admin_last_activity'] = time();
         header("location:admin_dashboard.php");
     }
     else{
