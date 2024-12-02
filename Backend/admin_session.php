@@ -8,9 +8,9 @@
         exit();
     }
 
-    $admin_timeout = 10;
+    $admin_timeout = 900;
     if (isset($_SESSION['admin_last_activity']) && (time() - $_SESSION['admin_last_activity'] > $admin_timeout)) {
-        // If last activity is over 30 minutes ago
+        // If last activity is over 15 minutes ago
         session_unset();
         session_destroy();
         header('location: index.php?timeout=true');

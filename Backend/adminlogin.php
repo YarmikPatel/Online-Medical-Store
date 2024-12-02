@@ -1,5 +1,5 @@
 <?php
-    
+    include('admin_session.php');
     include('connection.php');
 ?>
 
@@ -25,8 +25,8 @@
                     <input type="text" name="admin_name" id="adname">
                 </div>
                 <div class="inputBx" id="apass">
-                    Enter admin pass
-                    <input type="text" name="apass" id="adpass">
+                    Enter admin password
+                    <input type="passwaord" name="apass" id="adpass">
                 </div>
                 <div class="inputBx" id="login">
                     <input type="submit" value="login">
@@ -51,7 +51,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         session_start();
         $_SESSION['admin_name']=$admin_name;
         $_SESSION['apass']=$apass;
-        
         header("location:admin_dashboard.php");
     }
     else{
