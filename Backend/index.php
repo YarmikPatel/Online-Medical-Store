@@ -1,4 +1,5 @@
 <?php
+
 include ('connection.php');
 ?>
 
@@ -45,6 +46,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     //Verifying the data from database.
     if($num >= 1){
         $login = true;
+        session_start();
+        $_SESSION['code'] = $code;
+        $_SESSION['is_admin_logged_in'] = true;
         header("location:adminlogin.php");
     }
     else{

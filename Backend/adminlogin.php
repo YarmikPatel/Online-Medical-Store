@@ -1,4 +1,5 @@
 <?php
+    
     include('connection.php');
 ?>
 
@@ -46,11 +47,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $num = mysqli_num_rows($result);
     //Verifying the data from database.
     if($num >= 1){
-        session_start();
         //Set session variables
+        session_start();
         $_SESSION['admin_name']=$admin_name;
         $_SESSION['apass']=$apass;
-        $_SESSION['is_admin_logged_in'] = true;
+        
         $_SESSION['admin_last_activity'] = time();
         header("location:admin_dashboard.php");
     }
