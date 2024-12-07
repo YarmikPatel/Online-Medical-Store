@@ -21,7 +21,7 @@ include ('connection.php');
             <form action="" method="post" class="verify">
                 <div class="inputBx" id="admincode">
                     Enter admin code
-                    <input type="text" name="code" id="acode">
+                    <input type="password" name="code" id="acode" require>
                 </div>
                 <div class="inputBx" id="submit">
                     <input type="submit" value="Verify passcode">
