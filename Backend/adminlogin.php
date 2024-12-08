@@ -53,6 +53,28 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         header("location:admin_dashboard.php");
     }
     else{
+<<<<<<< HEAD
+=======
+        ?>
+        <script>
+            function validateform(event){    //function for input validation
+                const admin_name =document.getElementById('adname').value.trim();  //
+                const admin_password = document.getElementById('adpass').value.trim();
+        
+                    if(admin_name == '' && admin_password == ''){
+                          alert('Field required');
+                         event.preventDefault(); // Stops form from submission
+                         return false;
+                    }else if(){
+                          alert('code must be of 8 characters ');
+                          event.preventDefault();
+                         return false;
+                    }
+                return true;
+            }
+        </script>
+<?php
+>>>>>>> 691dfde21361dac978420ad8f483c1f37e030942
     }
 }
 ?>
