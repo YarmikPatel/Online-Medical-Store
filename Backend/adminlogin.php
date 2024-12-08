@@ -18,7 +18,7 @@
             Admin login
         </h4>
         <div>
-            <form action="" method="post" class="login"></form>
+            <form action="" method="post" class="login">
                 <div class="inputBx" id="adminname">
                     Enter admin name
                     <input type="text" name="admin_name" id="adname">
@@ -55,13 +55,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     else{
         ?>
         <script>
-      
-             const validpass = document.getElementById('adpass').value.trim();
-
-             if(validpass == ''){
-                     alert('field required');
-              }else if( echo $_SESSION['admin_name'] != validpass){
-               alert('not match');
+            function validateform(event){    //function for input validation
+                const admin_name =document.getElementById('adname').value.trim();  //
+                const admin_password = document.getElementById('adpass').value.trim();
+        
+                    if(admin_name == '' && admin_password == ''){
+                          alert('Field required');
+                         event.preventDefault(); // Stops form from submission
+                         return false;
+                    }else if(){
+                          alert('code must be of 8 characters ');
+                          event.preventDefault();
+                         return false;
+                    }
+                return true;
             }
         </script>
 <?php
