@@ -54,9 +54,22 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
     else{
         ?>
-        <script>
-            alert("Invalid Credentials");
-        </script>
+       <script>
+                function validateform(event){    //function for input validation
+                const validcode =document.getElementById('acode').value.trim();  //
+        
+                  if(validcode == ''){
+                          alert('Field required');
+                         event.preventDefault(); // Stops form from submission
+                         return false;
+                 }else if(validcode.length() > 8 && validcode.length() < 8){
+                          alert('code must be of 8 characters ');
+                          event.preventDefault();
+                         return false;
+                }
+    return true;
+}
+</script>
 <?php
     }
 }
