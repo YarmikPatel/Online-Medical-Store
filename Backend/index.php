@@ -11,6 +11,7 @@ include ('connection.php');
     <title>Admin - MedPlus Pharmacy</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <h1>Admin, welcome to our <strong>MedPlus Pharmacy</strong></h1>
@@ -18,7 +19,7 @@ include ('connection.php');
     <main>
         <h2>Admin verification</h2>
         <div>
-            <form action="" method="post" class="verify">
+            <form action="" method="post" class="verify" onsubmit="return validateform(event)">
                 <div class="inputBx" id="admincode">
                     Enter admin code
                     <input type="password" name="code" id="acode" require>
@@ -30,7 +31,7 @@ include ('connection.php');
         </div>
     </main>
     <footer>
-        <p>Copyright &copy; 2024 of MedPlus. All rights reserved.<br>Created by Tirth Barot and Yarmik Kansagara.</p>
+        <p>2024 of MedPlus. All rights reserved.<br>Created by Tirth Barot and Yarmik Kansagara.</p>
     </footer>
 </body>
 </html>
@@ -55,8 +56,21 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     else{
         ?>
         <script>
-            alert("Invalid Credentials");
-        </script>
+                function validateform(event){    //function for input validation
+                const validcode =document.getElementById('acode').value.trim();  //
+        
+                  if(validcode == ''){
+                          alert('Field required');
+                         event.preventDefault(); // Stops form from submission
+                         return false;
+                 }else if(validcode.length() > 8 && validcode.length() < 8){
+                          alert('code must be of 8 characters ');
+                          event.preventDefault();
+                         return false;
+                }
+    return true;
+}
+</script>
 <?php
     }
 }
