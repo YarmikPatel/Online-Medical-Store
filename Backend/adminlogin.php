@@ -18,14 +18,14 @@
             Admin login
         </h4>
         <div>
-            <form action="" method="post" class="login">
+            <form action="" method="post" class="login"></form>
                 <div class="inputBx" id="adminname">
                     Enter admin name
                     <input type="text" name="admin_name" id="adname">
                 </div>
                 <div class="inputBx" id="apass">
                     Enter admin password
-                    <input type="passwaord" name="apass" id="adpass">
+                    <input type="password" name="apass" id="adpass">
                 </div>
                 <div class="inputBx" id="login">
                     <input type="submit" value="login">
@@ -54,22 +54,16 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
     else{
         ?>
-       <script>
-                function validateform(event){    //function for input validation
-                const validcode =document.getElementById('acode').value.trim();  //
-        
-                  if(validcode == ''){
-                          alert('Field required');
-                         event.preventDefault(); // Stops form from submission
-                         return false;
-                 }else if(validcode.length() > 8 && validcode.length() < 8){
-                          alert('code must be of 8 characters ');
-                          event.preventDefault();
-                         return false;
-                }
-    return true;
-}
-</script>
+        <script>
+      
+             const validpass = document.getElementById('adpass').value.trim();
+
+             if(validpass == ''){
+                     alert('field required');
+              }else if( echo $_SESSION['admin_name'] != validpass){
+               alert('not match');
+            }
+        </script>
 <?php
     }
 }
