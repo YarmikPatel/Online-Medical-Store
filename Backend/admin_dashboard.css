@@ -14,6 +14,7 @@ html, body{
 .menu{
     /* background-color: green; */
     display: flex;
+    flex-wrap:wrap-reverse;
     list-style: none;
     justify-content:space-around;
     padding: 1.5%;

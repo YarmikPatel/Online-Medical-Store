@@ -26,7 +26,7 @@
         }
     }
 
-    $conn->close();
+    // $conn->close();
 ?>
 
 <!DOCTYPE html>
