@@ -26,7 +26,7 @@
     <div class="dashboard-items" id="mi"><a href="add_categories.php">Add Categories</a></div>
         <div class="dashboard-items" id="mi"><a href="save_product.php">Add Product</a></div>
         <div class="dashboard-items" id="mu"><a href="view_products.php">View Product</a></div>
-        <div class="dashboard-items" id="mo"><a href="update_product.php">Edit/Update Product</a></div>
+        <div class="dashboard-items" id="mo"><a href="update_products.php">Edit/Update Product</a></div>
         <div class="dashboard-items" id="rpt"><a href="delete_product.php">Delete Product</a></div>
     </div>
 </body>
