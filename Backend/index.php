@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                           alert('Field required');
                          event.preventDefault(); // Stops form from submission
                          return false;
-                 }else if(validcode.length() > 8 && validcode.length() < 8){
+                 }else if(validcode.length !==8) {
                           alert('code must be of 8 characters ');
                           event.preventDefault();
                          return false;

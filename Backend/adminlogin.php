@@ -53,8 +53,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         header("location:admin_dashboard.php");
     }
     else{
-<<<<<<< HEAD
-=======
         ?>
         <script>
             function validateform(event){    //function for input validation
@@ -65,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                           alert('Field required');
                          event.preventDefault(); // Stops form from submission
                          return false;
-                    }else if(){
+                    }else if(admin_password > 1){
                           alert('code must be of 8 characters ');
                           event.preventDefault();
                          return false;
@@ -74,7 +72,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             }
         </script>
 <?php
->>>>>>> 691dfde21361dac978420ad8f483c1f37e030942
     }
 }
 ?>
