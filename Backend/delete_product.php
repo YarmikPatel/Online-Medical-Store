@@ -1,5 +1,5 @@
 <?php 
-include('admin_session.php');
+// include('admin_session.php');
 include('connection.php'); 
 ?>
 
@@ -12,7 +12,7 @@ include('connection.php');
 </head>
 <body>
     <div class="main">
-        <table border="1" cellpadding="10">
+        <table>
             <tr>
                 <th>Product ID</th>
                 <th>Category ID</th>

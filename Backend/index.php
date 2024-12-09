@@ -10,6 +10,22 @@ include ('connection.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - MedPlus Pharmacy</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+            function validateform(event){    //function for input validation
+                const validcode =document.getElementById('acode').value;  //
+        
+                  if(validcode == ''){
+                          alert('Field required');
+                         event.preventDefault(); // Stops form from submission
+                         return false;
+                 }else if(validcode.length !==8) {
+                          alert('code must be of 8 characters ');
+                          event.preventDefault();
+                         return false;
+                }
+            return true;
+            }
+</script>
 </head>
 
 <body>
@@ -47,31 +63,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     //Verifying the data from database.
     if($num >= 1){
         $login = true;
-        session_start();
-        $_SESSION['code'] = $code;
-        $_SESSION['is_admin_logged_in'] = true;
-        $_SESSION['admin_last_activity'] = time();
+        // session_start();
+        // $_SESSION['code'] = $code;
+        // $_SESSION['is_admin_logged_in'] = true;
+        // $_SESSION['admin_last_activity'] = time();
         header("location:adminlogin.php");
     }
     else{
-        ?>
-        <script>
-                function validateform(event){    //function for input validation
-                const validcode =document.getElementById('acode').value.trim();  //
-        
-                  if(validcode == ''){
-                          alert('Field required');
-                         event.preventDefault(); // Stops form from submission
-                         return false;
-                 }else if(validcode.length !==8) {
-                          alert('code must be of 8 characters ');
-                          event.preventDefault();
-                         return false;
-                }
-    return true;
-}
-</script>
-<?php
+        echo "<script>alert('Invalid credentials');</script>";
     }
 }
 ?>

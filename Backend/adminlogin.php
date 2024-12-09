@@ -8,6 +8,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin login - MedPlus Pharmacy</title>
+    <script>
+            function validateform(event){    //function for input validation
+                const admin_name =document.getElementById('adname').value;  //
+                const admin_password = document.getElementById('adpass').value;
+        
+                    if(admin_name == '' && admin_password == ''){
+                          alert('All fields are required');
+                         event.preventDefault(); // Stops form from submission
+                         return false;
+                    }else if(admin_password.length !==15){
+                          alert('Password must be of 15 characters ');
+                          event.preventDefault();
+                         return false;
+                    }
+                return true;
+            }
+        </script>
 </head> 
 <body>
     <header>
@@ -18,7 +35,7 @@
             Admin login
         </h4>
         <div>
-            <form action="" method="post" class="login">
+            <form action="" method="post" class="login" onsubmit="return validateform(event)">
                 <div class="inputBx" id="adminname">
                     Enter admin name
                     <input type="text" name="admin_name" id="adname">
@@ -47,31 +64,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     //Verifying the data from database.
     if($num >= 1){
         //Set session variables
-        session_start();
-        $_SESSION['admin_name']=$admin_name;
-        $_SESSION['apass']=$apass;
+        // session_start();
+        // $_SESSION['admin_name']=$admin_name;
+        // $_SESSION['apass']=$apass;
         header("location:admin_dashboard.php");
     }
     else{
-        ?>
-        <script>
-            function validateform(event){    //function for input validation
-                const admin_name =document.getElementById('adname').value.trim();  //
-                const admin_password = document.getElementById('adpass').value.trim();
-        
-                    if(admin_name == '' && admin_password == ''){
-                          alert('Field required');
-                         event.preventDefault(); // Stops form from submission
-                         return false;
-                    }else if(admin_password > 1){
-                          alert('code must be of 8 characters ');
-                          event.preventDefault();
-                         return false;
-                    }
-                return true;
-            }
-        </script>
-<?php
+        echo "<script>alert('Invalid login credentials');</script>";
     }
 }
 ?>

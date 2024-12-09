@@ -1,5 +1,5 @@
 <?php 
-include('admin_session.php');
+// include('admin_session.php');
 include('connection.php'); 
 ?>
 
@@ -16,30 +16,14 @@ include('connection.php');
         
         <table>
             <th>
-                <td>
-                    product id
-                </td>
-                <td>
-                    categor id
-                </td>
-                <td>
-                    product name
-                </td>
-                <td>
-                    description
-                </td>
-                <td>
-                    illeness
-                </td>
-                <td>
-                    dosage schedule
-                </td>
-                <td>
-                    price
-                </td>
-                <td>
-                    Stock
-                </td>
+                <td>product id</td>
+                <td>categor id</td>
+                <td>product name</td>
+                <td>description</td>
+                <td>illeness</td>
+                <td>dosage schedule</td>
+                <td>price</td>
+                <td>Stock</td>
             </th>
             
             <?php
@@ -69,60 +53,111 @@ include('connection.php');
         </div>
            <div class="form">
                 <form method="post">
-                    <div class="inputbx">
+                    <div class="inputBx">
                         Enter product id:
-                        <input type="text" id="pid">
+                        <input type="text" id="inputvalue" name="inputvalue" value="<?php echo isset($_POST['inputvalue']) ? ($_POST['inputvalue']) : ''; ?>" required>
                     </div>
-                    <div class="inputbx" id="categor_id">
-                         Category id:
-                        <input type="text" <?php echo $_session['category_id'] ?> name="category_id" id="category_id">
-                    </div>
-                     <div class="inputbx" id="pname">
-                        Product name:
-                        <input type="text" name="pname" id="pname">
-                     </div>
-                     <div class="inputbx" id="descript">
-                     description:
-                        <input type="text" name="descript" id="descript">
-                     </div>
-                     <div class="inputbx" id="illeness">
-                     illeness :
-                        <input type="text" name="illeness" id="illeness">
-                     </div>
-                     <div class="inputbx" id="dosage_schedule">
-                     dosage_schedule:
-                        <input type="text" name="dosage_schedule" id="dosage_schedule">
-                     </div>
-                     <div class="inputbx" id="price">
-                     price :
-                        <input type="text" name="price" id="price">
-                     </div>
-                     <div class="inputbx" id="Stock">
-                     Stock:
-                        <input type="text" name="Stock" id="Stock">
-                     </div>
-                     <!--<div class="inputbx" id="image">
-                        image:
-                        <input type="file" name="image" id="image">
-                     </div>-->
-                     <button>Find data</button>
+                     <button type="submit" name="search">Search data</button>
                 </form>
             </div>     
+            <?php if (!empty($error)) {
+        <p style="color:red;"><?php echo $error; ?></p>
+     } ?>
+
+    <?php if (!empty($success)) { 
+        <p style="color:green;"><?php echo $success; ?></p>
+     } ?>
+
+    <?php
+     if (!empty($data)) { 
+        <h3>Edit User Details</h3>
+        <form method="POST" action="" enctype="multipart/form-data">
+            <input type="hidden" name="pid" value="<?php echo htmlspecialchars($data['pid']); ?>">
+
+            <?php for ($i = 1; $i <= 7; $i++) { 
+                <label for="field<?php echo $i; ?>">Field <?php echo $i; ?>:</label>
+                <input type="text" id="field<?php echo $i; ?>" name="field<?php echo $i; ?>" value="<?php echo htmlspecialchars($data["field$i"]); ?>">
+                <br><br>
+             } ?>
+
+            <label for="image">Current Image:</label><br>
+            <img src="<?php echo htmlspecialchars($data['image']); ?>" alt="User Image" width="100"><br><br>
+            <label for="image">Upload New Image:</label>
+            <input type="file" id="image" name="image">
+            <br><br>
+            <button type="submit" name="update">Update</button>
+        </form>
+     } 
+     ?>
 </body>
 </html>
 
 <?php 
+$result = null;
+// $error = "";
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $pid = $_POST['pid'];
-
-    //query for fatching data
-    $sql = "select * from `product` where pid=$pid";
-   $result =  mysqli_query($conn,$sql); 
- 
-   if($result && mysqli_num_rows($result) > 0){
-            $category_id = $row['category_id'];
-
+    if(isset($_POST['search'])){
+        // Handling serach value
+        $inputvalue = $_POST['inputvalue'];
         
-   }
+        if(!empty($inputvalue)){
+            $sql = "Select * from product where pid='$inputvalue'";
+            $result =  mysqli_query($conn,$sql);
+            
+            if($result && mysqli_num_rows($result) > 0){
+                $error = "No records found for the given input.";
+            }
+            else{
+                $data = $result->fetch_assoc(); // Fetch the single result
+            }
+        }
+        else{
+            $error = "Please! Enter product id to search.";
+        }
+    }
+    // elseif (isset($_POST['update'])) {
+    //     // Handle update
+    //     $id = $_POST['id'];
+    //     $fieldsToUpdate = [];
+    //     $params = [];
+    //     $types = '';
+
+    //     // Text values
+    //     for ($i = 1; $i <= 7; $i++) {
+    //         $field = $_POST["field$i"];
+    //         if (!empty($field)) {
+    //             $fieldsToUpdate[] = "field$i = ?";
+    //             $params[] = $field;
+    //             $types .= 's';
+    //         }
+    //     }
+
+    //     // Image upload
+    //     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    //         $targetDir = "uploads/";
+    //         $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+    //         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile);
+
+    //         $fieldsToUpdate[] = "image = ?";
+    //         $params[] = $targetFile;
+    //         $types .= 's';
+    //     }
+
+    //     if (!empty($fieldsToUpdate)) {
+    //         $params[] = $pid;
+    //         $types .= 'i';
+    //         $sql = "UPDATE users SET " . implode(", ", $fieldsToUpdate) . " WHERE id = '$inputvalue'";
+    //         $stmt = $conn->prepare($sql);
+    //         $stmt->bind_param($types, ...$params);
+
+    //         if ($stmt->execute()) {
+    //             $success = "Record updated successfully!";
+    //         } else {
+    //             $error = "Failed to update record.";
+    //         }
+    //     } else {
+    //         $error = "No fields were updated.";
+    //     }
+    // }    
 }
 ?>
