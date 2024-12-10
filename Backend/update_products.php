@@ -8,30 +8,33 @@ include('connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product Management</title>
 </head>
 <body>
-    
     <div class="main">
-        <table>
-            <th>
-                <td>product id</td>
-                <td>categor id</td>
-                <td>product name</td>
-                <td>description</td>
-                <td>illeness</td>
-                <td>dosage schedule</td>
-                <td>price</td>
-                <td>Stock</td>
-            </th>
-            
+        <!-- Display Product Table -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Category ID</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Illness</th>
+                    <th>Dosage Schedule</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
             <?php
-                // Fetch data from database
-                $sql = "Select * from product";
-                $result =  mysqli_query($conn,$sql);
-                if($result && mysqli_num_rows($result) > 0){
-                    // Output of each row
-                    while($row = $result->fetch_assoc()){
+                // Fetch data from the database
+                $sql = "SELECT * FROM product";
+                $result = mysqli_query($conn, $sql);
+                if($result && mysqli_num_rows($result) > 0) {
+                    // Output each row
+                    while($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row['pid'] . "</td>";
                         echo "<td>" . $row['category_id'] . "</td>";
@@ -41,150 +44,108 @@ include('connection.php');
                         echo "<td>" . $row['dosage_schedule'] . "</td>";
                         echo "<td>" . $row['price'] . "</td>";
                         echo "<td>" . $row['stock'] . "</td>";
-                        echo "<td><img src='" . $row['image'] . "' alt='Product Image'></td>";
+                        echo "<td><img src='" . $row['image'] . "' alt='Product Image' width='50'></td>";
                         echo "</tr>";
                     }
-                } else{
-                    echo "<tr><td colspan='2'>No records found</td></tr>";
+                } else {
+                    echo "<tr><td colspan='9'>No records found</td></tr>";
                 }
-                ?>
-           </table>   
-        </div>
-           <div class="form">
-                <form method="post">
-                    <div class="inputBx">
-                        Enter product id:
-                        <input type="text" id="pid" name="pid" required>
-                    </div>
-                    <div class="inputBx">
-                        Enter category id (leave blank if not updating):
-                        <input type="text" id="category_id" name="category_id">
-                    </div>
-                    <div class="inputBx">
-                        Enter product name (leave blank if not updating):
-                        <input type="text" id="pname" name="pname">
-                    </div>
-                    <div class="inputBx">
-                        Enter product description (leave blank if not updating):
-                        <input type="text" id="descript" name="descript">
-                    </div>
-                    <div class="inputBx">
-                        Enter illeness (leave blank if not updating):
-                        <input type="text" id="illeness" name="illeness">
-                    </div>
-                    <div class="inputBx">
-                        Enter dosage schedule (leave blank if not updating):
-                        <input type="text" id="dosage_schedule" name="dosage_schedule">
-                    </div>
-                    <div class="inputBx">
-                        Enter product price (leave blank if not updating):
-                        <input type="text" id="price" name="price">
-                    </div>
-                    <div class="inputBx">
-                        Enter product stock (leave blank if not updating):
-                        <input type="text" id="stock" name="stock">
-                    </div>
-                    <!-- <div class="inputBx">
-                        Enter product image (leave blank if not updating):
-                        <input type="text" id="image" name="image">
-                    </div> -->
-                    <div class="inputBx" id="update">
-                        <input type="button" value="Update data">
-                    </div>
-                </form>
+            ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Form to Fetch and Update Product -->
+    <div class="form">
+        <form method="post" action="">
+            <div class="notice">
+                <p>Leave fields blank if not updating.</p>
             </div>
-        </div>
-    </div>                
-</body>
-</html>
+            <div class="inputBx">
+                Enter Product ID:
+                <input type="text" id="pid" name="pid" required>
+            </div>
+            <div class="inputBx">
+                Enter Category ID:
+                <input type="text" id="category_id" name="category_id">
+            </div>
+            <div class="inputBx">
+                Enter Product Name:
+                <input type="text" id="pname" name="pname">
+            </div>
+            <div class="inputBx">
+                Enter Description:
+                <input type="text" id="descript" name="descript">
+            </div>
+            <div class="inputBx">
+                Enter Illness:
+                <input type="text" id="illeness" name="illeness">
+            </div>
+            <div class="inputBx">
+                Enter Dosage Schedule:
+                <input type="text" id="dosage_schedule" name="dosage_schedule">
+            </div>
+            <div class="inputBx">
+                Enter Price:
+                <input type="text" id="price" name="price">
+            </div>
+            <div class="inputBx">
+                Enter Stock:
+                <input type="text" id="stock" name="stock">
+            </div>
+            <div class="inputBx">
+                <input type="submit" name="fetch" value="Fetch Data">
+            </div>
+            <div class="inputBx">
+                <input type="submit" name="update" value="Update Data">
+            </div>
+        </form>
+    </div>
 
-<?php 
-    // Check if the form data is submitted
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $pid = $_POST['pid'];
-        $category_id = !empty($_POST['category_id']) ? $_POST['category_id'] : null;
-        $pname = !empty($_POST['pname']) ? $_POST['pname'] : null;
-        $descript = !empty($_POST['descript']) ? $_POST['descript'] : null;
-        $illeness = !empty($_POST['illeness']) ? $_POST['illeness'] : null;
-        $dosage_schedule = !empty($_POST['dosage_schedule']) ? $_POST['dosage_schedule'] : null;
-        $price = !empty($_POST['price']) ? $_POST['price'] : null;
-        $stock = !empty($_POST['stock']) ? $_POST['stock'] : null;
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $pid = $conn->real_escape_string($_POST['pid']);
 
-        // Preparing the query dynamically based on inputs
-        $fields = [];
-        $params = [];
-        $types = "";
-
-        if($pid !== null){
-            $fields[] = "pid='$pid'";
-            $params[] = $pid;
-            $types .= "i"; // i for integer 
-        }
-        
-        if($category_id !== null){
-            $fields[] = "category_id='$category_id'";
-            $params[] = $category_id;
-            $types .= "i"; // i for integer 
-        }
-
-        if($pname !== null){
-            $fields[] = "pname='$pname'";
-            $params[] = $pname;
-            $types .= "s"; // i for integer 
-        }
-
-        if($descript !== null){
-            $fields[] = "descript='$descript'";
-            $params[] = $descript;
-            $types .= "s"; // i for integer 
-        }
-
-        if($illeness !== null){
-            $fields[] = "illeness='$illeness'";
-            $params[] = $illeness;
-            $types .= "s"; // i for integer 
-        }
-
-        if($dosage_schedule !== null){
-            $fields[] = "dosage_schedule='$dosage_schedule'";
-            $params[] = $dosage_schedule;
-            $types .= "s"; // i for integer 
-        }
-
-        if($price !== null){
-            $fields[] = "price='$price'";
-            $params[] = $price;
-            $types .= "i"; // i for integer 
-        }
-
-        if($stock !== null){
-            $fields[] = "stock='$stock'";
-            $params[] = $stock;
-            $types .= "i"; // i for integer 
-        }
-
-        if(!empty($fields)){
-            $params[] = $pid;
-            $types .= "i";
-
-            $sql = "Update `product` set " . implode(", ", $fields) . " where `pid`='$pid'";
-            $stmt = $conn->prepare($sql);
-
-            if($stmt){
-                $stmt->bind_params($types, ...$params);
-                if($stmt->execute()){
-                    echo $stmt;
-                    echo "Record updated successfully";
-                }
-                else{
-                    echo "Error updating record " . $stmt->error; 
-                }
-            }else{
-                echo "Error preparing statement " . $conn->error;
+        if (isset($_POST['fetch'])) {
+            // Fetch data query
+            $sql = "SELECT * FROM product WHERE pid =$pid";
+            $result = mysqli_query($conn,$sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                echo "<script>
+                     document.getElementById('pid').value = '{$row['pid']}';
+                    document.getElementById('category_id').value = '{$row['category_id']}';
+                    document.getElementById('pname').value = '{$row['pname']}';
+                    document.getElementById('descript').value = '{$row['descript']}';
+                    document.getElementById('illeness').value = '{$row['illeness']}';
+                    document.getElementById('dosage_schedule').value = '{$row['dosage_schedule']}';
+                    document.getElementById('price').value = '{$row['price']}';
+                    document.getElementById('stock').value = '{$row['stock']}';
+                </script>";
+            } else {
+                echo "<script>alert('No record found for Product ID: $pid');</script>";
+                exit();
             }
-        }else{
-            echo "No fields to update";
+        }   
+
+
+        if (isset($_POST['update'])) {
+            $category_id = $conn->real_escape_string($_POST['category_id']);
+            $sql = "UPDATE `product` SET category_id=$category_id WHERE pid=$pid";
+            $result = mysqli_query($conn,$sql);
+            if ($result && mysqli_affected_rows($conn) > 0) {
+                echo "<script>alert('UPDATED successfully');</script>"; //for reload page
+
+                $relod = 1;
+                if($relod == 1){
+                    echo "<script>window.location.reload();</script>";
+                    exit();
+                }
+            } else {
+                echo "<script>alert('can't UPDATED');</script>";
+            }
         }
     }
-
-?>
+    ?>
+</body>
+</html>
