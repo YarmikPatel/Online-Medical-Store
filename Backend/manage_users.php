@@ -1,6 +1,8 @@
 <?php
 // include('admin_session.php');
 include('connection.php');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +26,7 @@ include('connection.php');
             xhr.send();
         }
     </script>
-    <title>Admin - View Products and Categories</title>
+    <title>Manage users - All users infromation</title>
 </head>
 <body>
     <div class="nav-bar">
@@ -34,14 +36,14 @@ include('connection.php');
             </ul>
     </div>
     <div>
-        <p>View Products and Categories lists.</p>
+        <p>Welcome to the Manage Users.</p>
     </div>
     <div class="headinfo">
         <p>Please! Click below buttons</p>
         <p>If you want to <strong>View Account Registration Information</strong> click on <strong>View Registrations</strong> or if you want to <strong>View Prescription Information</strong> click on <strong>View Prescriptions</strong> </p>    
     </div class="btns">
-            <button onclick="loadContent('view_categories.php')">View Categories</button>
-            <button onclick="loadContent('view_products_list.php')">View Products</button>
+            <button onclick="loadContent('view_registration.php')">View Registrations</button>
+            <button onclick="loadContent('view_prescription.php')">View Prescriptions</button>
     </div>
     <hr>
 
