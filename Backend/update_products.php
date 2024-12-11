@@ -1,9 +1,6 @@
 <?php 
 // include('admin_session.php');
 include('connection.php'); 
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 ?>
 
 <!DOCTYPE html>
@@ -11,34 +8,6 @@ include('connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script>
-        async function validateform(event) {
-            event.preventDefault();
-            const category_id = document.getElementById('category_id').value;
-
-            if(category_id){
-                const valid_Id = await checkCategoryExists(category_id);
-                if(!valid_Id){
-                    alert('The provided category does not exists');
-                    retrun;
-                }
-            }
-
-            // If validation passes submit the form 
-            document.getElementById('productform');
-        }
-
-        async function checkCategoryExists(category_id) {
-            try{
-                const response = await fetch('view_categories.php?category_id=${category_id}');
-                const result = await respons.json();
-                return result.exists;
-            }catch(error){
-                console.error("Error checking category:", error);
-                return false;
-            }
-        }
-    </script> -->
     <title>Product Management</title>
 </head>
 <body>
@@ -85,111 +54,108 @@ include('connection.php');
             </tbody>
         </table>
     </div>
+                
+    <!-- Fetch data and update the data-->
+  <div class="update_data">
+    <form method="post" action="">
+        <div class="inputbx">
+            Enter Product ID:
+                <input type="text" name="pid" id="pid" required>
+        </div>
+        <div class="dropdowninput">
+            <select name="dropdown_input" id="update_clm_option">
+                <option value="category_id">Category ID</option>
+                <option value="pname">Product Name</option>
+                <option value="descript">Description</option>
+                <option value="illeness">Illness</option>
+                <option value="dosage_schedule">Dosage Schedule</option>
+                <option value="price">Price</option>
+                <option value="stock">Stock</option>
+            </select>
+                <input type="text" name="txt_update" id="txt_update" required>  
+        </div>
+        <div class="inputbx">
+            <input type="submit" name="update" id="update" value="Update Data">
+        </div>
+    </form>
+  </div>
 
-    <!-- Form to Fetch and Update Product -->
-    <div class="form">
-        <form id="productform" method="post" action="">
-            <div class="notice">
-                <p>Leave fields blank if not updating.</p>
-            </div>
-            <div class="inputBx">
-                Enter Product ID:
-                <input type="text" id="pid" name="pid" required>
-            </div>
-            <div class="inputBx">
-                Enter Category ID:
-                <input type="text" id="category_id" name="category_id">
-            </div>
-            <div class="inputBx">
-                Enter Product Name:
-                <input type="text" id="pname" name="pname">
-            </div>
-            <div class="inputBx">
-                Enter Description:
-                <input type="text" id="descript" name="descript">
-            </div>
-            <div class="inputBx">
-                Enter Illness:
-                <input type="text" id="illeness" name="illeness">
-            </div>
-            <div class="inputBx">
-                Enter Dosage Schedule:
-                <input type="text" id="dosage_schedule" name="dosage_schedule">
-            </div>
-            <div class="inputBx">
-                Enter Price:
-                <input type="text" id="price" name="price">
-            </div>
-            <div class="inputBx">
-                Enter Stock:
-                <input type="text" id="stock" name="stock">
-            </div>
-            <!-- <div class="inputBx">
-                <input type="submit" name="fetch" value="Fetch Data">
-            </div> -->
-            <div class="inputBx">
-                <input type="submit" name="update" value="Update Data">
-            </div>
-        </form>
-    </div>
+    <?php 
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $pid = $conn->real_escape_string($_POST['pid']);
+            $txt_update = $conn->real_escape_string($_POST['txt_update']);
+            $selected_option = $_POST['dropdown_input'];        
+            
+           switch($selected_option){
+                case "category_id":
+                    $sql = "UPDATE `product` SET category_id=$txt_update WHERE pid=$pid";
+                    $result = mysqli_query($conn, $sql);
+                        if($result){
+                            echo "<script>alert('updated successfully');</script>";
+                        }else{
+                            echo "<script>alert('cant update');</script>";
+                        }
+                        break;
+                case "pname":
+                    $sql = "UPDATE `product` SET pname=$txt_update WHERE pid=$pid";
+                    $result = mysqli_query($conn, $sql);
+                         if($result){
+                             echo "<script>alert('updated successfully');</script>";
+                         }else{
+                            echo "<script>alert('cant update');</script>";
+                         }   
+                        break;
+                case "descript":
+                    $sql = "UPDATE `product` SET descript=$txt_update WHERE pid=$pid";
+                    $result = mysqli_query($conn, $sql);
+                        if($result){
+                            echo "<script>alert('updated successfully');</script>";
+                        }else{
+                             echo "<script>alert('cant update');</script>";
+                        }
+                        break;
+                case "illeness":
+                    $sql = "UPDATE `product` SET illeness=$txt_update WHERE pid=$pid";
+                    $result = mysqli_query($conn, $sql);
+                         if($result){
+                              echo "<script>alert('updated successfully');</script>";
+                         }else{
+                              echo "<script>alert('cant update');</script>";
+                        }
+                        break;  
+                case "dosage_schedule": 
+                    $sql = "UPDATE `product` SET dosage_schedule=$txt_update WHERE pid=$pid";
+                    $result = mysqli_query($conn, $sql);
+                        if($result){
+                              echo "<script>alert('updated successfully');</script>";
+                        }else{
+                            echo "<script>alert('cant update');</script>";
+                        }
+                    break;
+                case "price":
+                    $sql = "UPDATE `product` SET price=$txt_update WHERE pid=$pid";
+                    $result = mysqli_query($conn, $sql);
+                        if($result){
+                              echo "<script>alert('updated successfully');</script>";
+                        }else{
+                            echo "<script>alert('cant update');</script>";
+                        }
+                    break;
+                case "stock":
+                    $sql = "UPDATE `product` SET stock=$txt_update WHERE pid=$pid";
+                    $result = mysqli_query($conn, $sql);
+                        if($result){
+                              echo "<script>alert('updated successfully');</script>";
+                        }else{
+                            echo "<script>alert('cant update');</script>";
+                        }
+                    break;           
+                default:echo "<script>alert('Selected value: $selected_option');</script>";
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $pid = $conn->real_escape_string($_POST['pid']);
-
-        if (isset($_POST['fetch'])) {
-            // Fetch data query
-            $sql = "SELECT * FROM product WHERE pid =$pid";
-            $result = mysqli_query($conn,$sql);
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                echo "<script>
-                    document.getElementById('pid').value = '{$row['pid']}';
-                    document.getElementById('category_id').value = '{$row['category_id']}';
-                    document.getElementById('pname').value = '{$row['pname']}';
-                    document.getElementById('descript').value = '{$row['descript']}';
-                    document.getElementById('illeness').value = '{$row['illeness']}';
-                    document.getElementById('dosage_schedule').value = '{$row['dosage_schedule']}';
-                    document.getElementById('price').value = '{$row['price']}';
-                    document.getElementById('stock').value = '{$row['stock']}';
-                </script>";
-            } else {
-                echo "<script>alert('No record found for Product ID: $pid');</script>";
-                exit();
             }
-        }   
-
-
-        if (isset($_POST['update'])) {
-            $category_id = $conn->real_escape_string($_POST['category_id']);
-            $pname = $conn->real_escape_string($_POST['pname']);
-            $sql = "UPDATE `product` SET category_id=$category_id, pname='$pname' WHERE pid=$pid";
-            $result = mysqli_query($conn,$sql);
-            // if ($result && mysqli_affected_rows($conn) > 0) {
-            //     echo "<script>alert('Record Updated successfully');</script>"; 
-
-            //     $relod = 1;
-            //     if($relod == 1){
-            //         echo "<script>window.location.reload();</script>";//for reload page
-            //         exit();
-            //     }
-            // } else {
-            //     echo "<script>alert('Record not updated successfully');</script>";
-            // }
-
-            if ($result) {
-                if (mysqli_affected_rows($conn) > 0) {
-                    echo "<script>alert('Record updated successfully');</script>"; 
-                    echo "<script>window.location.reload();</script>";
-                    header("location:manage_inventory.php");
-                    // exit();
-                } 
-            } else {
-                // Query execution failed
-                echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
-            }
+            // Display alert with the selected dropdown value
+            //echo "<script>alert('Selected value: $selected_option');</script>";
         }
-    }
     ?>
 </body>
 </html>
