@@ -29,7 +29,7 @@ include('connection.php');
                     </th>
                     <?php
                         // Fetch data from database
-                        $sql = "Select * from registration";
+                        $sql = "Select * from prescription_detail";
                         $result =  mysqli_query($conn,$sql);
                         if($result && mysqli_num_rows($result) > 0){
                         // Output of each row

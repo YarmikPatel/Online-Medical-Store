@@ -113,7 +113,7 @@ include('connection.php');
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 echo "<script>
-                     document.getElementById('pid').value = '{$row['pid']}';
+                    document.getElementById('pid').value = '{$row['pid']}';
                     document.getElementById('category_id').value = '{$row['category_id']}';
                     document.getElementById('pname').value = '{$row['pname']}';
                     document.getElementById('descript').value = '{$row['descript']}';
@@ -131,18 +131,30 @@ include('connection.php');
 
         if (isset($_POST['update'])) {
             $category_id = $conn->real_escape_string($_POST['category_id']);
-            $sql = "UPDATE `product` SET category_id=$category_id WHERE pid=$pid";
+            $pname = $conn->real_escape_string($_POST['pname']);
+            $sql = "UPDATE `product` SET category_id=$category_id, pname='$pname' WHERE pid=$pid";
             $result = mysqli_query($conn,$sql);
-            if ($result && mysqli_affected_rows($conn) > 0) {
-                echo "<script>alert('UPDATED successfully');</script>"; //for reload page
+            // if ($result && mysqli_affected_rows($conn) > 0) {
+            //     echo "<script>alert('Record Updated successfully');</script>"; 
 
-                $relod = 1;
-                if($relod == 1){
+            //     $relod = 1;
+            //     if($relod == 1){
+            //         echo "<script>window.location.reload();</script>";//for reload page
+            //         exit();
+            //     }
+            // } else {
+            //     echo "<script>alert('Record not updated successfully');</script>";
+            // }
+
+            if ($result) {
+                if (mysqli_affected_rows($conn) > 0) {
+                    echo "<script>alert('Record updated successfully');</script>"; 
                     echo "<script>window.location.reload();</script>";
                     exit();
-                }
+                } 
             } else {
-                echo "<script>alert('can't UPDATED');</script>";
+                // Query execution failed
+                echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
             }
         }
     }
