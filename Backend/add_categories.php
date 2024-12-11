@@ -3,8 +3,8 @@
     include('connection.php');
 
     if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $category_id = $conn->real_escape_string($_POST['category_id']);
-        $name = $conn->real_escape_string($_POST['name']);
+        $category_id = $_POST['category_id'];
+        $name = $_POST['name'];
 
         //SQL query to post data into database.
         $sql = "INSERT INTO `category` (`category_id`,`name`) VALUES ('$category_id','$name')";
@@ -18,11 +18,10 @@
             $_SESSION['category_id'] = $category_id;
             $_SESSION['name'] = $name;
             // $_SESSION['user_email'] = $email;
-            echo "Category records inserted successfully";
-            header("location:save_product.php");
+            echo "<script>alert('Category records inserted successfully');</script>";
         }
         else{
-            echo "Records not inserted successfully";
+            echo "<script>alert('Records not inserted successfully');</script>";
         }
     }
 

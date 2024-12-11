@@ -11,7 +11,7 @@ include('connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
+    <!-- <script>
         async function validateform(event) {
             event.preventDefault();
             const category_id = document.getElementById('category_id').value;
@@ -30,7 +30,7 @@ include('connection.php');
 
         async function checkCategoryExists(category_id) {
             try{
-                const response = await fetch('view_category.php?category_id=${category_id}');
+                const response = await fetch('view_categories.php?category_id=${category_id}');
                 const result = await respons.json();
                 return result.exists;
             }catch(error){
@@ -38,7 +38,7 @@ include('connection.php');
                 return false;
             }
         }
-    </script>
+    </script> -->
     <title>Product Management</title>
 </head>
 <body>
@@ -88,7 +88,7 @@ include('connection.php');
 
     <!-- Form to Fetch and Update Product -->
     <div class="form">
-        <form id="productform" method="post" action="" onsubmit="validateform(event)">
+        <form id="productform" method="post" action="">
             <div class="notice">
                 <p>Leave fields blank if not updating.</p>
             </div>

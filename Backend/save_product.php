@@ -3,14 +3,14 @@
     include('connection.php');
 
     if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $pid = $conn->real_escape_string($_POST['pid']);
-        $category_id = $conn->real_escape_string($_POST['category_id']);
-        $pname = $conn->real_escape_string($_POST['pname']);
-        $descript = $conn->real_escape_string($_POST['descript']);
-        $illeness = $conn->real_escape_string($_POST['illeness']);
-        $dosage_schedule = $conn->real_escape_string($_POST['dosage_schedule']);
-        $price = $conn->real_escape_string($_POST['price']);
-        $stock = $conn->real_escape_string($_POST['stock']);
+        $pid = $_POST['pid'];
+        $category_id = $_POST['category_id'];
+        $pname = $_POST['pname'];
+        $descript = $_POST['descript'];
+        $illeness = $_POST['illeness'];
+        $dosage_schedule = $_POST['dosage_schedule'];
+        $price = $_POST['price'];
+        $stock = $_POST['stock'];
     //     $image = $conn->real_escape_string($_POST['image']);
     $image = NULL;
 
