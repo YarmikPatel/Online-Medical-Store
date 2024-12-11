@@ -1,6 +1,9 @@
 <?php 
 // include('admin_session.php');
 include('connection.php'); 
+// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+// header("Cache-Control: post-check=0, pre-check=0", false);
+// header("Pragma: no-cache");
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +11,34 @@ include('connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        async function validateform(event) {
+            event.preventDefault();
+            const category_id = document.getElementById('category_id').value;
+
+            if(category_id){
+                const valid_Id = await checkCategoryExists(category_id);
+                if(!valid_Id){
+                    alert('The provided category does not exists');
+                    retrun;
+                }
+            }
+
+            // If validation passes submit the form 
+            document.getElementById('productform');
+        }
+
+        async function checkCategoryExists(category_id) {
+            try{
+                const response = await fetch('view_category.php?category_id=${category_id}');
+                const result = await respons.json();
+                return result.exists;
+            }catch(error){
+                console.error("Error checking category:", error);
+                return false;
+            }
+        }
+    </script>
     <title>Product Management</title>
 </head>
 <body>
@@ -57,7 +88,7 @@ include('connection.php');
 
     <!-- Form to Fetch and Update Product -->
     <div class="form">
-        <form method="post" action="">
+        <form id="productform" method="post" action="" onsubmit="validateform(event)">
             <div class="notice">
                 <p>Leave fields blank if not updating.</p>
             </div>
@@ -93,9 +124,9 @@ include('connection.php');
                 Enter Stock:
                 <input type="text" id="stock" name="stock">
             </div>
-            <div class="inputBx">
+            <!-- <div class="inputBx">
                 <input type="submit" name="fetch" value="Fetch Data">
-            </div>
+            </div> -->
             <div class="inputBx">
                 <input type="submit" name="update" value="Update Data">
             </div>
@@ -150,7 +181,8 @@ include('connection.php');
                 if (mysqli_affected_rows($conn) > 0) {
                     echo "<script>alert('Record updated successfully');</script>"; 
                     echo "<script>window.location.reload();</script>";
-                    exit();
+                    header("location:manage_inventory.php");
+                    // exit();
                 } 
             } else {
                 // Query execution failed
