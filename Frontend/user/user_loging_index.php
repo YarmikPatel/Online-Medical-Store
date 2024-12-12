@@ -1,5 +1,5 @@
 <?php
-//include('../Backend/connection.php');
+include('../../Backend/connection.php');
 ?>
 
 <!DOCTYPE html>
