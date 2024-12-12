@@ -97,7 +97,7 @@ include('connection.php');
                         }
                         break;
                 case "pname":
-                    $sql = "UPDATE `product` SET pname=$txt_update WHERE pid=$pid";
+                    $sql = "UPDATE `product` SET pname='$txt_update' WHERE pid=$pid";
                     $result = mysqli_query($conn, $sql);
                          if($result){
                              echo "<script>alert('updated successfully');</script>";
@@ -106,7 +106,7 @@ include('connection.php');
                          }   
                         break;
                 case "descript":
-                    $sql = "UPDATE `product` SET descript=$txt_update WHERE pid=$pid";
+                    $sql = "UPDATE `product` SET descript='$txt_update' WHERE pid=$pid";
                     $result = mysqli_query($conn, $sql);
                         if($result){
                             echo "<script>alert('updated successfully');</script>";
@@ -115,7 +115,7 @@ include('connection.php');
                         }
                         break;
                 case "illeness":
-                    $sql = "UPDATE `product` SET illeness=$txt_update WHERE pid=$pid";
+                    $sql = "UPDATE `product` SET illeness='$txt_update' WHERE pid=$pid";
                     $result = mysqli_query($conn, $sql);
                          if($result){
                               echo "<script>alert('updated successfully');</script>";
@@ -124,7 +124,7 @@ include('connection.php');
                         }
                         break;  
                 case "dosage_schedule": 
-                    $sql = "UPDATE `product` SET dosage_schedule=$txt_update WHERE pid=$pid";
+                    $sql = "UPDATE `product` SET dosage_schedule='$txt_update' WHERE pid=$pid";
                     $result = mysqli_query($conn, $sql);
                         if($result){
                               echo "<script>alert('updated successfully');</script>";
