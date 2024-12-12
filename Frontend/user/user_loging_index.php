@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="user_sidebar.css"> 
 </head>
 <body>
-    
+<button class="toggle-btn" id="toggle-btn">☰</button>
     <?php include 'user_sidebar.php'; ?>
-    
+    <div>haah</div>
+    <script src="user_sidebar.js"></script>
 </body>
 </html>
