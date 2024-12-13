@@ -16,16 +16,16 @@ include('connection.php');
                 <p>Users account information</p>
             </div>
             <div class="infotable">
-                <table>
-                    <th>
-                        <td>User ID</td>
-                        <td>User Name</td>
-                        <td>Full Name</td>
-                        <td>User Password</td>
-                        <td>Mobile</td>
-                        <td>Email ID</td>
-                        <td>Address</td>
-                    </th>
+                <table border="1">
+                    <tr>
+                        <th>User ID</th>
+                        <th>User Name</th>
+                        <th>Full Name</th>
+                        <th>User Password</th>
+                        <th>Mobile</th>
+                        <th>Email ID</th>
+                        <th>Address</th>
+                    </tr>
                     <?php
                         // Fetch data from database
                         $sql = "Select * from registration";
