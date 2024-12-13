@@ -16,17 +16,17 @@ include('connection.php');
                 <p>Users Prescription Information</p>
             </div>
             <div>
-                <table>
-                    <th>
-                        <td>Prescription ID</td>
-                        <td>User ID</td>
-                        <td>Date</td>
-                        <td>Illeness</td>
-                        <td>Medicince Name</td>
-                        <td>Dosage Schedule</td>
-                        <td>Doctor Name</td>
-                        <td>Hospital Name</td>
-                    </th>
+                <table border="1">
+                    <tr>
+                        <th>Prescription ID</th>
+                        <th>User ID</th>
+                        <th>Date</th>
+                        <th>Illeness</th>
+                        <th>Medicince Name</th>
+                        <th>Dosage Schedule</th>
+                        <th>Doctor Name</th>
+                        <th>Hospital Name</th>
+                    </tr>
                     <?php
                         // Fetch data from database
                         $sql = "Select * from prescription_detail";
