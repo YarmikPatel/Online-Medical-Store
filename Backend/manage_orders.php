@@ -1,6 +1,1 @@
-<?php
-    include('connection.php');
-
-    
-?>
-
+// Code needs to be write again
