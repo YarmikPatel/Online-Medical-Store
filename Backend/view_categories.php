@@ -20,7 +20,7 @@ include('connection.php');
                 </tr>
                 <?php
                 // Fetch data from database
-                $sql = "Select * from category";
+                $sql = "SELECT * FROM category";
                 $result =  mysqli_query($conn,$sql);
                 if($result && mysqli_num_rows($result) > 0){
                     // Output of each row
