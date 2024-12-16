@@ -7,20 +7,15 @@ body {
 
 .toggle-btn {
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 10px;
-    background-color: transparent;
-    /* background-color: #333; */
-    color: white;
+    background-color: #333;
+    color: black;
     border: none;
     font-size: 20px;
     cursor: pointer;
     z-index: 1000;
     padding: 10px 15px;
-}
-
-.toggle-btn:hover{
-    color: #00bcd4;
 }
 
 .sidebar {
