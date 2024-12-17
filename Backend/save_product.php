@@ -47,10 +47,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="save_product.css"
     <title>Add Product Details</title>
 </head>
 <body>
     <div class="main">
+
+ <!-- Display Product Table -->
+ <table border="1">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Category ID</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Illness</th>
+                    <th>Dosage Schedule</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                // Fetch data from the database
+                $sql = "SELECT * FROM product";
+                $result = mysqli_query($conn, $sql);
+                if($result && mysqli_num_rows($result) > 0) {
+                    // Output each row
+                    while($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['pid'] . "</td>";
+                        echo "<td>" . $row['category_id'] . "</td>";
+                        echo "<td>" . $row['pname'] . "</td>";
+                        echo "<td>" . $row['descript'] . "</td>";
+                        echo "<td>" . $row['illeness'] . "</td>";
+                        echo "<td>" . $row['dosage_schedule'] . "</td>";
+                        echo "<td>" . $row['price'] . "</td>";
+                        echo "<td>" . $row['stock'] . "</td>";
+                        echo "<td><img src='" . $row['image'] . "' alt='Product Image' width='50'></td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='9'>No records found</td></tr>";
+                }
+            ?>
+            </tbody>
+        </table>
+
     <div class="form">
         <form method="post">
                 <div class="inputBx" id="pid">
