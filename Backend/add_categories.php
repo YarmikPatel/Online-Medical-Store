@@ -8,11 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Prepare and bind SQL statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO `category` (`category_id`, `name`) VALUES (?, ?)");
-        $stmt->bind_param("ss", $category_id, $name);
-
+        $sql = "INSERT INTO `category` (`category_id`, `name`) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("is", $category_id, $name);
+        $execute_value = $stmt->execute();
         // Execute the query
-        if ($stmt->execute()) {
+        if ($execute_value > 0) {
             echo "<script>alert('Category records inserted successfully');</script>";
         } else {
             echo "<script>alert('Records not inserted successfully');</script>";
@@ -21,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Close the prepared statement
         $stmt->close();
     } catch (Exception $e) {
-        echo "<script>alert('Error: " . $e->getMessage() . "');</script>";
+        echo "<script>alert('Error: Category id already exist!');</script>";
     }
 }
 
