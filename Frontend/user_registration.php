@@ -15,9 +15,38 @@ include('../Backend/connection.php');
             font-size: 14px;
             margin-top: 5px;
         }
+
+        /* Basic alert box styling */
+        .alert-box {
+            margin: 15px 0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color:blue;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            width: 50%;
+            margin: auto;
+        }
+
+        /* Success Alert */
+        /* .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Error Alert */
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        } */
     </style>
 </head>
 <body>
+    <div class="alert-box" id="alertbox"></div>
     <h1>User - Sign up</h1>
     <div>
         <form action="" method="post">
@@ -37,10 +66,13 @@ include('../Backend/connection.php');
             <div class="inputBx" id="confirmuserpass">
                 Enter Confirm User Password:
                 <input type="password" id="confirmupass" name="confirmupass" required>
+                <p class="error-msg" id="passerrormsg"></p>
+
             </div>
             <div class="inputBx" id="usermobile">
                 Enter Mobile number:
                 <input type="text" id="mobile" name="mobile" required>
+                <p class="error-msg" id="mobileerrormsg"></p>
             </div>
             <div class="inputBx" id="useremailid">
                 Enter Email id:
@@ -56,6 +88,72 @@ include('../Backend/connection.php');
             </div>
         </form>
     </div>
+
+    <!-- <script src="user_registration.php"></script> -->
+     <script>
+    // Handle form submission
+document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    console.log('hyyy');
+    const form = e.target;
+    const password = form.upass.value;
+    console.log(password);
+    const confirmpassword = form.confirmupass.value;
+    console.log(confirmpassword);
+    const mobile = form.mobile.value;
+    console.log(mobile);
+    const email = form.email_id.value;
+    console.log(email);
+
+    let hasError = false;
+
+    // Checking confirm password with password
+    if(confirmpassword != password){
+        document.getElementById('confirmupass').style.borderColor = "red";
+        document.getElementById('passerrormsg').textContent = 'Confirm Password must be same as password';
+        hasError = true;
+    }else {
+        document.getElementById('confirmupass').style.borderColor = "";
+        document.getElementById('passerrormsg').textContent = "";
+    }
+
+    // Checking length of mobile number
+    if(!/^\d{10}$/.test(mobile)){
+        document.getElementById('mobile').style.borderColor = "red";
+        document.getElementById('mobileerrormsg').textContent = 'Mobile must be of 10 number';
+        hasError = true;
+    }else {
+        document.getElementById('mobile').style.borderColor = "";
+        document.getElementById('mobileerrormsg').textContent = "";
+    }
+
+
+    const emailRegex =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)){
+        document.getElementById('email_id').style.borderColor = "red";
+        document.getElementById('emailerrormsg').textContent = 'Invalid email format';
+        hasError = true;
+    }else {
+        document.getElementById('email_id').style.borderColor = "";
+        document.getElementById('emailerrormsg').textContent = "";
+    }
+
+    // If there are no errors, allow form submission
+    if (!hasError) {
+    form.submit();
+    }
+
+});
+document.addEventListener("DOMContentLoaded", () => {
+            const alert = document.getElementById('alertbox');
+            if (alert) {
+                // Remove the alert after 5 seconds
+                setTimeout(() => {
+                    alert.remove();
+                }, 5000);
+            }
+        });
+</script>
 </body>
 </html>
 
@@ -104,11 +202,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             $_SESSION['mobile']=$mobile;
             $_SESSION['email_id']=$email_id;
             $_SESSION['address']=$address;
+            echo "<script>document.getElementById('alertbox').textContent = 'Registration successful.';</script>";
             // header("location:admin_dashboard.php");
-            echo "<script>alert(Registration is successfully done);</script>";
+            // $alertMessage = "Registration successful!";
+            // $alertType = "success"; // Will trigger green alert
         }
         else{
-            echo "<script>alert('Invalid login credentials');</script>";
+            echo "<script>document.getElementById('alertbox').textContent = 'Registration unsuccessful';</script>";
+            // $alertMessage = "Registration unsuccessful!";
+            // $alertType = "error"; // Will trigger red alert
         }
     }
 }

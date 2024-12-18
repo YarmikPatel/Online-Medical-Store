@@ -39,7 +39,7 @@ include('../Backend/connection.php');
 
             if($result && mysqli_num_rows($result) > 0){
                echo "<script>alert('Loging successfuly...');</script>";
-               header("Location:../user/user_loging_index.php");  
+               header("Location:C:\xampp\htdocs\College Project\Frontend\user/user_loging_index.php");  
             }else{
                 echo "<script>alert('cant Loging...');</script>";
             }
