@@ -11,9 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO `category` (`category_id`, `name`) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("is", $category_id, $name);
-        $execute_value = $stmt->execute();
+        
         // Execute the query
-        if ($execute_value > 0) {
+        if ($stmt->execute()) {
             echo "<script>alert('Category records inserted successfully');</script>";
         } else {
             echo "<script>alert('Records not inserted successfully');</script>";
