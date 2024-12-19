@@ -11,7 +11,8 @@ $conn = new mysqli($servername,$username,$password,$dbname);
 //check connection
 
 if($conn->connect_error){
-        die("commection failed :" .$conn->connect_error);
+        // die("commection failed :" .$conn->connect_error);
+        die("commection failed :");
 }
 
 ?>
