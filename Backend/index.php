@@ -1,5 +1,4 @@
 <?php
-
 include ('connection.php');
 ?>
 
@@ -9,7 +8,7 @@ include ('connection.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - MedDrip Pharmacy</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
     <script>
             function validateform(event){    //function for input validation
                 const validcode =document.getElementById('acode').value;  //
@@ -19,7 +18,7 @@ include ('connection.php');
                          event.preventDefault(); // Stops form from submission
                          return false;
                  }else if(validcode.length !==8) {
-                          alert('code must be of 8 characters ');
+                          alert('code length is not matched');
                           event.preventDefault();
                          return false;
                 }
@@ -30,7 +29,7 @@ include ('connection.php');
 
 <body>
     <header>
-        <h1>Admin, welcome to our <strong>MedPlus Pharmacy</strong></h1>
+        <h1>Admin, welcome to our <strong>MedDrip Pharmacy</strong></h1>
     </header>
     <main>
         <h2>Admin verification</h2>
@@ -47,7 +46,7 @@ include ('connection.php');
         </div>
     </main>
     <footer>
-        <p>2024 of MedPlus. All rights reserved.<br>Created by Tirth Barot and Yarmik Kansagara.</p>
+        <p>2024 of MedDrip. All rights reserved.<br>Created by Tirth Barot and Yarmik Kansagara.</p>
     </footer>
 </body>
 </html>
@@ -56,17 +55,17 @@ include ('connection.php');
 $login = false;
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     $code = $_POST["code"];
-    //SQL query to post data into database.
+    //SQL query to check data from database.
     $sql = "Select * from admin_info where code='$code'";
     $result = mysqli_query($conn,$sql);
     $num = mysqli_num_rows($result);
     //Verifying the data from database.
     if($num >= 1){
         $login = true;
-        // session_start();
-        // $_SESSION['code'] = $code;
-        // $_SESSION['is_admin_logged_in'] = true;
-        // $_SESSION['admin_last_activity'] = time();
+         session_start();
+        $_SESSION['code'] = $code;
+        $_SESSION['is_admin_logged_in'] = true;
+        $_SESSION['admin_last_activity'] = time();
         header("location:adminlogin.php");
     }
     else{
