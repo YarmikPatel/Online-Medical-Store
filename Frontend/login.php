@@ -16,11 +16,11 @@ include('../Backend/connection.php');
         <form class="login" action="" method="post">
         <div class="email_id">
             <P>Enter Email ID</P>
-            <input type="text" name="email" id="email">
+            <input type="email" name="email" id="email" required>
         </div>
         <div class="pass">
             <p>Enter Password</p>
-            <input type="password" name="pass" id="pass">
+            <input type="password" name="pass" id="pass" required>
         </div>
         <div class="check_data">
             <input type="submit" value="Login" id="check_data">
@@ -44,7 +44,7 @@ include('../Backend/connection.php');
                echo "<script>alert('Loging successfuly...');</script>";
                header("Location: user/user_login_index.php");  
             }else{
-                echo "<script>alert('cant Loging...');</script>";
+                echo "<script>alert('Invalid Credentials');</script>";
             }
          }
     ?>
