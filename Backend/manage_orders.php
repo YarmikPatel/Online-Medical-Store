@@ -9,6 +9,7 @@ include('connection.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Orders</title>
+    <link rel="stylesheet" href="add_categories.css">
 </head>
 <body>
     <div class="main">

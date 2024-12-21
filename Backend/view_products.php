@@ -9,7 +9,7 @@ include('connection.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="admin_dashboard.css">
-    <!-- <link rel="stylesheet" href="manage_users.css"> -->
+    <link rel="stylesheet" href="add_categories.css">
     <script>
         function loadContent(page) {
             const xhr = new XMLHttpRequest();

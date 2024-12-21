@@ -12,12 +12,7 @@
         $result = mysqli_query($conn,$sql);
         //Verifying the data from database.
         if($result){
-             // Get the last inserted ID
-            // $last_id = $conn->insert_id;
-
-            // Set session variables
-           // $_SESSION['category_id'] = $category_id;
-            echo "Product records inserted successfully";
+            echo "category records inserted successfully";
         }
         else{
             echo "Records not inserted successfully";
@@ -32,8 +27,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="save_product.css"
     <title>Add Product Details</title>
+    <link rel="stylesheet" href="add_categories.css">
 </head>
 <body>
     <div class="main">
