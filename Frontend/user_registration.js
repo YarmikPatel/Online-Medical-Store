@@ -10,6 +10,8 @@ document.querySelector('form').addEventListener('submit', function (e) {
     console.log(mobile);
     const email = form.email_id.value;
     console.log(email);
+    const errorContainer = getElementById('errorContainer');
+    errorContainer.innerHTML = '';
 
     let hasError = false;
 
@@ -44,18 +46,54 @@ document.querySelector('form').addEventListener('submit', function (e) {
         document.getElementById('emailerrormsg').textContent = "";
     }
 
+    const minLength = 8;
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[@$!%*?&]/.test(password);
+
+    const errors = [];
+    if (password.length < minLength) errors.push("Password must be at least 8 characters long.");
+    if (!hasLowercase) errors.push("Password must include at least one lowercase letter.");
+    if (!hasUppercase) errors.push("Password must include at least one uppercase letter.");
+    if (!hasDigit) errors.push("Password must include at least one digit.");
+    if (!hasSpecialChar) errors.push("Password must include at least one special character (@$!%*?&).");
+    // Display Errors
+     if(errors.length > 0) {
+        for (let i = 0; i < errors.length; i++) {
+          const errorItem = document.createElement("li");
+          errorItem.textContent = errors[i];
+          errorContainer.appendChild(errorItem);
+        }
+      };
+
     // If there are no errors, allow form submission
     if (!hasError) {
     form.submit();
     }
 
 });
-document.addEventListener("DOMContentLoaded", () => {
-            const alert = document.getElementById('alertbox');
-            if (alert) {
-                // Remove the alert after 5 seconds
-                setTimeout(() => {
-                    alert.remove();
-                }, 5000);
-            }
-        });
+
+// Check for username error
+const unameError = localStorage.getItem('unameError');
+if (unameError) {
+    document.getElementById('unameerrormsg').textContent = unameError;
+    localStorage.removeItem('unameError'); // Clear the message
+}
+
+// Check for email error
+const emailError = localStorage.getItem('emailError');
+if (emailError) {
+    document.getElementById('emailerrormsg').textContent = emailError;
+    localStorage.removeItem('emailError'); // Clear the message
+}
+
+// document.addEventListener("DOMContentLoaded", () => {
+//             const alert = document.getElementById('alertbox');
+//             if (alert) {
+//                 // Remove the alert after 5 seconds
+//                 setTimeout(() => {
+//                     alert.remove();
+//                 }, 5000);
+//             }
+//         });

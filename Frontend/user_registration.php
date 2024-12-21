@@ -21,18 +21,26 @@ include('../Backend/connection.php');
             margin: 15px 0;
             padding: 10px 15px;
             border-radius: 5px;
-            background-color:blue;
             font-family: Arial, sans-serif;
             font-size: 16px;
             font-weight: bold;
             text-align: center;
-            width: 50%;
+            width: 100%;
             margin: auto;
+        }
+        .success{
+            background-color:'lightgreen';
+            color:'green';
+        }
+        .error{
+            background-color:'lightred';
+            color:'red';
         }
     </style>
 </head>
 <body>
-    <div class="alert-box" id="alertbox"></div>
+    <div class="alert-box success" id="successalertbox"></div>
+    <div class="alert-box error" id="erroralertbox"></div>
     <h1>User - Sign up</h1>
     <div>
         <form action="" method="post">
@@ -53,7 +61,8 @@ include('../Backend/connection.php');
                 Enter Confirm User Password:
                 <input type="password" id="confirmupass" name="confirmupass" required>
                 <p class="error-msg" id="passerrormsg"></p>
-
+                 <!-- Error Messages -->
+                <ul id="errorContainer" class="error-msg"></ul>
             </div>
             <div class="inputBx" id="usermobile">
                 Enter Mobile number:
@@ -75,11 +84,7 @@ include('../Backend/connection.php');
         </form>
     </div>
 
-    <!-- <script src="user_registration.php"></script> -->
-     <script>
-    // Handle form submission
-
-</script>
+    <script src="user_registration.php"></script>
 </body>
 </html>
 
@@ -101,8 +106,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) > 0){
         $usernameTaken = true;
-        echo "<script>document.getElementById('unameerrormsg').textContent = 'The username is already taken Please choose a different one.';</script>";
-        // echo "The username '$uname' is already taken. Please choose a different one.";
     } 
 
     // Check the user email ID in the registration table if already exists.
@@ -110,9 +113,26 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) > 0){
         $emailTaken = true;
-        echo "<script>document.getElementById('emailerrormsg').textContent = 'An Account with email is already exists.';</script>";
-        // echo "Account with this '$email_id' is already exists. Please choose a different one.";
     } 
+
+    // Display error message 
+    if($usernameTaken){
+        // echo "<script>document.getElementById('emailerrormsg').textContent = 'An Account with email is already exists.';</script>";
+        echo "<script>
+        localStorage.setItem('unameError', 'The username is already taken. Please choose a different one.');
+        </script>";
+    }else{
+        // echo "<script>document.getElementById('emailerrormsg').textContent = '';</script>";
+        echo "<script>
+        localStorage.setItem('emailError', 'An account with this email already exists.');
+        </script>";
+    }
+
+    if($emailTaken){
+        echo "<script>document.getElementById('unameerrormsg').textContent = 'The username is already taken Please choose a different one.';</script>";
+    }else{
+        echo "<script>document.getElementById('unameerrormsg').textContent = '';</script>";
+    }
 
     // If no errors, proceed with registration
     if(!$usernameTaken && !$emailTaken){
@@ -121,18 +141,21 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $result = mysqli_query($conn,$sql);
         if($result){
             //Set session variables
-            // session_start();
+            session_start();
             $_SESSION['uname']=$uname;
             $_SESSION['full_name']=$full_name;
             $_SESSION['upass']=$upass;
             $_SESSION['mobile']=$mobile;
             $_SESSION['email_id']=$email_id;
             $_SESSION['address']=$address;
-            echo "<script>document.getElementById('alertbox').textContent = 'Registration successful.';</script>";
-            header("location:login.php");
+            echo "<script>document.getElementById('successalertbox').textContent = 'Registration successful.';
+            setTimeout(function() {
+                window.location.href = 'login.php';
+            }, 3000); // Redirect after 3 seconds
+            </script>"; 
         }
         else{
-            echo "<script>document.getElementById('alertbox').textContent = 'Registration unsuccessful';</script>";
+            echo "<script>document.getElementById('erroralertbox').textContent = 'Registration unsuccessful';</script>";
         }
     }
 }
