@@ -2,7 +2,7 @@
     // include('admin_session.php');
     include('connection.php');
 
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pid = $_POST['pid'];
         $category_id = $_POST['category_id'];
         $pname = $_POST['pname'];
@@ -12,32 +12,57 @@
         $price = $_POST['price'];
         $stock = $_POST['stock'];
 
-        //SQL query to post data into database.
-        $sql = "INSERT INTO `product` (`pid`,`category_id`,`pname`,`descript`,`illeness`,`dosage_schedule`,`price`,`stock`,`image`) VALUES ('$pid','$category_id','$pname','$descript','$illeness','$dosage_schedule','$price','$stock',NULL)";
-        $result = mysqli_query($conn,$sql);
-        //Verifying the data from database.
-        if($result){
-             // Get the last inserted ID
-            // $last_id = $conn->insert_id;
+        // Handle image upload
+        $target_dir = "image1/"; // Folder to store uploaded images
+        $target_file = $target_dir . basename($_FILES["image"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-            // Set session variables
-            $_SESSION['pid'] = $pid;
-            $_SESSION['category_id'] = $category_id;
-            $_SESSION['pname'] = $pname;
-            $_SESSION['descript'] = $descript;
-            $_SESSION['illeness'] = $illeness;
-            $_SESSION['dosage_schedule'] = $dosage_schedule;
-            $_SESSION['price'] = $price;
-            $_SESSION['stock'] = $stock;
-            // $_SESSION['image'] = $image;
-            echo "Product records inserted successfully";
+        // Check if image file is a real image
+        if (isset($_FILES["image"]) && $_FILES["image"]["tmp_name"] != "") {
+            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            if ($check !== false) {
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
         }
-        else{
-            echo "Records not inserted successfully";
+
+        // Check file size
+        if ($_FILES["image"]["size"] > 500000) { // Limit size to 500KB
+            echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            // If everything is ok, try to upload file
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                // SQL query to insert data into the database
+                $sql = "INSERT INTO `product` (`pid`, `category_id`, `pname`, `descript`, `illeness`, `dosage_schedule`, `price`, `stock`, `image`) 
+                        VALUES ('$pid', '$category_id', '$pname', '$descript', '$illeness', '$dosage_schedule', '$price', '$stock', '$target_file')";
+
+                $result = mysqli_query($conn, $sql);
+
+                if ($result) {
+                    echo "Product records inserted successfully.";
+                } else {
+                    echo "Error: " . mysqli_error($conn);
+                }
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
         }
     }
-
-    // $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -50,9 +75,8 @@
 </head>
 <body>
     <div class="main">
-
- <!-- Display Product Table -->
- <table border="1">
+        <!-- Display Product Table -->
+        <table border="1">
             <thead>
                 <tr>
                     <th>Product ID</th>
@@ -71,9 +95,8 @@
                 // Fetch data from the database
                 $sql = "SELECT * FROM product";
                 $result = mysqli_query($conn, $sql);
-                if($result && mysqli_num_rows($result) > 0) {
-                    // Output each row
-                    while($row = $result->fetch_assoc()) {
+                if ($result && mysqli_num_rows($result) > 0) {
+                    while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row['pid'] . "</td>";
                         echo "<td>" . $row['category_id'] . "</td>";
@@ -83,7 +106,7 @@
                         echo "<td>" . $row['dosage_schedule'] . "</td>";
                         echo "<td>" . $row['price'] . "</td>";
                         echo "<td>" . $row['stock'] . "</td>";
-                        echo "<td><img src=../img/" .$row['image']. " alt='Product Image' width=100 height=100></td>";
+                        echo "<td><img src='" . $row['image'] . "' alt='Product Image' width=100 height=100></td>";
                         echo "</tr>";
                     }
                 } else {
@@ -93,8 +116,8 @@
             </tbody>
         </table>
 
-    <div class="form">
-        <form method="post">
+        <div class="form">
+            <form method="post" enctype="multipart/form-data">
                 <div class="inputBx" id="pid">
                     Enter product id <br>
                     <input type="text" name="pid" id="pid">
@@ -112,11 +135,11 @@
                     <input type="text" name="descript" id="descript">
                 </div>
                 <div class="inputBx" id="illeness">
-                    Enter prescription/illenss related to product <br>
+                    Enter prescription/illness related to product <br>
                     <input type="text" name="illeness" id="illeness">
                 </div>
                 <div class="inputBx" id="dosage_schedule">
-                    Enter dosage_schedule <br>
+                    Enter dosage schedule <br>
                     <input type="text" name="dosage_schedule" id="dosage_schedule">
                 </div>
                 <div class="inputBx" id="price">
@@ -129,7 +152,7 @@
                 </div>
                 <div class="inputBx" id="image">
                     Upload product image <br>
-                    <input type="file" name="image" id="image">
+                    <input type="file" name="image" accept="image/*" id="image">
                 </div>
                 <div class="inputBX" id="submit">
                     <input type="submit" value="Insert product details">
