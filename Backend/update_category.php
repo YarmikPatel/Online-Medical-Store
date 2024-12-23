@@ -27,7 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product Details</title>
+    <title>Update Category Details</title>
     <link rel="stylesheet" href="add_categories.css">
 </head>
 <body>
@@ -69,7 +69,7 @@
                     <input type="text" name="cname" id="cname">
                 </div>
                 <div class="inputBX" id="submit">
-                    <input type="submit" value="Insert product details">
+                    <input type="submit" value="Update Category">
                 </div>
             </form>
         </div>
