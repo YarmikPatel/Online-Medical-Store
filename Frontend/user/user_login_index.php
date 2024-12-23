@@ -87,7 +87,7 @@
         }
 
         /* Responsive Styles */
-        @media (max-width: 768px) {
+        @media (max-width: 1097px) {
             .navbar ul {
                 position: absolute;
                 top: 80px;
