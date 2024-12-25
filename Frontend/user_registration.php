@@ -7,7 +7,7 @@ include('../Backend/connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedPlus - User Sign Up</title>
+    <title>MedDrip - User Sign Up</title>
     <style>
         /* Add styling for error messages */
         .error-msg {

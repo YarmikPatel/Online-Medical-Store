@@ -14,5 +14,4 @@ if($conn->connect_error){
         // die("commection failed :" .$conn->connect_error);
         die("commection failed :");
 }
-
 ?>

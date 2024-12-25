@@ -279,7 +279,7 @@ include('../Backend/connection.php');
             <li><a href="lab_test.php">Lab Test</a></li>
             <li><a href="cart.php">Cart</a></li>
             <li><a href="order_history.php">Order History</a></li>
-            <li><a href="prescription.php">Prescription</a></li>
+            <li><a href="\user\prescription.php">Prescription</a></li>
             <li><a href="login.php">Login</a></li>
         </ul>
     </div>

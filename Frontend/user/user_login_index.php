@@ -1,3 +1,8 @@
+<?php
+    include ('navbar.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,8 +135,8 @@
         <ul>
             <li><a href="user_login_index.php">HOME</a></li>
             <li><a href="lab_test.php">Lab Test</a></li>
-            <li><a href="cart.php">Cart</a></li>
-            <li><a href="order_history.php">Order History</a></li>
+            <li><a href="cart.php"> My Cart</a></li>
+            <li><a href="orders.php">My Orders</a></li>
             <li><a href="prescription.php">Priscription</a></li>
             <li><a href="feedback.php">Feedback</a></li>
             <li><a href="..\login.php">Login</a></li>
