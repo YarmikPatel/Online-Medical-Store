@@ -260,19 +260,6 @@ include('../Backend/connection.php');
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <!-- <div class="navbar-menu">
-        <ul>
-            <li><a href="index.php" class="index">Home</a></li>
-            <li><a href="lab_test.php">Lab Test</a></li>
-            <li><a href="cart.php">Cart</a></li>
-            <li><a href="order_history.php">Order History</a></li>
-            <li><a href="prescription.php">Prescription</a></li>
-            <li><a href="login.php">Login</a></li>
-        </ul>
-    </div> -->
-
-
     <div class="navbar-menu">
         <ul>
             <li><a href="index.php" class="index">Home</a></li>
@@ -293,7 +280,8 @@ include('../Backend/connection.php');
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo '<div class="card">';
-                        echo '<img src="' . $row['image'] . '" alt="Product Image">';
+                   // include('../Backend/connection.php');
+                        echo '<img src="../Backend/image1/' . $row['image'] . '" alt="Product Image">';
                         echo '<div class="card-content">';
                             echo '<div class="category">' . $row['name'] . '</div>';
                             echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
