@@ -21,7 +21,7 @@
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo '<div class="card">';
-                        echo '<img src="Backend/image1/' . $row['image'] . '" alt="Product Image">';
+                        echo '<img src="../../Backend/image1/' . $row['image'] . '" alt="Product Image">';
                         echo '<div class="card-content">';
                             echo '<div class="category">' . $row['name'] . '</div>';
                             echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
