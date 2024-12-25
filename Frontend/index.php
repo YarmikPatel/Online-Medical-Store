@@ -212,7 +212,7 @@ include('../Backend/connection.php');
         .category {
             background-color: #17a2b8;
             color: #ffffff;
-            font-size: 12px;
+            font-size: 14px;
             padding: 5px 10px;
             border-radius: 20px;
             display: inline-block;

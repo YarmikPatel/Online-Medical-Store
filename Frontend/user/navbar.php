@@ -18,9 +18,9 @@
 
         /* Navbar Styling */
         .navbar {
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
+            /* left: 0; */
             width: 100%;
             background-color: #2c3e50;
             display: flex;
