@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login Index</title>
-    <link rel="stylesheet" href="../product_catalogue.css">
+    <link rel="stylesheet" href="product_catalogue.css">
 </head>
 <body>
 
