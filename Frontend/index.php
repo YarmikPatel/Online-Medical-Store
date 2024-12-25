@@ -206,7 +206,7 @@ include('../Backend/connection.php');
         }
 
         .card-content {
-            padding: 15px;
+            padding: 10px;
         }
 
         .category {
@@ -280,7 +280,7 @@ include('../Backend/connection.php');
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo '<div class="card">';
-                   // include('../Backend/connection.php');
+                   // include('../Backend/connection.php'); 
                         echo '<img src="../Backend/image1/' . $row['image'] . '" alt="Product Image">';
                         echo '<div class="card-content">';
                             echo '<div class="category">' . $row['name'] . '</div>';
