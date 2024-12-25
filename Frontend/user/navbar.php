@@ -120,6 +120,10 @@
         .navbar.scrolled {
             background-color: #1abc9c;
         }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 <body>

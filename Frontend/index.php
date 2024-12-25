@@ -201,7 +201,7 @@ include('../Backend/connection.php');
 
         .card img {
             width: 100%;
-            height: 230px;
+            height: 290px;
             object-fit: cover;
         }
 
@@ -256,6 +256,10 @@ include('../Backend/connection.php');
 
         .button:hover {
             background-color: #45a049;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
