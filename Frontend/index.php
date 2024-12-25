@@ -201,7 +201,7 @@ include('../Backend/connection.php');
 
         .card img {
             width: 100%;
-            height: 200px;
+            height: 230px;
             object-fit: cover;
         }
 
@@ -285,9 +285,9 @@ include('../Backend/connection.php');
                         echo '<div class="card-content">';
                             echo '<div class="category">' . $row['name'] . '</div>';
                             echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
-                            echo '<div class="product-description"><strong>Description:</strong>' . $row['descript'] . '</div>';
-                            echo '<div class="product-description"><strong>Illness:</strong> ' . $row['illeness'] . '</div>';
-                            echo '<div class="product-description"><strong>Dosage:</strong> ' . $row['dosage_schedule'] . '</div>';
+                            //echo '<div class="product-description"><strong>Description:</strong>' . $row['descript'] . '</div>';
+                            //echo '<div class="product-description"><strong>Illness:</strong> ' . $row['illeness'] . '</div>';
+                            //echo '<div class="product-description"><strong>Dosage:</strong> ' . $row['dosage_schedule'] . '</div>';
                             echo '<div class="price">₹' . $row['price'] . '</div>';
                         echo '</div>';
                     echo '</div>';

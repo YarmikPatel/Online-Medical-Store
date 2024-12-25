@@ -45,7 +45,7 @@ include('connection.php');
                         echo "<td>" . $row['dosage_schedule'] . "</td>";
                         echo "<td>" . $row['price'] . "</td>";
                         echo "<td>" . $row['stock'] . "</td>";
-                        echo "<td><img src='" . $row['image'] . "' alt='Product Image' width='50'></td>";
+                        echo "<td><img src='image1/" . $row['image'] . "' alt='Product Image' width='50'></td>";
                         echo "</tr>";
                     }
                 } else {
