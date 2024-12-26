@@ -41,6 +41,8 @@ include('../Backend/connection.php');
             $result = mysqli_query($conn,$sql);
 
             if($result && mysqli_num_rows($result) > 0){
+                session_start();
+                $_SESSION['uid']=$uid;
                echo "<script>alert('Loging successfuly...');</script>";
                header("Location: user/user_login_index.php");  
             }else{
