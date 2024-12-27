@@ -17,11 +17,11 @@ include ('connection.php');
                          alert('Field required');
                          event.preventDefault(); // Stops form from submission
                          return false;
-                 }else if(validcode.length !==8) {
+                 }/*else if(validcode.length !==8) {
                           alert('code length is not matched');
                           event.preventDefault();
                          return false;
-                }
+                }*/
             return true;
             }
 </script>

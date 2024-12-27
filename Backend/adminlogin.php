@@ -46,7 +46,7 @@
                     <input type="password" name="apass" id="adpass" required>
                 </div>
                 <div class="inputBx" id="login">
-                    <input type="submit" value="login">
+                    <input type="submit" id="submit" value="login">
                 </div>
             </form>
         </div>
