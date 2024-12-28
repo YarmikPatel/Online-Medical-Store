@@ -182,7 +182,7 @@ include('../Backend/connection.php');
             <input type="submit" value="Login" class="submit-btn" id="check_data">
         </div>
         <div class="registration">
-            <a href="user_registration.php">NEW USER? Register here</a>
+           NEW USER? <a href="user_registration.php">Register here</a>
         </div>
     </form>
 </div>

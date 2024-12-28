@@ -34,8 +34,9 @@ include('../Backend/connection.php');
         /* Navbar Styling */
         .navbar-menu {
             background-color: #1e2a38;
-            padding: 10px 20px;
             color: white;
+            padding: 10px 20px;
+            position: relative;
         }
 
         .navbar-menu ul {
@@ -43,6 +44,7 @@ include('../Backend/connection.php');
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .navbar-menu ul li {
@@ -67,6 +69,51 @@ include('../Backend/connection.php');
             background-color: #4CAF50;
             border-radius: 5px;
             color: #ffffff;
+        }
+
+        /* Responsive Navbar */
+        .navbar-toggle {
+            display: none;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .navbar-toggle:focus {
+            outline: none;
+        }
+
+        .navbar-menu ul {
+            flex-direction: row;
+        }
+
+        .navbar-menu ul.show {
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-menu ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #1e2a38;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: 10;
+            }
+
+            .navbar-menu ul.show {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
         }
 
         .card {
@@ -138,10 +185,6 @@ include('../Backend/connection.php');
             transition: background-color 0.3s ease;
         }
 
-        /* .button:hover {
-            background-color: #45a049;
-        } */
-
         ::-webkit-scrollbar {
             display: none;
         }
@@ -149,7 +192,8 @@ include('../Backend/connection.php');
 </head>
 <body>
     <div class="navbar-menu">
-        <ul>
+        <button class="navbar-toggle" onclick="toggleNavbar()">Menu</button>
+        <ul id="navbar-links">
             <li><a href="index.php" class="index">Home</a></li>
             <li><a href="lab_test.php">Lab Test</a></li>
             <li><a href="cart.php">Cart</a></li>
@@ -158,7 +202,6 @@ include('../Backend/connection.php');
             <li><a href="login.php">Login</a></li>
         </ul>
     </div>
-
 
     <div class="menu">
     <?php
@@ -184,5 +227,12 @@ include('../Backend/connection.php');
             }
         ?>
     </div>
+
+    <script>
+        function toggleNavbar() {
+            const navbarLinks = document.getElementById('navbar-links');
+            navbarLinks.classList.toggle('show');
+        }
+    </script>
 </body>
 </html>
