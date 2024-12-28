@@ -196,21 +196,15 @@ include('../Backend/connection.php');
         $sql = "SELECT * FROM `registration` WHERE upass='$pass' and email_id='$email'";
         $result = mysqli_query($conn,$sql);
 
-        if($result && mysqli_num_rows($result) > 0){
-            session_start();
-            $_SESSION['uid']=$uid;
-            echo "<script>alert('Login successful!');</script>";
-            header("Location: user/user_login_index.php");  
-        } else {
-            echo "<script>alert('Invalid Credentials');</script>";
-        }
-     }
-?>
-
-<!-- Footer -->
-<div class="footer">
-    <p>&copy; 2024 MedDrip Pharmacy. All Rights Reserved.</p>
-</div>
-
+            if($result && mysqli_num_rows($result) > 0){
+                session_start();
+                $_SESSION['uid']=$uid;
+               echo "<script>alert('Loging successfuly...');</script>";
+               header("Location: user/user_login_index.php");  
+            }else{
+                echo "<script>alert('Invalid Credentials');</script>";
+            }
+         }
+    ?>
 </body>
 </html>

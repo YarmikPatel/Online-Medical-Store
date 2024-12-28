@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('../Backend/connection.php');
 ?>
 
@@ -176,10 +175,6 @@ include('../Backend/connection.php');
                     echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
                     echo '<div class="product-description"><strong>Description:</strong>' . $row['descript'] . '</div>';
                     echo '<div class="price">₹' . $row['price'] . '</div>';
-                    echo '<form method="POST">';
-                    echo '<input type="hidden" name="pid" value="' . $row['pid'] . '">';
-                    echo '<button type="submit" class="button">Add to Cart</button>';
-                    echo '</form>';
                     echo '</div>';
                     echo '</div>';
                     echo'</a>';
@@ -191,28 +186,3 @@ include('../Backend/connection.php');
     </div>
 </body>
 </html>
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $pid = $_POST['pid'];
-    $uid = $_SESSION['uid']; // Replace with the logged-in user ID from session
-
-    // Check if the product is already in the cart
-    $check_cart = "SELECT * FROM cart WHERE pid = $pid AND uid = $uid";
-    $result = mysqli_query($conn, $check_cart);
-
-    if (mysqli_num_rows($result) > 0) {
-        // Update quantity if already in the cart
-        $update_cart = "UPDATE cart SET qty = qty + 1 WHERE pid = $pid AND uid = $uid";
-        mysqli_query($conn, $update_cart);
-    } else {
-        // Insert into cart
-        $insert_cart = "INSERT INTO cart (pid, uid) VALUES ($pid, $uid)";
-        mysqli_query($conn, $insert_cart);
-    }
-
-    header("Location: cart.php");
-    exit;
-}
-
-?>

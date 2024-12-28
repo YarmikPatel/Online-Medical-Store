@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['email_id'])) {
+    die('User not logged in. UID not found in session.');
+}
+$email_id = $_SESSION['email_id'];
 include('../Backend/connection.php');
 ?>
 
@@ -9,6 +14,17 @@ include('../Backend/connection.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
         /* Navbar Styling */
         .navbar {
             position: sticky;
@@ -92,11 +108,21 @@ include('../Backend/connection.php');
                 INNER JOIN product p ON c.pid = p.id 
                 WHERE c.uid = $uid";
         $result = mysqli_query($conn, $sql);
-        
-        while ($row = $result->fetch_assoc()) {
-            echo '<div>';
-            echo '<p>' . $row['pname'] . ' - ₹' . $row['price'] . ' (Quantity: ' . $row['quantity'] . ')</p>';
-            echo '</div>';
+        if($result){
+            if(mysqli_num_rows($result) > 0 ){
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div>';
+                        echo '<p><strong>Product:</strong> ' . $row['pname'] . '</p>';
+                        echo '<p><strong>Price:</strong> ₹' . $row['price'] . '</p>';
+                        echo '<p><strong>Quantity:</strong> ' . $row['qty'] . '</p>';
+                        echo '<hr>';
+                        echo '</div>';
+                }
+            }else{
+                echo "Your cart is empty";
+            }
+        }else{
+            echo "Server error";
         }
     ?>
 </body>
