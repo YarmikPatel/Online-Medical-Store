@@ -11,7 +11,7 @@ include('../Backend/connection.php');
     <title>Index Without Login</title>
     <style>
         /* Basic Reset */
-        * {
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -36,7 +36,9 @@ include('../Backend/connection.php');
             background-color: #1e2a38;
             color: white;
             padding: 10px 20px;
-            position: relative;
+            position: sticky;
+            top:0;
+            z-index: 1000;
         }
 
         .navbar-menu ul {
@@ -69,7 +71,7 @@ include('../Backend/connection.php');
             background-color: #4CAF50;
             border-radius: 5px;
             color: #ffffff;
-        }
+        } 
 
         /* Responsive Navbar */
         .navbar-toggle {
