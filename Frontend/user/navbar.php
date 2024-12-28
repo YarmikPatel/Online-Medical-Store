@@ -20,7 +20,6 @@
         .navbar {
             position: sticky;
             top: 0;
-            /* left: 0; */
             width: 100%;
             background-color: #2c3e50;
             display: flex;
@@ -74,6 +73,15 @@
         }
 
         .navbar ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Active Menu Item */
+        .navbar ul li a.active {
+            color: #1abc9c;
+        }
+
+        .navbar ul li a.active::after {
             width: 100%;
         }
 
@@ -132,11 +140,11 @@
         <a href="#" class="logo">MediStore</a>
         <span class="menu-toggle">&#9776;</span>
         <ul>
-            <li><a href="user_login_index.php">HOME</a></li>
+            <li><a href="user_login_index.php" class="active">HOME</a></li>
             <li><a href="lab_test.php">Lab Test</a></li>
             <li><a href="cart.php"> My Cart</a></li>
             <li><a href="orders.php">My Orders</a></li>
-            <li><a href="prescription.php">Priscription</a></li>
+            <li><a href="prescription.php">Prescription</a></li>
             <li><a href="feedback.php">Feedback</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
@@ -146,6 +154,7 @@
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.navbar ul');
         const navbar = document.querySelector('.navbar');
+        const navItems = document.querySelectorAll('.navbar ul li a');
 
         // Toggle menu visibility on click
         menuToggle.addEventListener('click', () => {
@@ -159,6 +168,14 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Highlight active menu item
+        navItems.forEach((item) => {
+            item.addEventListener('click', (e) => {
+                navItems.forEach((link) => link.classList.remove('active'));
+                e.target.classList.add('active');
+            });
         });
     </script>
 

@@ -1,3 +1,16 @@
+<?php
+include('../../Backend/connection.php');
+include 'navbar.php';
+// Fetch prescription details
+$query = "SELECT date, illeness, dosage_schedule, doctor_name, hospital_name FROM prescription_detail WHERE uid = 1"; // Replace 1 with the actual user ID
+$result = mysqli_query($conn, $query);
+
+// Check for query errors
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +23,6 @@
             margin: 0;
             padding: 0;
             background-color: #f9f9f9;
-            transition: filter 0.3s ease;
         }
         .container {
             max-width: 800px;
@@ -56,34 +68,50 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             padding: 20px;
             display: none;
             z-index: 1000;
+            width: 90%;
+            max-width: 400px;
+            color: #fff;
+        }
+        #prescription-form h2 {
+            margin-bottom: 15px;
+            text-align: center;
+            color: #fff;
         }
         #prescription-form label {
             display: block;
             margin: 10px 0 5px;
+            font-weight: bold;
         }
         #prescription-form input {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         #prescription-form button {
-            background: #007bff;
-            color: white;
-            padding: 10px 20px;
+            background: #fff;
+            color: #007bff;
+            padding: 12px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            width: 100%;
         }
         #prescription-form button:hover {
-            background: #0056b3;
+            background: #00d4ff;
+            color: #fff;
         }
         .overlay {
             position: fixed;
@@ -95,30 +123,44 @@
             display: none;
             z-index: 999;
         }
+        .blur-content {
+            transition: filter 0.3s ease;
+        }
+        .blurred {
+            filter: blur(5px);
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Prescription Details</h1>
+    <!-- Navbar (if any) -->
+    <nav>
+        <!-- Add your navbar content here -->
+    </nav>
 
-        <!-- Display success or error message -->
-        <?php if (isset($success_message)): ?>
-            <p style="color: green;"><?= htmlspecialchars($success_message) ?></p>
-        <?php endif; ?>
-        <?php if (isset($error_message)): ?>
-            <p style="color: red;"><?= htmlspecialchars($error_message) ?></p>
-        <?php endif; ?>
+    <!-- Content to Blur -->
+    <div class="blur-content" id="blur-content">
+        <div class="container">
+            <h1>Prescription Details</h1>
 
-        <!-- Display Prescription Details in Card Style -->
-        <?php while ($row = $result->fetch_assoc()): ?>
-        <div class="card">
-            <h3>Illness: <?= htmlspecialchars($row['illeness']) ?></h3>
-            <p><strong>Date:</strong> <?= htmlspecialchars($row['date']) ?></p>
-            <p><strong>Dosage Schedule:</strong> <?= htmlspecialchars($row['dosage_schedule']) ?></p>
-            <p><strong>Doctor Name:</strong> <?= htmlspecialchars($row['doctor_name']) ?></p>
-            <p><strong>Hospital Name:</strong> <?= htmlspecialchars($row['hospital_name']) ?></p>
+            <!-- Display success or error message -->
+            <?php if (isset($success_message)): ?>
+                <p style="color: green;"><?= htmlspecialchars($success_message) ?></p>
+            <?php endif; ?>
+            <?php if (isset($error_message)): ?>
+                <p style="color: red;"><?= htmlspecialchars($error_message) ?></p>
+            <?php endif; ?>
+
+            <!-- Display Prescription Details in Card Style -->
+            <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="card">
+                <h3>Illness: <?= htmlspecialchars($row['illeness']) ?></h3>
+                <p><strong>Date:</strong> <?= htmlspecialchars($row['date']) ?></p>
+                <p><strong>Dosage Schedule:</strong> <?= htmlspecialchars($row['dosage_schedule']) ?></p>
+                <p><strong>Doctor Name:</strong> <?= htmlspecialchars($row['doctor_name']) ?></p>
+                <p><strong>Hospital Name:</strong> <?= htmlspecialchars($row['hospital_name']) ?></p>
+            </div>
+            <?php endwhile; ?>
         </div>
-        <?php endwhile; ?>
     </div>
 
     <!-- Overlay -->
@@ -149,13 +191,13 @@
         function showForm() {
             document.getElementById('prescription-form').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
-            document.body.style.filter = 'blur(5px)';
+            document.getElementById('blur-content').classList.add('blurred'); // Add blur effect
         }
 
         function hideForm() {
             document.getElementById('prescription-form').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';
-            document.body.style.filter = 'none';
+            document.getElementById('blur-content').classList.remove('blurred'); // Remove blur effect
         }
     </script>
 </body>
