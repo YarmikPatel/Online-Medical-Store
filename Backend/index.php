@@ -37,7 +37,7 @@ include ('connection.php');
             <form action="" method="post" class="verify" onsubmit="return validateform(event)">
                 <div class="inputBx" id="admincode">
                     Enter admin code
-                    <input type="password" name="code" id="acode" require>
+                    <input type="password" name="code" id="acode" required>
                 </div>
                 <div class="inputBx" id="submit">
                     <input type="submit" value="Verify passcode">
@@ -53,7 +53,7 @@ include ('connection.php');
 
 <?php
 $login = false;
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     $code = $_POST["code"];
     //SQL query to check data from database.
     $sql = "Select * from admin_info where code='$code'";
