@@ -1,5 +1,5 @@
 <?php
-    // include('admin_session.php');
+     include('admin_session.php');
     include('connection.php');
 ?>
 
@@ -22,7 +22,7 @@
         <p>
             <?php 
                 // Admin specific content
-                // echo "<br>Hi admin, " . $_SESSION['admin_name'];
+                 echo "<br>Hi admin, " . $_SESSION['admin_name'];
                 
             ?>
         </p>
