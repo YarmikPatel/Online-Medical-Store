@@ -47,7 +47,7 @@ include('connection.php');
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='9'>No records found</td></tr>";
+                    echo "<tr><td colspan='8'>No records found</td></tr>";
                 }
             ?>
             </tbody>
@@ -59,7 +59,7 @@ include('connection.php');
     <form method="post" action="">
         <div class="inputbx">
             Enter Order ID:
-                <input type="text" name="oid" id="oid" required>
+                <input type="number" name="oid" id="oid" required>
         </div>
         <div class="dropdowninput">
               change Order Status  &nbsp;&nbsp;
@@ -78,7 +78,7 @@ include('connection.php');
 
     <?php 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $oid = $conn->real_escape_string($_POST['oid']);
+            $oid = intval($_POST['oid']); //validate input as integer
             $selected_option = $_POST['dropdown_input'];        
             
 ////////////////////////
@@ -86,7 +86,9 @@ $sql = "UPDATE `order_history` SET status='$selected_option' WHERE oid=$oid";
 $result = mysqli_query($conn, $sql);
     if($result){
         if(mysqli_affected_rows($conn) > 0){
-        echo "<script>alert('updated successfully'); window.location.reload(); </script>";
+        echo "<script>alert('updated successfully'); </script>"; //window.location.reload(); 
+         header("Location: " . $_SERVER['PHP_SELF']);
+         exit();
         }
     }else{
         echo "<script>alert('cant update');</script>";
