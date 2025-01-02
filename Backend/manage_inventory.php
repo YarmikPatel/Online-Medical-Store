@@ -25,10 +25,10 @@
     <div class="main">
         <div class="dashboard-items" id="ac"><a href="add_categories.php">Add Categories</a></div>
         <div class="dashboard-items" id="sp"><a href="save_product.php">Add Product</a></div>
-        <div class="dashboard-items" id="sp"><a href="update_category.php">Update Categories</a></div>
+        <div class="dashboard-items" id="uc"><a href="update_category.php">Update Categories</a></div>
         <div class="dashboard-items" id="up"><a href="update_products.php">Edit/Update Product</a></div>
         <div class="dashboard-items" id="sp"><a href="delete_category.php">Delete Categories</a></div>
-        <div class="dashboard-items" id="do"><a href="delete_product.php">Delete Product</a></div>
+        <div class="dashboard-items" id="dp"><a href="delete_product.php">Delete Product</a></div>
     </div>
 </body>
 </html>
