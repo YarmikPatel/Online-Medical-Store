@@ -196,6 +196,8 @@ include('../Backend/connection.php');
     <div class="navbar-menu">
         <button class="navbar-toggle" onclick="toggleNavbar()">Menu</button>
         <ul id="navbar-links">
+            <li>    <img src="../Backend/image1/profile-user.png" alt="MedDrip Pharmacy Logo" height="50px" width="50px" >
+            </li>
             <li><a href="index.php" class="index">Home</a></li>
             <li><a href="lab_test.php">Lab Test</a></li>
             <li><a href="cart.php">Cart</a></li>

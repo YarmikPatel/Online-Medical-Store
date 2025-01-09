@@ -170,7 +170,7 @@ include('../Backend/connection.php');
             echo '<div class="product-name"><strong>Dosage Schedule:</strong> ' . $row['dosage_schedule'] . '</div>';
             echo '<p class="price"><strong>Price:</strong> ₹' . $row['price'] . '</p>';
             echo '<p><strong>Stock:</strong>' . $row['stock'] . '</p>';
-            echo '<a href="#" class="button">Add to cart</a>';
+            echo '<a href="add_cart.php" class="button">Add to cart</a>';
             } else {
                 echo '<p>Product not found.</p>';
             }

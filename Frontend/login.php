@@ -169,7 +169,7 @@ include('../Backend/connection.php');
 <body>
 
 <div class="login-container">
-    <img src="../Backend/image1/meddrip_foto.png" alt="MedDrip Pharmacy Logo">
+    <img src="../Backend/image1/profile-user.png" alt="MedDrip Pharmacy Logo">
     <h2>Login to MedDrip Pharmacy</h2>
     <form class="login" action="" method="post">
         <div class="email-id">
