@@ -1,8 +1,10 @@
 <?php
+session_start();
 include('../../Backend/connection.php');
 include 'navbar.php';
 // Fetch prescription details
-$query = "SELECT date, illeness, dosage_schedule, doctor_name, hospital_name FROM prescription_detail WHERE uid = 1"; // Replace 1 with the actual user ID
+$uid =  $_SESSION['uid'];
+$query = "SELECT date, illeness, dosage_schedule, doctor_name, hospital_name FROM prescription_detail WHERE uid=$uid"; // Replace 1 with the actual user ID
 $result = mysqli_query($conn, $query);
 
 // Check for query errors
@@ -78,6 +80,7 @@ if (!$result) {
             max-width: 400px;
             color: #fff;
         }
+        
         #prescription-form h2 {
             margin-bottom: 15px;
             text-align: center;
