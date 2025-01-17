@@ -11,7 +11,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($result){
             if(mysqli_num_rows($result) > 0){
             session_start();
-             $_SESSION['uid'] = $result[''];
+            $_SESSION['is_user_logged_in'] == true;
+            $row = $result->fetch_assoc();
+             $_SESSION['uid'] = $row['uid'];
            echo "<script>alert('Loging successfuly...');</script>";
            header("Location: user/user_login_index.php");  
         }
