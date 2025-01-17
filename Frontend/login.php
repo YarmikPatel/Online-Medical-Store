@@ -1,5 +1,24 @@
 <?php
 include('../Backend/connection.php');
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $email = $conn->real_escape_string($_POST['email']);
+    $pass = $conn->real_escape_string($_POST['pass']);
+   
+    $sql = "SELECT * FROM `registration` WHERE upass='$pass' and email_id='$email'";
+    $result = mysqli_query($conn,$sql);
+
+        if($result){
+            if(mysqli_num_rows($result) > 0){
+            session_start();
+             $_SESSION['uid'] = $result[''];
+           echo "<script>alert('Loging successfuly...');</script>";
+           header("Location: user/user_login_index.php");  
+        }
+        }else{
+            echo "<script>alert('Invalid Credentials');</script>";
+        }
+     }
 ?>
 
 <!DOCTYPE html>
@@ -186,25 +205,5 @@ include('../Backend/connection.php');
         </div>
     </form>
 </div>
-
-<!-- PHP code to handle login -->
-<?php 
-     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $email = $conn->real_escape_string($_POST['email']);
-        $pass = $conn->real_escape_string($_POST['pass']);
-       
-        $sql = "SELECT * FROM `registration` WHERE upass='$pass' and email_id='$email'";
-        $result = mysqli_query($conn,$sql);
-
-            if($result && mysqli_num_rows($result) > 0){
-                session_start();
-                $_SESSION['uid']=$uid;
-               echo "<script>alert('Loging successfuly...');</script>";
-               header("Location: user/user_login_index.php");  
-            }else{
-                echo "<script>alert('Invalid Credentials');</script>";
-            }
-         }
-    ?>
 </body>
 </html>

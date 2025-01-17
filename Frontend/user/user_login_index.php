@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION['email_id'])){
+    if(!isset($_SESSION['uid'])){
         die('user not logged in. UID not found in session');
     }
     include('../../Backend/connection.php');
