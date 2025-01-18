@@ -24,20 +24,20 @@
             if ($check !== false) {
                 $uploadOk = 1;
             } else {
-                echo "File is not an image.";
+                $error_message = "File is not an image.";
                 $uploadOk = 0;
             }
         }
         
         // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png") {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $error_message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
             $uploadOk = 0;
         }
 
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
+            $error_message = "Sorry, your file was not uploaded.";
         } else {
             // If everything is ok, try to upload file
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
@@ -46,17 +46,15 @@
                         VALUES ('$pid', '$category_id', '$pname', '$descript', '$illeness', '$dosage_schedule', '$price', '$stock', '$target_file')";
 
                 $result = mysqli_query($conn, $sql);
-
-                if ($result) {
-                    echo "Product records inserted successfully.";
-                } else {
-                    echo "Error: " . mysqli_error($conn);
+                
+                if($result){
+                    $success_message = "Category added successfully!";
+                }else{
+                    $error_message = "Failed to  add Category";
                 }
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
         }
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,9 +64,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product Details</title>
     <link rel="stylesheet" href="add_categories.css">
+    <script src="toggle-btn.js"></script>
 </head>
 <body>
     <div class="main">
+    <?php
+     if (isset($success_message)) echo "<p class='success'>$success_message</p>"; 
+     ?>
+    <?php
+     if (isset($error_message)) echo "<p class='error'>$error_message</p>"; 
+     ?>
         <!-- Display Product Table -->
         <table border="1">
             <thead>
@@ -110,7 +115,7 @@
             </tbody>
         </table>
 
-        <div class="form">
+        <div id="form-container" class="form-container">
             <form method="post" enctype="multipart/form-data">
                 <div class="inputBx" id="pid">
                     Enter product id <br>
@@ -153,6 +158,11 @@
                 </div>
             </form>
         </div>
+
+         <!-- Toggle Button -->
+         <button id="toggle-button" onclick="toggleForm()">
+            Show Form
+        </button>
     </div>
 </body>
 </html>
