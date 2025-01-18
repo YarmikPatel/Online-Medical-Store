@@ -81,9 +81,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 echo "<tr><td colspan='2'>Error: " . $e->getMessage() . "</td></tr>";
             }
             ?>
+            </table>
             <!-- Form Container Row -->
-            <tr id="form-container" class="form-container">
-                <td colspan='2'>
+            <div id="form-container" class="form-container">
                     <form method="post">
                         <div class="inputBx">
                             Enter category ID <br>
@@ -97,15 +97,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <input type="submit" value="Add category">
                         </div>
                     </form>
-                </td>
-            </tr>
-        </table>
+        </div>
 
         <!-- Toggle Button -->
-        <!-- <button id="toggle-button" onclick="toggleForm()" style="padding: 10px 20px; background-color: #0bc05370; color: white; border: none; border-radius: 5px; cursor: pointer;">
-            Show Form
-        </button> -->
-
         <button id="toggle-button" onclick="toggleForm()">
             Show Form
         </button>
