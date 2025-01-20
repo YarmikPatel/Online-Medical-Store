@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         /* Main Login Container */
         .login-container {
-            background: rgba(255, 255, 255, 0.8); /* Light background with transparency */
+            background: rgba(255, 255, 255, 0.8); /* Light background with transparency */ 
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
@@ -190,7 +190,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
 
 <div class="login-container">
-    <img src="../Backend/image1/profile-user.png" alt="MedDrip Pharmacy Logo">
+    <img src="../Backend/image1/Menopause.png" alt="MedDrip Pharmacy Logo">
     <h2>Login to MedDrip Pharmacy</h2>
     <form class="login" action="" method="post">
         <div class="email-id">
