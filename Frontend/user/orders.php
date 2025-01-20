@@ -31,6 +31,8 @@ $result = $conn->query($sql);
         .card {
             background: #fff;
             border-radius: 8px;
+padding: 10px;
+margin: 15px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-bottom: 20px;
@@ -109,7 +111,6 @@ $result = $conn->query($sql);
     </div>
 
     <div class="overlay"></div>
-    <button class="floating-button" onclick="alert('Floating button clicked!');">+</button>
 </body>
 </html>
 
