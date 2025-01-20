@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             session_start();
             $_SESSION['is_user_logged_in'] == true;
             $row = $result->fetch_assoc();
-             $_SESSION['uid'] = $row['uid'];
+            $_SESSION['uid'] = $row['uid'];
            echo "<script>alert('Loging successfuly...');</script>";
            header("Location: user/user_login_index.php");  
         }

@@ -1,10 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['email_id'])) {
+if (!isset($_SESSION['uid'])) {
     die('User not logged in. UID not found in session.');
 }
-$email_id = $_SESSION['email_id'];
-include('../Backend/connection.php');
+$uid = $_SESSION['uid'];
+include('../../Backend/connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +105,7 @@ include('../Backend/connection.php');
         $uid = $_SESSION['uid']; // Replace with session user ID
         $sql = "SELECT p.pname, p.price, c.qty 
                 FROM cart c 
-                INNER JOIN product p ON c.pid = p.id 
+                INNER JOIN product p ON c.pid = p.pid 
                 WHERE c.uid = $uid";
         $result = mysqli_query($conn, $sql);
         if($result){
