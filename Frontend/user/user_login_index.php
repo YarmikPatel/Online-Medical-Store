@@ -37,7 +37,6 @@
                             echo '<input type="hidden" name="pname" value="' . $row['pname'] . '">';
                             echo '<input type="hidden" name="image" value="' . $row['image'] . '">';
                             echo '<input type="hidden" name="price" value="' . $row['price'] . '">';
-                            // echo '<input type="hidden" name="qty" value="' . $row['qty'] . '">';
                             echo '<button type="submit" class="button">Add to Cart</button>';
                             echo '</form>';
                         echo '</div>';
@@ -59,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pname = $_POST['pname'];
     $image = $_POST['image'];
     $price = $_POST['price'];
-    // $qty = $_POST['qty'];
     $uid = $_SESSION['uid']; // Replace with the logged-in user ID from session
 
     // Check if the product is already in the cart
@@ -68,11 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (mysqli_num_rows($result) > 0) {
         // Update quantity if already in the cart
-        $update_cart = "UPDATE cart SET qty = qty + 1 WHERE pid = $pid AND uid = $uid";
-        mysqli_query($conn, $update_cart);
+        $update_cart1 = "UPDATE cart SET qty = qty + 1 WHERE pid = $pid AND uid = $uid";
+        mysqli_query($conn, $update_cart1);
+        $update_cart2 = "UPDATE cart SET final_order = price * qty WHERE pid = $pid AND uid = $uid";
+        mysqli_query($conn, $update_cart2);
     } else {
         // Insert into cart
-        $insert_cart = "INSERT INTO `cart` (`pid`, `uid`, `pname`, `image`, `price`) VALUES ('$pid', '$uid', '$pname', '$image', '$price')";
+        $final_order = $price * 1;
+        $insert_cart = "INSERT INTO `cart` (`uid`, `pid`, `pname`, `image`, `price`,`qty`,`final_order`) VALUES ('$uid', '$pid', '$pname', '$image', '$price','1','$final_order')";
         mysqli_query($conn, $insert_cart);
     }
 
