@@ -203,7 +203,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <input type="submit" value="Login" class="submit-btn" id="check_data">
         </div>
         <div class="registration">
-           NEW USER? <a href="user_registration.php">Register here</a>
+           NEW USER? <a href="user_registration.php">Register here</a> | 
+           Forgot Password? <a href="forgot_pass.php">Click Here</a>
         </div>
     </form>
 </div>

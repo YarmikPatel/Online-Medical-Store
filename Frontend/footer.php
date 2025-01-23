@@ -4,7 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedDrip Pharmacy Footer</title>
-    <link rel="stylesheet" href="footer.css">
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    background-color: #2c3e50; /*#1a1a1a;*/
+    color: #f5f5f5;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* Footer Sections */
+.footer-section {
+    flex: 1 1 calc(25% - 20px);
+    min-width: 200px;
+}
+
+.footer-section h2,
+.footer-section h3 {
+    color: #00b894;
+    margin-bottom: 10px;
+}
+
+.footer-section p,
+.footer-section a {
+    color: #d1d1d1;
+    font-size: 14px;
+    line-height: 1.6;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: #00b894;
+    text-decoration: underline;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #d1d1d1;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: #00b894;
+}
+
+/* Social Icons */
+.social-icons a {
+    display: inline-block;
+    margin-right: 15px;
+    color: #d1d1d1;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #00b894;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    font-size: 12px;
+    color: #aaa;
+}
+    </style>
 </head>
 <body>
     <footer>

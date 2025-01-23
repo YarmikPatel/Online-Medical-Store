@@ -42,6 +42,6 @@ if (isset($_GET['product_id'])) {
 </head>
 <body>
     <!-- Footer -->
-    <?php include('footer.php'); ?>
+    <?php include('../footer.php'); ?>
 </body>
 </html>

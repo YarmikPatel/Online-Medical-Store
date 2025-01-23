@@ -113,7 +113,7 @@ margin: 15px;
     <div class="overlay"></div>
 
     <!-- Footer -->
-    <?php include('footer.php'); ?>
+    <?php include('../footer.php'); ?>
 </body>
 </html>
 

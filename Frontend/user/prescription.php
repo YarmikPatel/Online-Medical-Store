@@ -205,6 +205,6 @@ if (!$result) {
     </script>
 
     <!-- Footer -->
-    <?php include('footer.php'); ?>
+    <?php include('../footer.php'); ?>
 </body>
 </html>
