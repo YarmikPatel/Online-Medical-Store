@@ -42,7 +42,7 @@ $uid = $_SESSION['uid'];
                         <input type="hidden" name="pid" id="pid" value="<?php echo $row['pid']; ?>">
                         <input type="text" name="qty" id="qty">
                         <button type="submit" name="update_qty" id="update_qty" onclick="text_null()">Add Quentity</button>
-                        <button type="submit" name="delete_cart_item" id="delete_qty">Delete Item</button>
+                        <button type="submit" name="delete_cart_item" id="delete_qty"><img src="../../Backend/image1/delete.png" alt="Delete Item"></button>
                         </form>
                         <?php 
                         echo '<hr>';
