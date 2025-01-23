@@ -55,6 +55,9 @@ $uid = $_SESSION['uid'];
             echo "Server error";
         }
     ?>
+
+    <!-- Footer -->
+    <?php include('footer.php'); ?>
 </body>
 </html>
 

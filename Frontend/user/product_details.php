@@ -41,5 +41,7 @@ if (isset($_GET['product_id'])) {
     <link rel="stylesheet" href="">
 </head>
 <body>
+    <!-- Footer -->
+    <?php include('footer.php'); ?>
 </body>
 </html>

@@ -203,5 +203,8 @@ if (!$result) {
             document.getElementById('blur-content').classList.remove('blurred'); // Remove blur effect
         }
     </script>
+
+    <!-- Footer -->
+    <?php include('footer.php'); ?>
 </body>
 </html>

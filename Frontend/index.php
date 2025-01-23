@@ -238,5 +238,8 @@ include('../Backend/connection.php');
             navbarLinks.classList.toggle('show');
         }
     </script>
+
+    <!-- Footer -->
+    <?php include('footer.php'); ?>
 </body>
 </html>

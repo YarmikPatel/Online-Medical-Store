@@ -83,5 +83,8 @@ include('../../Backend/connection.php');
         xhr.send();
     }
 </script>
+
+<!-- Footer -->
+<?php include('footer.php'); ?>
 </body>
 </html>

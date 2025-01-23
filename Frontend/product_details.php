@@ -179,5 +179,7 @@ include('../Backend/connection.php');
         }
     ?>
     </div>
+    <!-- Footer -->
+    <?php include('footer.php'); ?>
 </body>
 </html>
