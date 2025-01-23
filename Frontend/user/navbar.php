@@ -76,9 +76,10 @@
             width: 100%;
         }
 
-        /* Active Menu Item */
+        /* Active links */
         .navbar ul li a.active {
             color: #1abc9c;
+            padding: 5px 10px;
         }
 
         .navbar ul li a.active::after {
@@ -135,17 +136,20 @@
     </style>
 </head>
 <body>
-
+<?php
+// Get the current page name
+$current_page = basename($_SERVER['PHP_SELF']);
+?>
     <nav class="navbar">
         <a href="#" class="logo">MediStore</a>
         <span class="menu-toggle">&#9776;</span>
         <ul>
-            <li><a href="user_login_index.php" class="active">HOME</a></li>
-            <li><a href="lab_test.php">Lab Test</a></li>
-            <li><a href="cart.php"> My Cart</a></li>
-            <li><a href="orders.php">My Orders</a></li>
-            <li><a href="prescription.php">Prescription</a></li>
-            <li><a href="feedback.php">Feedback</a></li>
+            <li><a href="user_login_index.php" class="<?php echo ($current_page == 'user_login_index.php' || $current_page == '') ? 'active' : ''; ?>">HOME</a></li>
+            <li><a href="lab_test.php" class="<?php echo ($current_page == 'lab_tests.php') ? 'active' : ''; ?>">Lab Test</a></li>
+            <li><a href="cart.php" class="<?php echo ($current_page == 'cart.php') ? 'active' : ''; ?>"> My Cart</a></li>
+            <li><a href="orders.php" class="<?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">My Orders</a></li>
+            <li><a href="prescription.php" class="<?php echo ($current_page == 'prescription.php') ? 'active' : ''; ?>">Prescription</a></li>
+            <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
@@ -168,14 +172,6 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
-        });
-
-        // Highlight active menu item
-        navItems.forEach((item) => {
-            item.addEventListener('click', (e) => {
-                navItems.forEach((link) => link.classList.remove('active'));
-                e.target.classList.add('active');
-            });
         });
     </script>
 
