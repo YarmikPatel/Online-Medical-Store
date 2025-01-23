@@ -8,6 +8,7 @@ include('../Backend/connection.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedDrip - User Sign Up</title>
+    <script src="user_registration.php"></script>
     <style>
         /* Add styling for error messages */
         .error-msg {
@@ -84,7 +85,7 @@ include('../Backend/connection.php');
         </form>
     </div>
 
-    <script src="user_registration.php"></script>
+    
 </body>
 </html>
 
