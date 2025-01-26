@@ -6,95 +6,105 @@
     <title>MedDrip Pharmacy Footer</title>
     <style>
         /* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-}
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up the full viewport height */
+        }
 
-footer {
-    background-color: #2c3e50; /*#1a1a1a;*/
-    color: #f5f5f5;
-    padding: 40px 20px;
-    text-align: center;
-}
+        main {
+            flex: 1; /* Push the footer to the bottom if there's not enough content */
+        }
 
-footer .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 20px;
-}
+        footer {
+            background-color: #2c3e50;
+            color: #f5f5f5;
+            padding: 40px 20px;
+            text-align: center;
+        }
 
-/* Footer Sections */
-.footer-section {
-    flex: 1 1 calc(25% - 20px);
-    min-width: 200px;
-}
+        footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+        }
 
-.footer-section h2,
-.footer-section h3 {
-    color: #00b894;
-    margin-bottom: 10px;
-}
+        /* Footer Sections */
+        .footer-section {
+            flex: 1 1 calc(25% - 20px);
+            min-width: 200px;
+        }
 
-.footer-section p,
-.footer-section a {
-    color: #d1d1d1;
-    font-size: 14px;
-    line-height: 1.6;
-    text-decoration: none;
-}
+        .footer-section h2,
+        .footer-section h3 {
+            color: #00b894;
+            margin-bottom: 10px;
+        }
 
-.footer-section a:hover {
-    color: #00b894;
-    text-decoration: underline;
-}
+        .footer-section p,
+        .footer-section a {
+            color: #d1d1d1;
+            font-size: 14px;
+            line-height: 1.6;
+            text-decoration: none;
+        }
 
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-}
+        .footer-section a:hover {
+            color: #00b894;
+            text-decoration: underline;
+        }
 
-.footer-section ul li {
-    margin-bottom: 8px;
-}
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
 
-.footer-section ul li a {
-    color: #d1d1d1;
-    text-decoration: none;
-}
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
 
-.footer-section ul li a:hover {
-    color: #00b894;
-}
+        .footer-section ul li a {
+            color: #d1d1d1;
+            text-decoration: none;
+        }
 
-/* Social Icons */
-.social-icons a {
-    display: inline-block;
-    margin-right: 15px;
-    color: #d1d1d1;
-    font-size: 14px;
-    text-decoration: none;
-}
+        .footer-section ul li a:hover {
+            color: #00b894;
+        }
 
-.social-icons a:hover {
-    color: #00b894;
-}
+        /* Social Icons */
+        .social-icons a {
+            display: inline-block;
+            margin-right: 15px;
+            color: #d1d1d1;
+            font-size: 14px;
+            text-decoration: none;
+        }
 
-/* Footer Bottom */
-.footer-bottom {
-    margin-top: 20px;
-    border-top: 1px solid #333;
-    padding-top: 10px;
-    font-size: 12px;
-    color: #aaa;
-}
+        .social-icons a:hover {
+            color: #00b894;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            margin-top: 20px;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            font-size: 12px;
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
+    <main>
+        <!-- Main content of your page -->
+    </main>
     <footer>
         <div class="container">
             <!-- Logo and About -->

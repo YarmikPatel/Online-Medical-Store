@@ -1,6 +1,8 @@
 <?php
-include('../../Backend/connection.php');
 session_start();
+include('../../Backend/connection.php');
+include 'navbar.php';
+
 
 // Fetch data from order_history table
 $sql = "SELECT * FROM order_history";

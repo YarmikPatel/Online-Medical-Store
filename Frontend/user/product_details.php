@@ -3,8 +3,8 @@
     include 'navbar.php';
 
 // Get the product ID from the URL
-if (isset($_GET['product_id'])) {
-    $product_id = $_GET['product_id'];
+if (isset($_GET['pid'])) {
+    $product_id = $_GET['pid'];
 
     // Fetch product details from the database
     $sql = "SELECT p.pname, p.descript, p.price, p.image, c.name 

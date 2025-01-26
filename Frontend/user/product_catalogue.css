@@ -84,3 +84,31 @@ body {
         width: 90%;
     }
 }
+
+.button {
+    background-color: #4CAF50; /* A calming green color representing health */
+    color: white; /* White text for contrast */
+    font-size: 16px; /* Easy-to-read font size */
+    font-weight: bold; /* Emphasize the button text */
+    padding: 10px 20px; /* Comfortable padding for better usability */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Smooth rounded edges */
+    cursor: pointer; /* Pointer cursor for better UX */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+.button:active {
+    background-color: #3e8e41; /* Even darker green when clicked */
+    transform: scale(0.98); /* Slightly smaller for a pressed effect */
+}
+
+.button:focus {
+    outline: 2px solid #8BC34A; /* Accessible focus outline */
+    outline-offset: 2px;
+}
