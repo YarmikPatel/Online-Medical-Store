@@ -105,7 +105,7 @@
                         echo "<td>" . $row['dosage_schedule'] . "</td>";
                         echo "<td>" . $row['price'] . "</td>";
                         echo "<td>" . $row['stock'] . "</td>";
-                        echo "<td><img src='" . $row['image'] . "' alt='Product Image' width=100 height=100></td>";
+                        echo "<td><img src='image1/" . $row['image'] . "' alt='Product Image' width=100 height=100></td>";
                         echo "</tr>";
                     }
                 } else {
@@ -119,43 +119,43 @@
             <form method="post" enctype="multipart/form-data">
                 <div class="inputBx" id="pid">
                     Enter product id <br>
-                    <input type="text" name="pid" id="pid">
+                    <input type="text" name="pid" id="pid" required>
                 </div>
                 <div class="inputBx" id="category_id">
                     Enter category id <br>
-                    <input type="text" name="category_id" id="category_id">
+                    <input type="text" name="category_id" id="category_id" required>
                 </div>
                 <div class="inputBx" id="pname">
                     Enter product name <br>
-                    <input type="text" name="pname" id="pname">
+                    <input type="text" name="pname" id="pname" required>
                 </div>
                 <div class="inputBx" id="descript">
                     Enter product description <br>
-                    <input type="text" name="descript" id="descript">
+                    <input type="text" name="descript" id="descript" required>
                 </div>
                 <div class="inputBx" id="illeness">
                     Enter prescription/illness related to product <br>
-                    <input type="text" name="illeness" id="illeness">
+                    <input type="text" name="illeness" id="illeness" required>
                 </div>
                 <div class="inputBx" id="dosage_schedule">
                     Enter dosage schedule <br>
-                    <input type="text" name="dosage_schedule" id="dosage_schedule">
+                    <input type="text" name="dosage_schedule" id="dosage_schedule" required>
                 </div>
                 <div class="inputBx" id="price">
                     Enter product price <br>
-                    <input type="text" name="price" id="price">
+                    <input type="text" name="price" id="price" required>
                 </div>
                 <div class="inputBx" id="stock">
                     Enter product stock <br>
-                    <input type="text" name="stock" id="stock">
+                    <input type="text" name="stock" id="stock" required>
                 </div>
                 <div class="inputBx" id="image">
                     Upload product image <br>
-                    <input type="file" name="image" accept="image/*" id="image">
+                    <input type="file" name="image" accept="image/*" id="image" required>
                 </div>
-                <div class="inputBX" id="submit">
-                    <input type="submit" value="Insert product details">
-                </div>
+                <div class="inputBx">
+                            <input type="submit" value="Add Product">
+                        </div>
             </form>
         </div>
 

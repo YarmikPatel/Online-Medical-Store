@@ -53,3 +53,7 @@ button:hover {
 .error {
     color: red;
 }
+
+ul li a {
+    color: #1abc9c;
+}

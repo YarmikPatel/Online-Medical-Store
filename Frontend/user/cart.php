@@ -17,6 +17,11 @@ $uid = $_SESSION['uid'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="">
+    <style>
+        ul li a {
+            color: #1abc9c;
+        }
+    </style>
     <script>
         function text_null(){
             document.getElementById('qty').value = NULL;

@@ -13,7 +13,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login Index</title>
-    <link rel="stylesheet" href="product_catalogue.css">
+    <!-- <link rel="stylesheet" href="product_catalogue.css"> -->
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .card {
+        width: 300px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+        width: 100%;
+        height: 200px; /* Fixed height for consistent display */
+        object-fit: contain; /* Ensures the entire image fits within the area */
+        background-color: #f0f0f0; /* Optional: Add a light background for empty space */
+    }
+
+    .card-content {
+        padding: 15px;
+        text-align: left;
+    }
+
+    .category {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 5px;
+    }
+
+    .product-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .product-description {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #00b894;
+        margin-bottom: 10px;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #00b894;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #01966c;
+    }
+</style>
+
 </head>
 <body>
 

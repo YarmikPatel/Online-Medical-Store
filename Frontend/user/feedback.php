@@ -1,5 +1,6 @@
 <?php
 include('../../Backend/connection.php');
+include('navbar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
