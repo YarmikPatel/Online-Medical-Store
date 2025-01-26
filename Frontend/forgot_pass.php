@@ -1,40 +1,36 @@
 <?php
-    session_start();
-    include('../Backend/connection.php');
-   
-    // $sql = "Select * from registration where email_id='$email_id'";
-    // $result = mysqli_query($conn,$sql);
-    // if(mysqli_num_rows($result) > 0){
-    //     $emailTaken = true;
-    // } 
-    // if($emailTaken){
-    //     echo "<script>document.getElementById('unameerrormsg').textContent = 'The username is already taken Please choose a different one.';</script>";
-    // }else{
-    //     echo "<script>document.getElementById('unameerrormsg').textContent = '';</script>";
-    // }
+session_start();
+include('../Backend/connection.php');
 
+if (isset($_POST['change_pass'])) {
+    $email = $_POST['email'];
+    $pass = $_POST['new_password'];
+    $confipass = $_POST['confirm_password'];
 
-    if(isset($_POST['change_pass'])){
-        $email = $_POST['email'];
-        $pass = $_POST['new_password'];
-        $confipass = $_POST['confirm_password'];
+    // Check if the passwords match
+    if ($pass !== $confipass) {
+        echo "<script>document.getElementById('check_email').textContent = 'Passwords do not match.'; document.getElementById('check_email').style.color = 'red';</script>";
+    } else {
+        // Check if the email exists
+        $sql = "SELECT email_id FROM registration WHERE email_id='$email'";
+        $result = mysqli_query($conn, $sql);
 
-        $sql ="SELECT email_id FROM registration where email_id='$email'";
-        $result = mysqli_query($conn,$sql);
-        
-        if(mysqli_num_rows($result) > 0){
-            $sql = "UPDATE registration SET upass=$pass WHERE email_id='$email'";
-            $result = mysqli_query($conn,$sql);
+        if (mysqli_num_rows($result) > 0) {
+            // Update password in the database
+            $sql = "UPDATE registration SET upass='$pass' WHERE email_id='$email'";
+            $result = mysqli_query($conn, $sql);
 
-            echo "<script>document.getElementById('check_email').textContent = 'ha moj ha';</script>";
-            
-        }else{
-            echo "<script>document.getElementById('check_email').textContent = 'Registration unsuccessful';</script>";
+            if ($result) {
+                echo "<script>document.getElementById('check_email').textContent = 'Password updated successfully!'; document.getElementById('check_email').style.color = 'green';</script>";
+            } else {
+                echo "<script>document.getElementById('check_email').textContent = 'Error updating password. Please try again.'; document.getElementById('check_email').style.color = 'red';</script>";
+            }
+        } else {
+            echo "<script>document.getElementById('check_email').textContent = 'Email not found in the system.'; document.getElementById('check_email').style.color = 'red';</script>";
         }
     }
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -113,26 +109,57 @@
             color: green;
         }
 
-        /* .hidden {
+        .hidden {
             display: none;
-        } */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Forgot Password</h2>
         <form id="forgotPasswordForm" method="POST">
-            <input type="email" id="email" name="email" placeholder="Enter your Gmail" required>
-            <!-- <button type="button" id="verifyEmailBtn" name="change_pass">Verify Email</button> -->
-            
-            
+            <!-- Email input and button to verify email -->
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <button type="button" id="verifyEmailBtn" onclick="verifyEmail()">Verify Email</button>
+
+            <!-- Password fields (hidden initially) -->
             <div id="passwordFields" class="hidden">
                 <input type="password" id="newPassword" name="new_password" placeholder="Enter new password" required>
                 <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
                 <button type="submit" name="change_pass" value="reset_password">Reset Password</button>
             </div>
+
+            <!-- Success/Error message -->
             <div class="check_email" id="check_email"></div>
         </form>
-    </div>    
+    </div>
+
+    <script>
+        // Function to verify email and show password fields
+        function verifyEmail() {
+            var email = document.getElementById('email').value;
+            if (email === "") {
+                document.getElementById('check_email').textContent = "Please enter an email.";
+                document.getElementById('check_email').style.color = 'red';
+                return;
+            }
+
+            // Send an AJAX request to verify the email (optional, can also be done server-side)
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "verify_email.php", true); // Assuming you have a file to verify email
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function() {
+                if (xhr.responseText == "email_exists") {
+                    document.getElementById('check_email').textContent = "Email verified!";
+                    document.getElementById('check_email').style.color = 'green';
+                    document.getElementById('passwordFields').classList.remove('hidden');
+                } else {
+                    document.getElementById('check_email').textContent = "Email not found.";
+                    document.getElementById('check_email').style.color = 'red';
+                }
+            };
+            xhr.send("email=" + email);
+        }
+    </script>
 </body>
 </html>
