@@ -89,6 +89,9 @@ margin: 15px;
             display: none;
             z-index: 999;
         }
+        .status{
+            width:100% ;
+        }
     </style>
 </head>
 <body>

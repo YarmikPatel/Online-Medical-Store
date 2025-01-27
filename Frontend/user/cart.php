@@ -29,6 +29,7 @@ $uid = $_SESSION['uid'];
     </script>
 </head>
 <body>
+  
     <?php
         $uid = $_SESSION['uid']; // Replace with session user ID
         $sql = "SELECT pid,pname, price, qty, final_order 
@@ -38,7 +39,8 @@ $uid = $_SESSION['uid'];
             if(mysqli_num_rows($result) > 0 ){
                 while ($row = $result->fetch_assoc()) {
                     echo '<div>';
-                        echo '<p><strong>Product:</strong> ' . $row['pname'] . '</p>';
+                       echo '<a href="payment.php?pid=' . $row['pid'] . '"><button class=procc_by id=procc_by>Buy Now</button></a>';
+                       echo '<p><strong>Product:</strong> ' . $row['pname'] . '</p>';
                         echo '<p><strong>Price:</strong> ₹' . $row['price'] . '</p>';
                         echo '<p><strong>Quantity:</strong> ' . $row['qty'] . '</p>';
                         echo '<p><strong>SubTotal:</strong> ' . $row['final_order'] . '</p>';
@@ -48,7 +50,6 @@ $uid = $_SESSION['uid'];
                         <input type="text" name="qty" id="qty">
                         <button type="submit" name="update_qty" id="update_qty" onclick="text_null()">Add Quentity</button>
                         <button type="submit" name="delete_cart_item" id="delete_qty"><img src="../../Backend/image1/delete.png" alt="Delete Item" height="25px"></button>
-                        <button type="submit" name="buy_now" id="buy_now">Buy Now</button>
                         </form>
                         <?php 
                         echo '<hr>';
