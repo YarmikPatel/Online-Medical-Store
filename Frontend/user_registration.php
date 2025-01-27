@@ -141,7 +141,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $sql = "INSERT INTO `registration` (`uname`,`full_name`,`upass`,`mobile`,`email_id`,`address`)VALUES   ('$uname','$full_name','$upass','$mobile','$email_id','$address')";
         $result = mysqli_query($conn,$sql);
         if($result){
-            //Set session variables
+            //Set session variables 
             session_start();
             $_SESSION['uname']=$uname;
             $_SESSION['full_name']=$full_name;
