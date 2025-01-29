@@ -2,32 +2,47 @@
 session_start();
 include('../Backend/connection.php');
 
-if (isset($_POST['change_pass'])) {
-    $email = $_POST['email'];
-    $pass = $_POST['new_password'];
-    $confipass = $_POST['confirm_password'];
+$emailError = $passwordError = $successMessage = "";
 
-    // Check if the passwords match
-    if ($pass !== $confipass) {
-        echo "<script>document.getElementById('check_email').textContent = 'Passwords do not match.'; document.getElementById('check_email').style.color = 'red';</script>";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST['email']);
+    $new_password = trim($_POST['new_password']);
+    $confirm_password = trim($_POST['confirm_password']);
+
+    // Validate input fields
+    if (empty($email)) {
+        $emailError = "Please enter your email.";
+    } elseif (empty($new_password) || empty($confirm_password)) {
+        $passwordError = "Please enter and confirm your new password.";
+    } elseif ($new_password !== $confirm_password) {
+        $passwordError = "Passwords do not match!";
     } else {
-        // Check if the email exists
-        $sql = "SELECT email_id FROM registration WHERE email_id='$email'";
-        $result = mysqli_query($conn, $sql);
+        // Check if email exists
+        $stmt = $conn->prepare("SELECT email_id FROM registration WHERE email_id = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
 
-        if (mysqli_num_rows($result) > 0) {
+        if ($stmt->num_rows > 0) {
+            // Hash the new password
+            $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+
             // Update password in the database
-            $sql = "UPDATE registration SET upass='$pass' WHERE email_id='$email'";
-            $result = mysqli_query($conn, $sql);
+            $update_stmt = $conn->prepare("UPDATE registration SET upass = ? WHERE email_id = ?");
+            $update_stmt->bind_param("ss", $hashed_password, $email);
+            $update_stmt->execute();
 
-            if ($result) {
-                echo "<script>document.getElementById('check_email').textContent = 'Password updated successfully!'; document.getElementById('check_email').style.color = 'green';</script>";
+            if ($update_stmt->affected_rows > 0) {
+                $successMessage = "Password updated successfully!";
             } else {
-                echo "<script>document.getElementById('check_email').textContent = 'Error updating password. Please try again.'; document.getElementById('check_email').style.color = 'red';</script>";
+                $passwordError = "Error updating password. Please try again.";
             }
         } else {
-            echo "<script>document.getElementById('check_email').textContent = 'Email not found in the system.'; document.getElementById('check_email').style.color = 'red';</script>";
+            $emailError = "Email not found!";
         }
+
+        $stmt->close();
+        $conn->close();
     }
 }
 ?>
@@ -49,7 +64,6 @@ if (isset($_POST['change_pass'])) {
             align-items: center;
             color: #333;
         }
-
         .container {
             background: #ffffff;
             padding: 30px;
@@ -58,12 +72,10 @@ if (isset($_POST['change_pass'])) {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
-
         .container h2 {
             color: #00796b;
             margin-bottom: 20px;
         }
-
         .container input {
             width: 100%;
             padding: 12px;
@@ -73,13 +85,11 @@ if (isset($_POST['change_pass'])) {
             font-size: 14px;
             transition: 0.3s;
         }
-
         .container input:focus {
             border-color: #00796b;
             outline: none;
             box-shadow: 0 0 8px rgba(0, 121, 107, 0.5);
         }
-
         .container button {
             width: 100%;
             padding: 12px;
@@ -91,75 +101,80 @@ if (isset($_POST['change_pass'])) {
             cursor: pointer;
             margin-top: 10px;
         }
-
         .container button:hover {
             background: #00695c;
         }
-
-        .error, .success {
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .success {
+            color: green;
             font-size: 14px;
             margin-top: 10px;
         }
 
-        .error {
-            color: red;
+        a {
+            color: #2d3e50;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
         }
-
-        .success {
-            color: green;
-        }
-
-        .hidden {
-            display: none;
+        
+        a:hover {
+            color: #4CAF50;
+            text-decoration: underline;
         }
     </style>
+    <script>
+        function validateForm() {
+            var email = document.getElementById('email').value;
+            var newPassword = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var emailError = document.getElementById('emailError');
+            var passwordError = document.getElementById('passwordError');
+
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            if (email === "") {
+                emailError.textContent = "Please enter your email.";
+                return false;
+            }
+
+            if (newPassword === "" || confirmPassword === "") {
+                passwordError.textContent = "Please enter and confirm your new password.";
+                return false;
+            }
+
+            if (newPassword !== confirmPassword) {
+                passwordError.textContent = "Passwords do not match!";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h2>Forgot Password</h2>
-        <form id="forgotPasswordForm" method="POST">
-            <!-- Email input and button to verify email -->
+        <h2>Reset Password</h2>
+        <form method="POST" onsubmit="return validateForm()">
             <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            <button type="button" id="verifyEmailBtn" onclick="verifyEmail()">Verify Email</button>
+            <div id="emailError" class="error"><?php echo $emailError; ?></div>
 
-            <!-- Password fields (hidden initially) -->
-            <div id="passwordFields" class="hidden">
-                <input type="password" id="newPassword" name="new_password" placeholder="Enter new password" required>
-                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
-                <button type="submit" name="change_pass" value="reset_password">Reset Password</button>
-            </div>
-
-            <!-- Success/Error message -->
-            <div class="check_email" id="check_email"></div>
+            <input type="password" id="newPassword" name="new_password" placeholder="Enter new password" required>
+            <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
+            <div id="passwordError" class="error"><?php echo $passwordError; ?></div>
+            
+            <button type="submit" name="change_pass">Change Password</button>
+            <div class="success"><?php echo $successMessage; ?></div>
+            | <a href="login.php">GO TO LOGIN</a> |
         </form>
     </div>
-
-    <script>
-        // Function to verify email and show password fields
-        function verifyEmail() {
-            var email = document.getElementById('email').value;
-            if (email === "") {
-                document.getElementById('check_email').textContent = "Please enter an email.";
-                document.getElementById('check_email').style.color = 'red';
-                return;
-            }
-
-            // Send an AJAX request to verify the email (optional, can also be done server-side)
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "verify_email.php", true); // Assuming you have a file to verify email
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onload = function() {
-                if (xhr.responseText == "email_exists") {
-                    document.getElementById('check_email').textContent = "Email verified!";
-                    document.getElementById('check_email').style.color = 'green';
-                    document.getElementById('passwordFields').classList.remove('hidden');
-                } else {
-                    document.getElementById('check_email').textContent = "Email not found.";
-                    document.getElementById('check_email').style.color = 'red';
-                }
-            };
-            xhr.send("email=" + email);
-        }
-    </script>
 </body>
 </html>

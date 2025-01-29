@@ -36,7 +36,7 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid'])) {
                     padding: 0;
                     background-color: #f9f9f9;
                 }
-                .container {
+                .container1 {
                     max-width: 1200px;
                     margin: 50px auto;
                     padding: 20px;
@@ -101,7 +101,7 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid'])) {
             </style>
         </head>
         <body>
-            <div class="container">
+            <div class="container1">
                 <!-- Product Image -->
                 <div class="product-image">
                     <img src="../../Backend/image1/<?php echo htmlspecialchars($row['image']); ?>" alt="Product Image">
@@ -118,6 +118,7 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid'])) {
                         <strong>Stock:</strong> <?php echo $row['stock'] > 0 ? 'In Stock' : 'Out of Stock'; ?>
                     </p>
                     <a href="add_to_cart.php?pid=<?php echo $product_id; ?>" class="add-to-cart">Add to Cart</a>
+                    <a href="buy.php?pid=<?php echo $product_id; ?>" class="add-to-cart">Buy Now</a>
                 </div>
             </div>
 

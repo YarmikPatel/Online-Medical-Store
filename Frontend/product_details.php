@@ -92,44 +92,6 @@ include('../Backend/connection.php');
         .button:hover {
             background-color: #45a049;
         }
-
-    /* Navbar Styling */
-    .navbar-menu {
-            background-color: #1e2a38;
-            padding: 10px 20px;
-            color: white;
-        }
-
-        .navbar-menu ul {
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-menu ul li {
-            margin: 0 10px;
-        }
-
-        .navbar-menu ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            padding: 8px 15px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .navbar-menu ul li a:hover {
-            background-color: #4CAF50;
-            border-radius: 5px;
-            color: #ffffff;
-        }
-
-        .navbar-menu ul li a.index {
-            background-color: #4CAF50;
-            border-radius: 5px;
-            color: #ffffff;
-        }
 </style>
 </head>
 <body>
