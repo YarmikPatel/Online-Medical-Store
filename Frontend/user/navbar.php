@@ -133,6 +133,8 @@
         ::-webkit-scrollbar {
             display: none;
         }
+
+
     </style>
 </head>
 <body>
@@ -149,10 +151,30 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li><a href="cart.php" class="<?php echo ($current_page == 'cart.php') ? 'active' : ''; ?>"> My Cart</a></li>
             <li><a href="orders.php" class="<?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">My Orders</a></li>
             <li><a href="prescription.php" class="<?php echo ($current_page == 'prescription.php') ? 'active' : ''; ?>">Prescription</a></li>
-            <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>   
         </ul>
     </nav>
+
+    <?php
+            $sql = "SELECT * FROM registration";
+            $result = mysqli_query($conn, $sql);
+
+            if ($result && mysqli_num_rows($result) > 0) {
+                if($row = $result->fetch_assoc()){
+                    echo '<nav class="navbar">';
+                    echo '<ul>';
+                    echo '<li>';
+                    echo '<a href="profile.php?uid=' .$row['uid'] . '"> <img src="../../Backend/image1/profile-user.png" alt="MedDrip Pharmacy Logo" height="50px" width="50px" ></a>';
+                    //echo '<a href="profile.php?uid=' . $row['uid'] . '";">';
+                    echo '</li>';
+                    echo '<li><a href="logout.php" class="signout-button">Logout</a></li>';
+                    echo '</ul>';
+                    echo '</nav>';
+                }
+            } else {
+                echo '<p>No products found.</p>';
+            }
+        ?>
 
     <script>
         const menuToggle = document.querySelector('.menu-toggle');
