@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['uid'])){
+    die('user not logged in. UID not found in session');
+}
     include('../../Backend/connection.php');
     include('navbar.php');
     $payment_method = $_POST['payment_method'] ?? '';
