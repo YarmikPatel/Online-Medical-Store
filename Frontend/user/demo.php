@@ -111,55 +111,51 @@
                 <div class="status-text">Delivered</div>
             </div>
         </div>
+        <button id="cancelOrder" style="display: block; width: 100%; margin-top: 20px; padding: 10px; background: red: color: white; border: none; cursor: pointer;">Cancel Order</button>
     </div>
 
     <script>
-        const statusSteps = ["step-1", "step-2", "step-3", "step-4"]; // Status sequence
-        const intervalTime = 60000; // 1 minute in milliseconds
-        const startTimeKey = "orderStatusStartTime"; // Key for storing time in localStorage
-        const currentStepKey = "currentOrderStep"; // Key for storing step in localStorage
+        const statusSteps = ["Pending", "Shipped", "Out for Delivery", "Delivered", "Cancelled"]; // Status sequence
+        const stepElements = ["step-1", "step-2", "step-3", "step-4"];
+        
+        function updateStatusUI(status){
+            document.querySelectorAll(".status-step").forEach(el => el.classList.remove("active"));
 
-        // Retrieve or initialize start time
-        let startTime = localStorage.getItem(startTimeKey);
-        if (!startTime) {
-            startTime = Date.now(); // Initialize with the current time
-            localStorage.setItem(startTimeKey, startTime);
-        }
+            if(status === "Cancelled"){
+                alert("Order has been cancelled.");
+                return;
+            }
 
-        // Calculate the current step based on elapsed time
-        const elapsedTime = Date.now() - startTime;
-        let currentStep = Math.floor(elapsedTime / intervalTime);
-
-        // Ensure the step doesn't exceed the number of statuses
-        if (currentStep >= statusSteps.length) {
-            currentStep = statusSteps.length - 1; // Stop at "Delivered"
-        }
-
-        // Update localStorage with the current step
-        localStorage.setItem(currentStepKey, currentStep);
-
-        // Function to update the UI
-        function updateStatus() {
-            // Remove 'active' from all steps
-            statusSteps.forEach(step => {
-                document.getElementById(step).classList.remove("active");
-            });
-
-            // Add 'active' to the current step
-            if (currentStep < statusSteps.length) {
-                document.getElementById(statusSteps[currentStep]).classList.add("active");
-                currentStep++;
-
-                // Save the updated step in localStorage
-                localStorage.setItem(currentStepKey, currentStep);
+            let index = statusSteps.indexOf(status);
+            if(index !== -1){
+                document.getElementById(stepElements[index]).classList.add("active");
             }
         }
 
-        // Initialize the status UI
-        updateStatus();
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderid = urlParams.get("oid");
+        function fetchStatus(){
+            fetch("get_status.php?oid=${orderid}")
+                .then(response => response.json())
+                .then(data => updateStatusUI(data.status));
+        }
 
-        // Update the status every 1 minute
-        setInterval(updateStatus, intervalTime);
+        function cancelOrder(){
+            fetch("cancel_order.php")
+                .then(response => response.json())
+                .then(data => {
+                    updateStatusUI(data.status);
+                    document.getElementById("cancelOrder").style.display = "none";
+                });
+        }
+
+        document.getElementById("cancelOrder").addEventListener("click", cancelOrder);
+
+        setInterval(() => {
+            fetch("update_status.php").then(() => fetchStatus());
+        }, 60000);
+
+        fetchStatus();
     </script>
 </body>
 </html>

@@ -95,6 +95,9 @@ margin: 15px;
     </style>
 </head>
 <body>
+    <?php 
+        include('demo.php');
+    ?>
     <div class="container">
         <h1>Your Order History</h1>
         <?php if ($result->num_rows > 0): ?>
