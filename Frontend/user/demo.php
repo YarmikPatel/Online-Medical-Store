@@ -135,13 +135,13 @@
         const urlParams = new URLSearchParams(window.location.search);
         const orderid = urlParams.get("oid");
         function fetchStatus(){
-            fetch("get_status.php?oid=${orderid}")
+            fetch("get_order_status.php?oid=${orderid}")
                 .then(response => response.json())
                 .then(data => updateStatusUI(data.status));
         }
 
         function cancelOrder(){
-            fetch("cancel_order.php")
+            fetch("cancel_order_status.php")
                 .then(response => response.json())
                 .then(data => {
                     updateStatusUI(data.status);
@@ -152,7 +152,7 @@
         document.getElementById("cancelOrder").addEventListener("click", cancelOrder);
 
         setInterval(() => {
-            fetch("update_status.php").then(() => fetchStatus());
+            fetch("update_order_status.php").then(() => fetchStatus());
         }, 60000);
 
         fetchStatus();
