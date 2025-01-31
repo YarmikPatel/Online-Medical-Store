@@ -142,7 +142,20 @@
 // Get the current page name
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
-    <nav class="navbar">
+
+    <?php  
+                    echo '<nav class="navbar">';
+                    echo '<ul>';
+                    echo '<li>';
+                    echo '<a href="profile.php?uid=' .$_SESSION['uid'] . '"> <img src="../../Backend/image1/profile-user.png" alt="MedDrip Pharmacy Logo" height="50px" width="50px" ></a>';
+                    //echo '<a href="profile.php?uid=' . $row['uid'] . '";">';
+                    echo '</li>';
+                    echo '<li><a href="logout.php" class="signout-button">Logout</a></li>';
+                    echo '</ul>';
+                    echo '</nav>';
+        ?>
+
+<nav class="navbar">
         <a href="#" class="logo">MediStore</a>
         <span class="menu-toggle">&#9776;</span>
         <ul>
@@ -154,27 +167,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>   
         </ul>
     </nav>
-
-    <?php
-            $sql = "SELECT * FROM registration";
-            $result = mysqli_query($conn, $sql);
-
-            if ($result && mysqli_num_rows($result) > 0) {
-                if($row = $result->fetch_assoc()){
-                    echo '<nav class="navbar">';
-                    echo '<ul>';
-                    echo '<li>';
-                    echo '<a href="profile.php?uid=' .$row['uid'] . '"> <img src="../../Backend/image1/profile-user.png" alt="MedDrip Pharmacy Logo" height="50px" width="50px" ></a>';
-                    //echo '<a href="profile.php?uid=' . $row['uid'] . '";">';
-                    echo '</li>';
-                    echo '<li><a href="logout.php" class="signout-button">Logout</a></li>';
-                    echo '</ul>';
-                    echo '</nav>';
-                }
-            } else {
-                echo '<p>No products found.</p>';
-            }
-        ?>
 
     <script>
         const menuToggle = document.querySelector('.menu-toggle');

@@ -5,15 +5,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $conn->real_escape_string($_POST['email']);
     $pass = $conn->real_escape_string($_POST['pass']);
    
-    $sql = "SELECT * FROM `registration` WHERE upass='$pass' and email_id='$email'";
+    $sql = "SELECT uid FROM `registration` WHERE upass='$pass' and email_id='$email'";
     $result = mysqli_query($conn,$sql);
 
         if($result){
             if(mysqli_num_rows($result) > 0){
             session_start();
             $_SESSION['is_user_logged_in'] == true;
-            $row = $result->fetch_assoc();
-            $_SESSION['uid'] = $row['uid'];
+            $row = mysqli_fetch_assoc($result); // Fetch one row as an associative array
+            $uid = $row['uid']; // Access the 'uid' column
+            $_SESSION['uid'] = $uid;
            echo "<script>alert('Loging successfuly...');</script>";
            header("Location: user/user_login_index.php");  
         }
