@@ -115,7 +115,16 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid'])) {
                     <p><strong>Dosage Schedule:</strong> <?php echo htmlspecialchars($row['dosage_schedule']); ?></p>
                     <p class="price"><strong>Price:</strong> ₹<?php echo htmlspecialchars($row['price']); ?></p>
                     <p class="stock <?php echo $row['stock'] > 0 ? 'in-stock' : ''; ?>">
-                        <strong>Stock:</strong> <?php echo $row['stock'] > 0 ? 'In Stock' : 'Out of Stock'; ?>
+                        <strong>Stock:</strong> <?php
+                        if($row['stock'] == 0){
+                            echo "Out of stock";
+                        }elseif($row['stock'] <= 20){
+                            echo "Limited Stock";
+                        }else{
+                            echo "In stock";
+                        }
+                       // echo $row['stock'] > 0 ? 'In Stock' : 'Out of Stock'; 
+                        ?>
                     </p>
                     <a href="add_to_cart.php?pid=<?php echo $product_id; ?>" class="add-to-cart">Add to Cart</a>
                     <a href="buy.php?pid=<?php echo $product_id; ?>" class="add-to-cart">Buy Now</a>
