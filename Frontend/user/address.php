@@ -16,12 +16,8 @@ include('navbar.php');
         <form action="summary.php" method="POST">
             <div class="saved-addresses">
                 <label>
-                    <input type="radio" name="address" value="123 Main St, City" required>
+                    <input type="radio" name="address" value="123 Main St, City">
                     123 Main St, City
-                </label>
-                <label>
-                    <input type="radio" name="address" value="456 Elm St, City" required>
-                    456 Elm St, City
                 </label>
             </div>
             <h2>Temporary Address</h2>
