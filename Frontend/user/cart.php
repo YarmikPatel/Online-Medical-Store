@@ -128,11 +128,6 @@ form button {
 }
 
     </style>
-    <script>
-        function resetQuantityField(){
-            document.getElementById('quantity-field').value = '';
-        }
-    </script>
 </head>
 <body>
   
@@ -152,10 +147,10 @@ form button {
                         echo '<p class="product-info"><strong>SubTotal:</strong> ' . $row['final_order'] . '</p>';
                         ?>
                         <form action="" method="post">
-                        <input type="hidden" name="pid" id="product-id" value="<?php echo $row['pid']; ?>">
-                        <input type="text" name="qty" id="quantity-field" class="quantity-input">
-                        <button type="submit" name="update_qty" id="update-quantity-button" class="product-button" onclick="resetQuantityField()">Add Quantity</button>
-                        <button type="submit" name="delete_cart_item" id="delete-item-button"><img src="../../Backend/image1/delete.png" alt="Delete Item" height="25px"></button>
+                            <input type="hidden" name="pid" value="<?php echo $row['pid']; ?>">
+                            <input type="text" name="qty" id="quantity-field" class="quantity-input">
+                            <button type="submit" name="update_qty" id="update-quantity-button" class="product-button">Update Quantity</button>
+                            <button type="submit" name="delete_cart_item" id="delete-item-button"><img src="../../Backend/image1/delete.png" alt="Delete Item" height="25px"></button>
                         </form>
                         <?php 
                         echo '<hr>';
@@ -184,17 +179,22 @@ if(isset($_POST['delete_cart_item'])){
 
 if(isset($_POST['update_qty'])){
     $qty1 = $_POST['qty'];
-    $pid = $_POST['pid'];
-    $sql = "UPDATE cart SET qty=$qty1 WHERE uid=$uid AND pid=$pid";
-    $result = mysqli_query($conn,$sql);
+    if(empty($qty1) || !is_numeric($qty1) || $qty1 <= 0){
+        echo "<p>Please enter a valid quantity.</p>";
+    } else {
+        $pid = $_POST['pid'];
+        $sql = "UPDATE cart SET qty=$qty1, final_order=price*$qty1 WHERE uid=$uid AND pid=$pid";
+        $result = mysqli_query($conn,$sql);
 
-    if($result){
-        echo '<script>location.href="cart.php"</script>';
-    }else{
-        echo "Quantity can't be updated";
+        if($result){
+            echo '<script>location.href="cart.php"</script>';
+        }else{
+            echo "Quantity can't be updated";
+        }
     }
 }
 
+
 if(isset($_POST['buy_now'])){
 }
-?>
+?> 
