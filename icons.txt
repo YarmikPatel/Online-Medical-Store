@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedDrip Pharmacy Icons</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .icon-box {
+            margin: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .icon-box i {
+            display: block;
+            margin-bottom: 8px;
+        }
+        h1 {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>MedDrip Pharmacy - Useful Icons</h1>
+
+    <!-- Inventory & Product Icons -->
+    <div class="icon-box">
+        <i class="fas fa-capsules"></i>
+        <p>Medicine</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-box"></i>
+        <p>Inventory</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-warehouse"></i>
+        <p>Warehouse</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-pills"></i>
+        <p>Prescription</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-medkit"></i>
+        <p>First Aid</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-flask"></i>
+        <p>Lab Tests</p>
+    </div>
+
+    <!-- User Management & Authentication Icons -->
+    <div class="icon-box">
+        <i class="fas fa-users"></i>
+        <p>Users</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-user-edit"></i>
+        <p>Edit User</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-user-plus"></i>
+        <p>Add User</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-user-check"></i>
+        <p>Verified</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-user-lock"></i>
+        <p>Lock User</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-sign-in-alt"></i>
+        <p>Login</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-sign-out-alt"></i>
+        <p>Logout</p>
+    </div>
+
+    <!-- Order & Delivery Icons -->
+    <div class="icon-box">
+        <i class="fas fa-shopping-cart"></i>
+        <p>Orders</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-truck"></i>
+        <p>Delivery</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-truck-loading"></i>
+        <p>Shipping</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-credit-card"></i>
+        <p>Payment</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-cash-register"></i>
+        <p>Checkout</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-receipt"></i>
+        <p>Receipt</p>
+    </div>
+
+    <!-- Health & Medical Consultation Icons -->
+    <div class="icon-box">
+        <i class="fas fa-heartbeat"></i>
+        <p>Heart Health</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-stethoscope"></i>
+        <p>Consultation</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-clinic-medical"></i>
+        <p>Clinic</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-user-md"></i>
+        <p>Doctor</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-hospital-symbol"></i>
+        <p>Hospital</p>
+    </div>
+
+    <!-- Reports & Statistics Icons -->
+    <div class="icon-box">
+        <i class="fas fa-chart-line"></i>
+        <p>Reports</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-chart-pie"></i>
+        <p>Statistics</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-file-invoice"></i>
+        <p>Invoice</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-file-alt"></i>
+        <p>Documents</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-clipboard-check"></i>
+        <p>Checklists</p>
+    </div>
+
+    <!-- Miscellaneous Icons -->
+    <div class="icon-box">
+        <i class="fas fa-basket"></i>
+        <p>Shopping Cart</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-comment-medical"></i>
+        <p>Medical Chat</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-headset"></i>
+        <p>Customer Support</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-phone-alt"></i>
+        <p>Contact</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-volume-up"></i>
+        <p>Audio</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-clock"></i>
+        <p>Schedule</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-bell"></i>
+        <p>Notifications</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>Alerts</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-life-ring"></i>
+        <p>Support</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-sync-alt"></i>
+        <p>Refresh</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-search"></i>
+        <p>Search</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-cogs"></i>
+        <p>Settings</p>
+    </div>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Icons</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .icon-box {
+            margin: 15px;
+            text-align: center;
+            font-size: 40px;
+        }
+        .icon-box i {
+            display: block;
+            margin-bottom: 8px;
+        }
+        h1 {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Alert Icons for MedDrip Pharmacy</h1>
+
+    <!-- Basic Alert Icons -->
+    <div class="icon-box">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>Warning</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>Warning Triangle</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-bell"></i>
+        <p>Notification</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-info-circle"></i>
+        <p>Information</p>
+    </div>
+
+    <!-- Error & Danger Alerts -->
+    <div class="icon-box">
+        <i class="fas fa-times-circle"></i>
+        <p>Error</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-ban"></i>
+        <p>Blocked</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-trash-alt"></i>
+        <p>Delete</p>
+    </div>
+
+    <!-- Success & Confirmation Alerts -->
+    <div class="icon-box">
+        <i class="fas fa-check-circle"></i>
+        <p>Success</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-thumbs-up"></i>
+        <p>Approved</p>
+    </div>
+
+    <!-- Information & Alert Icons -->
+    <div class="icon-box">
+        <i class="fas fa-lightbulb"></i>
+        <p>Idea</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-clipboard-list"></i>
+        <p>Reminder</p>
+    </div>
+
+    <!-- Critical Alerts -->
+    <div class="icon-box">
+        <i class="fas fa-heartbeat"></i>
+        <p>Critical Alert</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-ambulance"></i>
+        <p>Emergency</p>
+    </div>
+
+    <!-- Miscellaneous Alert Icons -->
+    <div class="icon-box">
+        <i class="fas fa-info-circle"></i>
+        <p>General Info</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-cogs"></i>
+        <p>System Alert</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-shield-alt"></i>
+        <p>Security Alert</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-bug"></i>
+        <p>Bug Alert</p>
+    </div>
+
+</body>
+</html>
+
