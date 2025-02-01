@@ -1,11 +1,33 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include('../../Backend/connection.php');
+
+// Get order_id from URL (or default to 1 for testing)
+$oid = isset($_GET['oid']) ? intval($_GET['oid']) : 1;
+
+// Fetch order status
+$query = "SELECT status FROM order_history WHERE oid = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $oid);
+$stmt->execute();
+$result = $stmt->get_result();
+$order = $result->fetch_assoc();
+
+// Define order status steps
+$statuses = ["Pending", "Shipped", "Out for Delivery", "Delivered"];
+$currentIndex = array_search($order['status'], $statuses);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="20">
     <title>Persistent Order Status Tracker</title>
     <style>
-        body {
+        /*body {
             font-family: Arial, sans-serif;
             background: #f9f9f9;
             margin: 0;
@@ -14,84 +36,45 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-        }
+        }*/
 
-        .container {
-            width: 90%;
-            max-width: 600px;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px 30px;
-        }
-
-        .title {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            margin: 30px 0;
-        }
-
-        .status-bar::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            width: 80%;
-            height: 4px;
-            background: #e0e0e0;
-            transform: translateY(-50%);
-            z-index: 0;
-        }
-
-        .status-step {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            flex: 1;
-        }
-
-        .status-circle {
-            width: 30px;
-            height: 30px;
-            background: #e0e0e0;
-            border-radius: 50%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: #999;
-            transition: all 0.3s ease;
-        }
-
-        .status-text {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #999;
-        }
-
-        .active .status-circle {
-            background: #4caf50;
-            color: #fff;
-        }
-
-        .active .status-text {
-            color: #4caf50;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .status { font-size: 20px; font-weight: bold; margin: 20px; }
+        .button-container { margin-top: 20px; }
+        button { padding: 10px 15px; font-size: 16px; margin: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="container">
+
+<h2>Order Status Tracker</h2>
+    <p>Order ID: <?php echo $oid; ?></p>
+    <p class="status">Current Status: <?php echo $order['status']; ?></p>
+
+    <div class="button-container">
+        <?php 
+        if ($currentIndex !== false && $currentIndex < count($statuses) - 1){
+            $new_status = $statuses[$currentIndex + 1]; // Move to the next stage
+            $update_query = "UPDATE order_history SET status = ? WHERE oid = ?";
+            $update_stmt = $conn->prepare($update_query);
+            $update_stmt->bind_param("si", $new_status, $order_id);
+            $update_stmt->execute();
+        }
+        ?>
+        <form action="update_order_status.php" method="POST">
+                <input type="hidden" name="order_id" value="<?php echo $oid; ?>">
+                <input type="hidden" name="new_status" value="<?php echo $statuses[$currentIndex + 1]; ?>">
+                <button type="submit">Update Status</button>
+            </form>
+        <!-- <button id="cancelOrder" style="display: block; width: 100%; margin-top: 20px; padding: 10px; background: red: color: white; border: none; cursor: pointer;">Cancel Order</button> -->
+        <form action="cancel_order_status.php" method="POST">
+            <input type="hidden" name="order_id" value="<?php echo $oid; ?>">
+            <button type="submit" style="background-color: red; color: white;">Cancel Order</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<!-- <div class="container">
         <h2 class="title">Order Status</h2>
         <div class="status-bar">
             <div class="status-step" id="step-1">
@@ -110,52 +93,4 @@
                 <div class="status-circle"></div>
                 <div class="status-text">Delivered</div>
             </div>
-        </div>
-        <button id="cancelOrder" style="display: block; width: 100%; margin-top: 20px; padding: 10px; background: red: color: white; border: none; cursor: pointer;">Cancel Order</button>
-    </div>
-
-    <script>
-        const statusSteps = ["Pending", "Shipped", "Out for Delivery", "Delivered", "Cancelled"]; // Status sequence
-        const stepElements = ["step-1", "step-2", "step-3", "step-4"];
-        
-        function updateStatusUI(status){
-            document.querySelectorAll(".status-step").forEach(el => el.classList.remove("active"));
-
-            if(status === "Cancelled"){
-                alert("Order has been cancelled.");
-                return;
-            }
-
-            let index = statusSteps.indexOf(status);
-            if(index !== -1){
-                document.getElementById(stepElements[index]).classList.add("active");
-            }
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const orderid = urlParams.get("oid");
-        function fetchStatus(){
-            fetch("get_order_status.php?oid=${orderid}")
-                .then(response => response.json())
-                .then(data => updateStatusUI(data.status));
-        }
-
-        function cancelOrder(){
-            fetch("cancel_order_status.php")
-                .then(response => response.json())
-                .then(data => {
-                    updateStatusUI(data.status);
-                    document.getElementById("cancelOrder").style.display = "none";
-                });
-        }
-
-        document.getElementById("cancelOrder").addEventListener("click", cancelOrder);
-
-        setInterval(() => {
-            fetch("update_order_status.php").then(() => fetchStatus());
-        }, 60000);
-
-        fetchStatus();
-    </script>
-</body>
-</html>
+        </div> -->
