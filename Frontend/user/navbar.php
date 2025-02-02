@@ -168,7 +168,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <span class="menu-toggle">&#9776;</span>
         <ul>
             <li><a href="user_login_index.php" class="<?php echo ($current_page == 'user_login_index.php' || $current_page == '') ? 'active' : ''; ?>">HOME</a></li>
-            <li><a href="lab_test.php" class="<?php echo ($current_page == 'lab_tests.php') ? 'active' : ''; ?>">Lab Test</a></li>
+            <li><a href="lab_test.php" class="<?php echo ($current_page == 'lab_test.php') ? 'active' : ''; ?>">Lab Test</a></li>
             <li><a href="cart.php" class="<?php echo ($current_page == 'cart.php') ? 'active' : ''; ?>"> My Cart</a></li>
             <li><a href="orders.php" class="<?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">My Orders</a></li>
             <li><a href="prescription.php" class="<?php echo ($current_page == 'prescription.php') ? 'active' : ''; ?>">Prescription</a></li>
