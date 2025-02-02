@@ -141,6 +141,27 @@ if(!isset($_SESSION['uid'])){
         }
 
 
+        /*scroll up */
+        #backToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 20px;
+    cursor: pointer;
+    display: none; /* Initially hidden */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s, background-color 0.3s;
+}
+
+#backToTopBtn:hover {
+    background-color: darkgreen;
+    opacity: 0.9;
+}
     </style>
 </head>
 <body>
@@ -148,29 +169,17 @@ if(!isset($_SESSION['uid'])){
 // Get the current page name
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
-
-    <?php  
-                    echo '<nav class="navbar">';
-                    echo '<ul>';
-                    echo '<li>';
-                    echo '<a href="profile.php?uid=' .$_SESSION['uid'] . '"> <img src="../../Backend/image1/profile-user.png" alt="MedDrip Pharmacy Logo" height="50px" width="50px" ></a>';
-                    //echo '<a href="profile.php?uid=' . $row['uid'] . '";">';
-                    echo '</li>';
-                    echo '<li><a href="logout.php" class="signout-button">Logout</a></li>';
-                    echo '</ul>';
-                    echo '</nav>';
-        ?>
-
-<nav class="navbar">
+    <nav class="navbar">
         <a href="#" class="logo">MediStore</a>
         <span class="menu-toggle">&#9776;</span>
         <ul>
             <li><a href="user_login_index.php" class="<?php echo ($current_page == 'user_login_index.php' || $current_page == '') ? 'active' : ''; ?>">HOME</a></li>
-            <li><a href="lab_test.php" class="<?php echo ($current_page == 'lab_tests.php') ? 'active' : ''; ?>">Lab Test</a></li>
+            <li><a href="lab_test.php" class="<?php echo ($current_page == 'lab_test.php') ? 'active' : ''; ?>">Lab Test</a></li>
             <li><a href="cart.php" class="<?php echo ($current_page == 'cart.php') ? 'active' : ''; ?>"> My Cart</a></li>
             <li><a href="orders.php" class="<?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">My Orders</a></li>
             <li><a href="prescription.php" class="<?php echo ($current_page == 'prescription.php') ? 'active' : ''; ?>">Prescription</a></li>
-            <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>   
+            <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>
+            <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
 
@@ -193,7 +202,26 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 navbar.classList.remove('scrolled');
             }
         });
-    </script>
 
+
+        //////////////////////////////// scroll up 
+        window.onscroll = function () {
+    toggleButton();
+};
+
+function toggleButton() {
+    let button = document.getElementById("backToTopBtn");
+    if (window.scrollY > 200) {
+        button.style.display = "block";
+    } else {
+        button.style.display = "none";
+    }
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+    </script>
+<button id="backToTopBtn" onclick="scrollToTop()">▲</button>
 </body>
 </html>

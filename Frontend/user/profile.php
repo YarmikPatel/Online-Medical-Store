@@ -1,52 +1,44 @@
 <?php
 include('../../Backend/connection.php');
 
-// Check if uid is set
-if (isset($_GET['uid'])) {
-    $uid = $_GET['uid'];
-
-    // Fetch user details
-    $sql = "SELECT uname, full_name, mobile, email_id, address FROM registration WHERE uid = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $uid);
-    $stmt->execute();
-    $user = $stmt->get_result()->fetch_assoc();
-    $stmt->close();
-
-    // Fetch cart details
-    $sql = "SELECT pname, image, price, qty, final_order FROM cart WHERE uid = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $uid);
-    $stmt->execute();
-    $cart = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-
-    // Fetch order history
-    $sql = "SELECT pid, order_date, status, price, qty, total_amount FROM order_history WHERE uid = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $uid);
-    $stmt->execute();
-    $orders = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-
-    // Fetch payment details
-    $sql = "SELECT 'oid', 'amount', 'payment_type' FROM payment WHERE uid = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $uid);
-    $stmt->execute();
-    $payments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-
-    // Fetch prescription details
-    $sql = "SELECT date, illeness, mname, dosage_schedule, doctor_name, hospital_name FROM prescription_detail WHERE uid = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $uid);
-    $stmt->execute();
-    $prescriptions = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-} else {
+if (!isset($_GET['uid'])) {
     die("User ID not provided.");
 }
+
+$uid = intval($_GET['uid']);
+
+// Fetch user details
+$sql = "SELECT uname, full_name, mobile, email_id, address FROM registration WHERE uid = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $uid);
+$stmt->execute();
+$user = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+
+// Fetch cart details
+$sql = "SELECT pname, image, price, qty FROM cart WHERE uid = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $uid);
+$stmt->execute();
+$cart = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+
+// Fetch order history
+$sql = "SELECT pid, order_date, status, total_amount FROM order_history WHERE uid = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $uid);
+$stmt->execute();
+$orders = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+
+// Fetch payment details
+$sql = "SELECT 'oid', 'amount', 'payment_type' FROM payment WHERE uid = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $uid);
+$stmt->execute();
+$payments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+
 $conn->close();
 ?>
 
@@ -111,7 +103,7 @@ $conn->close();
         <?php foreach ($cart as $item): ?>
             <div class="section">
                 <p><strong>Product Name:</strong> <?php echo htmlspecialchars($item['pname']); ?></p>
-                <img src="<?php echo htmlspecialchars($item['image']); ?>">
+                <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="Product Image">
                 <p><strong>Price:</strong> <?php echo htmlspecialchars($item['price']); ?></p>
                 <p><strong>Quantity:</strong> <?php echo htmlspecialchars($item['qty']); ?></p>
             </div>
