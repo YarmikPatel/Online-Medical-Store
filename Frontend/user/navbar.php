@@ -1,3 +1,9 @@
+<?php
+//session_start();
+if(!isset($_SESSION['uid'])){
+    die('user not logged in. UID not found in session');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
