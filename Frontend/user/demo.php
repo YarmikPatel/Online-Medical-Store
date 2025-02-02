@@ -24,11 +24,6 @@ $currentStatus = $order['status']; // "Pending", "Shipped" and so on.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Status Tracker</title>
     <style>
-            align-items: center;
-            min-height: 100vh;
-        }*/
-
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
     body {
       font-family: Arial, sans-serif;
       background: #f9f9f9;
