@@ -127,7 +127,7 @@ form button {
     }
 }
 
-    </style>
+</style>
 </head>
 <body>
   
@@ -196,5 +196,6 @@ if(isset($_POST['update_qty'])){
 
 
 if(isset($_POST['buy_now'])){
+    
 }
 ?> 
