@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .sidenav {
             height: 100vh;
@@ -25,9 +24,7 @@
             text-decoration: none;
             font-size: 18px;
             color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: block;
             transition: 0.3s;
         }
         .sidenav a:hover {
@@ -50,11 +47,11 @@
 <body>
     <div id="mySidenav" class="sidenav">
         <button class="closebtn" onclick="closeNav()">&times;</button>
-        <a href="manage_inventory.php"><i class="fas fa-box"></i> Manage Inventory</a>
-        <a href="manage_users.php"><i class="fas fa-users"></i> Manage Users</a>
-        <a href="manage_orders.php"><i class="fas fa-shopping-cart"></i> Manage Orders</a>
-        <a href="report.php"><i class="fas fa-chart-line"></i> Report</a>
-        <a href="admin_logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        <a href="manage_inventory.php">Manage Inventory</a>
+        <a href="manage_users.php">Manage Users</a>
+        <a href="manage_orders.php">Manage Orders</a>
+        <a href="report.php">Report</a>
+        <a href="admin_logout.php">Log Out</a>
     </div>
     <script>
         function openNav() {
