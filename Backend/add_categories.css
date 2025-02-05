@@ -79,8 +79,39 @@ table tr:hover {
     color: #333;
 }
 
-.inputBx input[type="text"],
-.inputBx input[type="submit"] {
+/*button hover and css*/
+.inputBx_button input[type="submit"] {
+    background-color: #0bc053;
+    color: white; /* Text color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.inputBx_button input[type="submit"]:hover {
+    background-color: #0bc053; /* Same color on hover */
+    opacity: 0.8; /* Slight opacity change on hover */
+}
+
+
+.inputBx_button {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    width: 100%;             /* Ensure it spans the full width */
+}
+
+.inputBx_button input {
+    margin: 10px; /* Optional: Adds space between buttons */
+}
+
+/*                    */
+
+
+.inputBx input[type="text"] {
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -105,6 +136,7 @@ table tr:hover {
 }
 
 .inputBx input[type="submit"]:hover {
+    background-color: #0bc053;
     background-color: #099a44;
     box-shadow: 0 3px 8px rgba(11, 192, 83, 0.3);
 }

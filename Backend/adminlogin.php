@@ -29,23 +29,20 @@
 </head> 
 <body>
     <header>
-        <h1>Way to MedDrip Pharmacy admin dashboard</h1>
+        <h1>Way to <strong> MedDrip Pharmacy </strong> admin dashboard</h1>
     </header>
     <main>
-        <h4>
-            Admin login
-        </h4>
         <div>
             <form action="" method="post" class="login" onsubmit="return validateform(event)">
                 <div class="inputBx" id="adminname">
-                    Enter admin name
+                   <label for="name_pass">Enter admin name</label> 
                     <input type="text" name="admin_name" id="adname" required>
                 </div>
                 <div class="inputBx" id="apass">
-                    Enter admin password
+                <label for="name_pass">Enter admin password</label>
                     <input type="password" name="apass" id="adpass" required>
                 </div>
-                <div class="inputBx" id="login">
+                <div class="inputBx" id="submit">
                     <input type="submit" id="submit" value="login">
                 </div>
             </form>
@@ -68,6 +65,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
          session_start();
          $_SESSION['admin_name']=$admin_name;
          $_SESSION['apass']=$apass;
+         $_SESSION['is_admin_logged_in'] = true;
         header("location:admin_dashboard.php");
     }
     else{

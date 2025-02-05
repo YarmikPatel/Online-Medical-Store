@@ -2,7 +2,8 @@
 include('admin_session.php');
 include('connection.php'); 
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+//  add category to database 
+if(isset($_POST['add_category'])){
     $category_id = $_POST['category_id'];
     $cname = $_POST['cname'];
 
@@ -78,10 +79,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </div>
                         <div class="inputBx">
                             Enter category name <br>
-                            <input type="text" name="cname" id="cname" required>
+                            <input type="text" name="cname" id="cname">
                         </div>
-                        <div class="inputBx">
-                            <input type="submit" value="Add category">
+                        <div class="inputBx_button">
+                                <input type="submit" name="add_category" value="Add category">
                         </div>
                     </form>
         </div>

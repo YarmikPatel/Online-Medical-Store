@@ -5,7 +5,13 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Dark gray text */
+    display: block;
+    margin-bottom: 5px;
+}
 /* Body Styling */
 body {
     background: linear-gradient(135deg, #74ebd5, #9face6);

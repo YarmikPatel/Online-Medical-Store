@@ -17,11 +17,7 @@ include ('connection.php');
                          alert('Field required');
                          event.preventDefault(); // Stops form from submission
                          return false;
-                 }/*else if(validcode.length !==8) {
-                          alert('code length is not matched');
-                          event.preventDefault();
-                         return false;
-                }*/
+                 }
             return true;
             }
 </script>
@@ -36,8 +32,7 @@ include ('connection.php');
         <div>
             <form action="" method="post" class="verify" onsubmit="return validateform(event)">
                 <div class="inputBx" id="admincode">
-                    Enter admin code
-                    <input type="password" name="code" id="acode" required>
+                    <input type="password" name="code" id="acode" placeholder="Enter admin code" required>
                 </div>
                 <div class="inputBx" id="submit">
                     <input type="submit" value="Verify passcode">
