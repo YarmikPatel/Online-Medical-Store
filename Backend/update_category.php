@@ -5,17 +5,22 @@
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         $category_id = $_POST['category_id'];
         $cname = $_POST['cname'];
-    $image = NULL;
+        $success_message = null;
+        $error_message =  null;
 
         //SQL query to post data into database.
         $sql = "UPDATE `category` SET name='$cname' WHERE category_id=$category_id";
         $result = mysqli_query($conn,$sql);
         //Verifying the data from database.
         if($result){
-            echo "category records inserted successfully";
+            if (mysqli_affected_rows($conn) > 0) { // Check if any rows were updated
+                $success_message = "Category updated successfully!";
+            } else {
+                $error_message = "Category id doesn't Exist!";
+            }
         }
         else{
-            echo "Records not inserted successfully";
+            $error_message = "Failed to  Update Category";
         }
     }
 
@@ -29,12 +34,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Category Details</title>
     <link rel="stylesheet" href="add_categories.css">
+    <script src="toggle-btn.js"></script>
 </head>
 <body>
     <div class="main">
-
- <!-- Display Product Table -->
- <table>
+        <?php
+        if (isset($success_message)) echo "<p class='success'>$success_message</p>"; 
+        ?>
+        <?php
+        if (isset($error_message)) echo "<p class='error'>$error_message</p>"; 
+        ?>
+        
+        <!-- Display Product Table -->
+        <table>
             <tr>
                 <th>Category ID</th>
                 <th>Category Name</th>
@@ -53,26 +65,31 @@
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='9'>No records found</td></tr>";
+                    echo "<tr><td colspan='2'>No records found</td></tr>";
                 }
             ?>
         </table>
 
-    <div class="form">
-        <form method="post">
-                <div class="inputBx" id="category_id">
-                    Enter category id <br>
-                    <input type="text" name="category_id" id="category_id">
-                </div>
-                <div class="inputBx" id="category_name">
-                    Enter category Name <br>
-                    <input type="text" name="cname" id="cname">
-                </div>
-                <div class="inputBX" id="submit">
-                    <input type="submit" value="Update Category">
-                </div>
-            </form>
+        <div id="form-container" class="form-container">
+                    <form method="post">
+                        <div class="inputBx">
+                            Enter category ID <br>
+                            <input type="text" name="category_id" id="category_id" required>
+                        </div>
+                        <div class="inputBx">
+                            Enter category name <br>
+                            <input type="text" name="cname" id="cname">
+                        </div>
+                        <div class="inputBx_button">
+                                <input type="submit" name="add_category" value="Update category">
+                        </div>
+                    </form>
         </div>
+
+        <!-- Toggle Button -->
+        <button id="toggle-button" onclick="toggleForm()">
+            Show Form
+        </button>
     </div>
 </body>
 </html>

@@ -31,7 +31,7 @@ if(isset($_POST['add_category'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="add_categories.css">
-    <title>Add Product - Category</title>
+    <title>Add Category</title>
     <script src="toggle-btn.js"></script>
 </head>
 <body>
@@ -43,7 +43,7 @@ if(isset($_POST['add_category'])){
      if (isset($error_message)) echo "<p class='error'>$error_message</p>"; 
      ?>
        
-    <table border="1">
+    <table>
             <tr>
                 <th>Category ID</th>
                 <th>Category Name</th>
