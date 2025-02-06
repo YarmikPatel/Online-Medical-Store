@@ -3,58 +3,47 @@
     include('connection.php');
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $pid = $_POST['pid'];
-        $category_id = $_POST['category_id'];
-        $pname = $_POST['pname'];
-        $descript = $_POST['descript'];
-        $illeness = $_POST['illeness'];
-        $dosage_schedule = $_POST['dosage_schedule'];
-        $price = $_POST['price'];
-        $stock = $_POST['stock'];
-
-        // Handle image upload
-        $target_dir = "image1/"; // Folder to store uploaded images
-        $target_file = $target_dir . basename($_FILES["image"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        // Check if image file is a real image
-        if (isset($_FILES["image"]) && $_FILES["image"]["tmp_name"] != "") {
-            $check = getimagesize($_FILES["image"]["tmp_name"]);
-            if ($check !== false) {
-                $uploadOk = 1;
+        try {
+            $pid = $_POST['pid'];
+            $category_id = $_POST['category_id'];
+            $pname = $_POST['pname'];
+            $descript = $_POST['descript'];
+            $illeness = $_POST['illeness'];
+            $dosage_schedule = $_POST['dosage_schedule'];
+            $price = $_POST['price'];
+            $stock = $_POST['stock'];
+    
+            // Image upload handling
+            $target_dir = "image1/"; // Folder to store uploaded images
+            $image_name = basename($_FILES["image"]["name"]); // Get only the image name
+            $target_file = $target_dir . $image_name;
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    
+            // Allow only JPG and PNG formats
+            if ($imageFileType != "jpg" && $imageFileType != "png") {
+                $error_message = "Sorry, only JPG and PNG files are allowed.";
             } else {
-                $error_message = "File is not an image.";
-                $uploadOk = 0;
-            }
-        }
-        
-        // Allow certain file formats
-        if ($imageFileType != "jpg" && $imageFileType != "png") {
-            $error_message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            $uploadOk = 0;
-        }
-
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            $error_message = "Sorry, your file was not uploaded.";
-        } else {
-            // If everything is ok, try to upload file
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                // SQL query to insert data into the database
-                $sql = "INSERT INTO `product` (`pid`, `category_id`, `pname`, `descript`, `illeness`, `dosage_schedule`, `price`, `stock`, `image`) 
-                        VALUES ('$pid', '$category_id', '$pname', '$descript', '$illeness', '$dosage_schedule', '$price', '$stock', '$target_file')";
-
-                $result = mysqli_query($conn, $sql);
-                
-                if($result){
-                    $success_message = "Category added successfully!";
-                }else{
-                    $error_message = "Failed to  add Category";
+                // Move the uploaded file to the target folder
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                    // Insert product data into the database (saving only the image name)
+                    $sql = "INSERT INTO `product` (`pid`, `category_id`, `pname`, `descript`, `illeness`, `dosage_schedule`, `price`, `stock`, `image`) 
+                            VALUES ('$pid', '$category_id', '$pname', '$descript', '$illeness', '$dosage_schedule', '$price', '$stock', '$image_name')";
+    
+                    $result = mysqli_query($conn, $sql);
+    
+                    if ($result) {
+                        $success_message = "Product added successfully!";
+                    } else {
+                        $error_message = "Failed to add product. Possible duplicate Product ID.";
+                    }
+                } else {
+                    $error_message = "File upload failed.";
                 }
+            }
+        } catch (Exception $e) {
+            $error_message = "An unexpected error occurred: " . $e->getMessage();
         }
     }
-}
 ?>
 
 <!DOCTYPE html>

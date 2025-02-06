@@ -2,3 +2,6 @@ Backend:
 index.php
 index.css
 adminlogin.php
+add_category.php
+update_category.php
+save_product.php
