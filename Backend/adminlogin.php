@@ -48,6 +48,9 @@
             </form>
         </div>
     </main>
+    <footer>
+        <p>2024 of MedDrip. All rights reserved.<br>Created by Tirth Barot and Yarmik Kansagara.</p>
+    </footer>
 </body>
 </html>
 

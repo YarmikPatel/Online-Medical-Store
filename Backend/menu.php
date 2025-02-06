@@ -7,6 +7,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        .menu-btn {
+            font-size: 30px;
+            cursor: pointer;
+            color: #007bff;
+            display: block;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+        
         .sidenav {
             height: 100vh;
             width: 0;
@@ -45,8 +55,10 @@
     </style>
 </head>
 <body>
+<span id="menuBtn" class="menu-btn" onclick="openNav()">&#9776;</span>
     <div id="mySidenav" class="sidenav">
         <button class="closebtn" onclick="closeNav()">&times;</button>
+        <a href="admin_dashboard.php">Home</a>
         <a href="manage_inventory.php">Manage Inventory</a>
         <a href="manage_users.php">Manage Users</a>
         <a href="manage_orders.php">Manage Orders</a>

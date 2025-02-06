@@ -1,6 +1,7 @@
 <?php
 include('admin_session.php');
 include('connection.php');
+include('menu.php');
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +28,6 @@ include('connection.php');
     <title>Manage users - All users infromation</title>
 </head>
 <body>
-    <div class="nav-bar">
-            <ul class="menu">
-                    <li><a href="#">MedPlus</a></li>
-                    <li><a href="admin_logout.php">Log out</a></li>
-            </ul>
-    </div>
     <div>
         <p>Welcome to the Manage Users.</p>
     </div>

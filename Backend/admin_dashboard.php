@@ -1,7 +1,7 @@
 <?php
 include('admin_session.php');
 include('connection.php');
-include('menu.php');  // Import sidebar.php here
+ include('menu.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -30,15 +30,7 @@ include('menu.php');  // Import sidebar.php here
             padding: 20px;
             transition: margin-left 0.5s;
         }
-        .menu-btn {
-            font-size: 30px;
-            cursor: pointer;
-            color: #007bff;
-            display: block;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-        }
+        
         .welcm {
             margin-left: 50px; /* Adds space between toggle button and Hi Admin message */
         }
@@ -70,71 +62,71 @@ include('menu.php');  // Import sidebar.php here
         border: 1px solid #c4d8e1;
         border-radius: 8px;
         margin-top: 20px;
-    }
+        }
 
-    .alert-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
-    }
+        .alert-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
 
-    .alert-table th, .alert-table td {
-        padding: 12px;
-        border: 1px solid #c4d8e1;
-        text-align: center;
-        font-size: 14px;
-    }
+        .alert-table th, .alert-table td {
+            padding: 12px;
+            border: 1px solid #c4d8e1;
+            text-align: center;
+            font-size: 14px;
+        }
 
-    .alert-table th {
-        background-color: rgb(175, 4, 4);
-        color: white;
-    }
+        .alert-table th {
+            background-color: rgb(175, 4, 4);
+            color: white;
+        }
 
-    .alert-table td {
-        background-color: #e9f1f7;
-    }
+        .alert-table td {
+            background-color: #e9f1f7;
+        }
 
-    .btn-update {
-        display: inline-block;
-        padding: 12px 20px;
-        background-color:rgb(136, 8, 8);
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 5px;
-        font-size: 16px;
-        margin-top: 20px;
-    }
+        .btn-update {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color:rgb(136, 8, 8);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
 
-    .btn-update:hover {
-        background-color:rgb(93, 5, 5);
-        text-decoration: underline;
-    }
+        .btn-update:hover {
+            background-color:rgb(93, 5, 5);
+            text-decoration: underline;
+        }
 
-    .center-btn {
-        text-align: center;
-        margin-top: 20px;
-    }
+        .center-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    .no-alerts {
-        color: #3e8e41;
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-        padding: 10px;
-        border-radius: 5px;
-    }
+        .no-alerts {
+            color: #3e8e41;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-    .error {
-        color: #721c24;
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-        padding: 10px;
-        border-radius: 5px;
-    }
+        .error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <span id="menuBtn" class="menu-btn" onclick="openNav()">&#9776;</span>
+    <!-- <span id="menuBtn" class="menu-btn" onclick="openNav()">&#9776;</span> -->
     <div class="main-content" id="main">
         <div class="welcm">
             <p id="wlcm_admin">Hi Admin, <?php echo $_SESSION['admin_name']; ?>
