@@ -7,3 +7,4 @@ save_product.php
 update_category.php
 update_product.php
 delete_category.php
+delete_product.php
