@@ -11,9 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $sql);
 
     if ($result && mysqli_affected_rows($conn) > 0) {
-        echo "<script>alert('Deleted successfully'); window.location.reload();</script>"; //for reload page
+        $success_message = "Category Deleted";
     } else {
-        echo "<script>alert(' Product ID not found');</script>";
+        $error_message = "Failed  to delete category";
     }
 }
 ?>
@@ -25,10 +25,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deleting Product</title>
     <link rel="stylesheet" href="add_categories.css">
+    <script src="toggle-btn.js"></script>
 </head>
 <body>
     <div class="main">
-        <table border="1">
+    <?php
+     if (isset($success_message)) echo "<p class='success'>$success_message</p>"; 
+     ?>
+    <?php
+     if (isset($error_message)) echo "<p class='error'>$error_message</p>"; 
+     ?> 
+        <table>
             <tr>
                 <th>Category ID</th>
                 <th>Category Name</th>
@@ -51,17 +58,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             ?>
         </table>
-    </div>
 
-    <div class="form">
-        <form method="post">
-            <div class="inputbx">
-                <label for="cid">Enter Category ID:</label>
-                <input type="text" id="cid" name="cid" required>
-            </div>
-            <button type="submit">Delete Data</button>
-        </form>
-    </div>     
+        <div id="form-container" class="form-container">
+                    <form method="post">
+                        <div class="inputBx">
+                    <label for="cid">Enter Category ID:</label>
+                    <input type="text" id="cid" name="cid" required>
+                </div>
+                <div class="inputBx_button">
+                <input type="submit" name="delete_category" value="Delete category">
+                </div>
+            </form>
+        </div>    
+                <!-- Toggle Button -->
+        <button id="toggle-button" onclick="toggleForm()">
+            Show Form
+        </button>
+    </div> 
 </body>
 </html>
 

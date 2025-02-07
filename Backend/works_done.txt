@@ -3,6 +3,7 @@ index.php
 index.css
 adminlogin.php
 add_category.php
-update_category.php
 save_product.php
+update_category.php
 update_product.php
+delete_category.php
