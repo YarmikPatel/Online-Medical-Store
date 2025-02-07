@@ -142,7 +142,7 @@
                     Upload product image <br>
                     <input type="file" name="image" accept="image/*" id="image" required>
                 </div>
-                <div class="inputBx">
+                <div class="inputBx_button">
                             <input type="submit" value="Add Product">
                         </div>
             </form>

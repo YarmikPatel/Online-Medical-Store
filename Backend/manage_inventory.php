@@ -136,7 +136,7 @@ include('connection.php');
             <div class="dashboard-card"><a href="add_categories.php">Add Categories</a></div>
             <div class="dashboard-card"><a href="save_product.php">Add Product</a></div>
             <div class="dashboard-card"><a href="update_category.php">Update Categories</a></div>
-            <div class="dashboard-card"><a href="update_products.php">Edit/Update Product</a></div>
+            <div class="dashboard-card"><a href="update_products.php">Update Product</a></div>
             <div class="dashboard-card"><a href="delete_category.php">Delete Categories</a></div>
             <div class="dashboard-card"><a href="delete_product.php">Delete Product</a></div>
 

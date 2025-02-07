@@ -5,3 +5,4 @@ adminlogin.php
 add_category.php
 update_category.php
 save_product.php
+update_product.php
