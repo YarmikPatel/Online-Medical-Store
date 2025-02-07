@@ -1,0 +1,13 @@
+Backend:
+index.php
+index.css
+adminlogin.php
+add_category.php
+save_product.php
+update_category.php
+update_product.php
+delete_category.php
+delete_product.php
+manage_user.php : view_registration.php and view_prescription.php
+manage_order.php
+report.php
