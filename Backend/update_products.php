@@ -92,7 +92,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
     <link rel="stylesheet" href="add_categories.css">
-    <title></title>
+    <title>MedDrip Pharmacy - update Product</title>
+    <script src="toggle-btn.js"></script>
     <style>
         .dropdowninput {
     display: flex;
@@ -127,7 +128,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
     </style>
-    <script src="toggle-btn.js"></script>
 </head>
 <body>
     <div class="main">

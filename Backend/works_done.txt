@@ -8,3 +8,4 @@ update_category.php
 update_product.php
 delete_category.php
 delete_product.php
+manage_user.php : view_registration.php and view_prescription.php
