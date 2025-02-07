@@ -1,6 +1,7 @@
 <?php 
 include('admin_session.php');
 include('connection.php'); 
+include 'menu.php';
 
 //  add category to database 
 if(isset($_POST['add_category'])){

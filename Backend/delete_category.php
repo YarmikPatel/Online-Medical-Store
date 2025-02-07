@@ -1,6 +1,21 @@
 <?php 
 include('admin_session.php');
 include('connection.php'); 
+include 'menu.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $cid = $conn->real_escape_string($_POST['cid']);
+
+    // Query to delete data
+    $sql = "DELETE FROM category WHERE category_id = '$cid'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_affected_rows($conn) > 0) {
+        echo "<script>alert('Deleted successfully'); window.location.reload();</script>"; //for reload page
+    } else {
+        echo "<script>alert(' Product ID not found');</script>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,18 +65,4 @@ include('connection.php');
 </body>
 </html>
 
-<?php 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $cid = $conn->real_escape_string($_POST['cid']);
 
-    // Query to delete data
-    $sql = "DELETE FROM category WHERE category_id = '$cid'";
-    $result = mysqli_query($conn, $sql);
-
-    if ($result && mysqli_affected_rows($conn) > 0) {
-        echo "<script>alert('Deleted successfully'); window.location.reload();</script>"; //for reload page
-    } else {
-        echo "<script>alert(' Product ID not found');</script>";
-    }
-}
-?>

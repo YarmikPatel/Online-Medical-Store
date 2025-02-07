@@ -1,6 +1,7 @@
 <?php
     include('admin_session.php');
     include('connection.php');
+    include 'menu.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
