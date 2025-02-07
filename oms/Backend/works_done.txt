@@ -1,4 +1,4 @@
-Backend:
+Backend: completed
 index.php
 index.css
 adminlogin.php
@@ -11,3 +11,7 @@ delete_product.php
 manage_user.php : view_registration.php and view_prescription.php
 manage_order.php
 report.php
+
+
+
+Frontend:
