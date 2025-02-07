@@ -17,7 +17,7 @@ include('connection.php');
             padding: 0;
             box-sizing: border-box;
             background-color: #f4f4f4;
-            display: flex;
+            /* display: flex; */
         }
 
         a {
@@ -32,7 +32,9 @@ include('connection.php');
         }
         
         .welcm {
-            margin-left: 50px; /* Adds space between toggle button and Hi Admin message */
+            margin-left: 50px; /*Adds space between toggle button and Hi Admin message*/ 
+            justify-content: space-between;
+            display: flex;
         }
 
         .dashboard-items {
@@ -129,15 +131,18 @@ include('connection.php');
     <!-- <span id="menuBtn" class="menu-btn" onclick="openNav()">&#9776;</span> -->
     <div class="main-content" id="main">
         <div class="welcm">
-            <p id="wlcm_admin">Hi Admin, <?php echo $_SESSION['admin_name']; ?>
-            <a href="admin_logout.php">Log Out</a>
-            </p>
+            <div class="welcm-title">
+                <p id="wlcm_admin">Hi Admin, <?php echo $_SESSION['admin_name']; ?></p>
+            </div>
+            <div class="welcm-head">
+                <a href="admin_logout.php">Log Out</a>
+            </div>
         </div>
         <div class="dashboard-items">
-            <div class="dashboard-card"><a href="manage_inventory.php">Manage Inventory</a></div>
-            <div class="dashboard-card"><a href="manage_users.php">Manage Users</a></div>
-            <div class="dashboard-card"><a href="manage_orders.php">Manage Orders</a></div>
-            <div class="dashboard-card"><a href="report.php">Report</a></div>
+            <a href="manage_inventory.php" class="dashboard-card"><div>Manage Inventory</div></a>
+            <a href="manage_users.php" class="dashboard-card"><div>Manage Users</div></a>
+            <a href="manage_orders.php" class="dashboard-card"><div>Manage Orders</div></a>
+            <a href="report.php" class="dashboard-card"><div>Report</div></a>
         </div>
 
 
