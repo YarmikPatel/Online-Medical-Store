@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" id="pid" name="pid" required>
                 </div>
                 <div class="inputBx_button">
-                                <input type="submit" name="delete_category" value="delete category">
+                                <input type="submit" name="delete_category" value="delete Product">
                         </div>
             </form>
         </div> 

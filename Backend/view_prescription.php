@@ -14,7 +14,7 @@ include 'menu.php';
 </head>
 <body>
     <!-- <p>helo world</p> -->
-    <div class="main">
+    
             <div class="title">
                 <p>Users Prescription Information</p>
             </div>
@@ -54,6 +54,6 @@ include 'menu.php';
                     ?>
                 </table>
             </div>
-        </div>
+        
 </body>
 </html>

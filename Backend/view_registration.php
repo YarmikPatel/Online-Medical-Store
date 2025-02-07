@@ -1,6 +1,6 @@
-<?php
+<?php 
 include('admin_session.php');
-include('connection.php');
+include('connection.php'); 
 include 'menu.php';
 ?>
 
@@ -9,49 +9,65 @@ include 'menu.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Deleting Product</title>
     <link rel="stylesheet" href="add_categories.css">
 </head>
 <body>
-    <!-- <p>helo world</p> -->
-    <div class="main">
-            <div class="title">
-                <p>Users account information</p>
-            </div>
-            <div class="infotable">
-                <table border="1">
-                    <tr>
-                        <th>User ID</th>
-                        <th>User Name</th>
-                        <th>Full Name</th>
-                        <th>User Password</th>
-                        <th>Mobile</th>
-                        <th>Email ID</th>
-                        <th>Address</th>
-                    </tr>
-                    <?php
-                        // Fetch data from database
-                        $sql = "Select * from registration";
-                        $result =  mysqli_query($conn,$sql);
-                        if($result && mysqli_num_rows($result) > 0){
-                        // Output of each row
-                        while($row = $result->fetch_assoc()){
-                            echo "<tr>";
-                            echo "<td>" . $row['uid'] . "</td>";
-                            echo "<td>" . $row['uname'] . "</td>";
-                            echo "<td>" . $row['full_name'] . "</td>";
-                            echo "<td>" . $row['upass'] . "</td>";
-                            echo "<td>" . $row['mobile'] . "</td>";
-                            echo "<td>" . $row['email_id'] . "</td>";
-                            echo "<td>" . $row['address'] . "</td>";
-                            echo "</tr>";
-                        }
-                        }else{
-                            echo "<tr><td>No records found</td></tr>";
-                        }
-                    ?>
-                </table>
-            </div>
-        </div>
+    <!-- <div class="main"> -->
+    <?php
+     if (isset($success_message)) echo "<p class='success'>$success_message</p>"; 
+     ?>
+    <?php
+     if (isset($error_message)) echo "<p class='error'>$error_message</p>"; 
+     ?> 
+        <table>
+            <tr>
+                <th>User Id</th>
+                <th>User Name</th>
+                <th>Full Name</th>
+                <th>Password</th>
+                <th>Mobile</th>
+                <th>Email ID</th>
+                <th>Address</th>
+            </tr>
+            
+            <?php
+                // Fetch data from the database
+                $sql = "SELECT * FROM registration";
+                $result = mysqli_query($conn, $sql);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    // Output of each row
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['uid'] . "</td>";
+                        echo "<td>" . $row['uname'] . "</td>";
+                        echo "<td>" . $row['full_name'] . "</td>";
+                        echo "<td>" . $row['upass'] . "</td>";
+                        echo "<td>" . $row['mobile'] . "</td>";
+                        echo "<td>" . $row['email_id'] . "</td>";
+                        echo "<td>" . $row['address'] . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='9'>No records found</td></tr>";
+                }
+            ?>
+        </table>
+
+        
+            <form method="post">
+                <div class="inputBx">
+                    <label for="cid">Enter User ID:</label>
+                    <input type="text" id="uid" name="uid" required>
+                </div>
+                <div class="inputBx_button">
+                    <input type="submit" name="delete_user" value="Delete User">
+                </div>
+            </form>
+       
+                
+    <!-- </div>  -->
 </body>
 </html>
+
+
