@@ -77,12 +77,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 20px;
         }
         .container input {
-            width: 100%;
+            width: 90%;
             padding: 12px;
-            margin: 10px 0;
+            margin: 10px auto;
             border: 1px solid #b2dfdb;
             border-radius: 5px;
             font-size: 14px;
+            display: block;
+            text-align: center;
             transition: 0.3s;
         }
         .container input:focus {
@@ -107,16 +109,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .error {
             color: red;
             font-size: 14px;
-            margin-top: -5px;
-            margin-bottom: 10px;
-            text-align: left;
+            margin-bottom: 5px;
+            text-align: center;
+            font-weight: bold;
+            background: #ffebee;
+            padding: 5px;
+            border-radius: 5px;
         }
         .success {
             color: green;
             font-size: 14px;
             margin-top: 10px;
         }
-
+        .email-container {
+            margin-bottom: 20px;
+        }
+        .password-container {
+            margin-bottom: 10px;
+        }
         a {
             color: #2d3e50;
             font-size: 14px;
@@ -124,7 +134,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-weight: bold;
             transition: color 0.3s ease;
         }
-        
         a:hover {
             color: #4CAF50;
             text-decoration: underline;
@@ -145,17 +154,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 emailError.textContent = "Please enter your email.";
                 return false;
             }
-
             if (newPassword === "" || confirmPassword === "") {
                 passwordError.textContent = "Please enter and confirm your new password.";
                 return false;
             }
-
             if (newPassword !== confirmPassword) {
                 passwordError.textContent = "Passwords do not match!";
                 return false;
             }
-
             return true;
         }
     </script>
@@ -164,12 +170,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <h2>Reset Password</h2>
         <form method="POST" onsubmit="return validateForm()">
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            <div id="emailError" class="error"><?php echo $emailError; ?></div>
+            <div class="email-container">
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div id="emailError" class="error"><?php echo $emailError; ?></div>
+            </div>
 
-            <input type="password" id="newPassword" name="new_password" placeholder="Enter new password" required>
-            <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
-            <div id="passwordError" class="error"><?php echo $passwordError; ?></div>
+            <div class="password-container">
+                <input type="password" id="newPassword" name="new_password" placeholder="Enter new password" required>
+            </div>
+            <div>
+                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
+                <div id="passwordError" class="error"><?php echo $passwordError; ?></div>
+            </div>
             
             <button type="submit" name="change_pass">Change Password</button>
             <div class="success"><?php echo $successMessage; ?></div>

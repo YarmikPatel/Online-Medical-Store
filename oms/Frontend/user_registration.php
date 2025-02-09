@@ -158,7 +158,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         }
     }else if(!$usernameTaken && !$emailTaken){
         //SQL query to post data into database.
-        $sql = "INSERT INTO `registration` (`uname`,`full_name`,`upass`,`mobile`,`email_id`,`address`)VALUES   ('$uname','$full_name','$upass','$mobile','$email_id','$address')";
+        $hashed_password = password_hash($upass, PASSWORD_BCRYPT);
+        $sql = "INSERT INTO `registration` (`uname`,`full_name`,`upass`,`mobile`,`email_id`,`address`)VALUES   ('$uname','$full_name','$hashed_password','$mobile','$email_id','$address')";
         $result = mysqli_query($conn,$sql);
         if($result){
             //Set session variables 
