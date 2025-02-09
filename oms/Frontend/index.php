@@ -191,6 +191,12 @@ include('../Backend/connection.php');
             display: none;
         }
     </style>
+    <script>
+        function toggleNavbar() {
+            const navbarLinks = document.getElementById('navbar-links');
+            navbarLinks.classList.toggle('show');
+        }
+    </script>
 </head>
 <body>
     <div class="navbar-menu">
@@ -232,12 +238,7 @@ include('../Backend/connection.php');
         ?>
     </div>
 
-    <script>
-        function toggleNavbar() {
-            const navbarLinks = document.getElementById('navbar-links');
-            navbarLinks.classList.toggle('show');
-        }
-    </script>
+    
 
     <!-- Footer -->
     <?php include('footer.php'); ?>
