@@ -5,7 +5,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $conn->real_escape_string($_POST['email']);
     $pass = $conn->real_escape_string($_POST['pass']);
    
-    $sql = "SELECT uid FROM `registration` WHERE upass='$pass' and email_id='$email'";
+    $sql = "SELECT * FROM `registration` WHERE upass='$pass' and email_id='$email'";
     $result = mysqli_query($conn,$sql);
 
         if($result){

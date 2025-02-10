@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../../Backend/connection.php');
 include('navbar.php');
 ?>
@@ -13,16 +14,9 @@ include('navbar.php');
 <body>
 <div class="container">
         <h2>Feedback Form</h2>
-        <!-- <?php
-        // Display success or error messages if set
-        //  if (isset($_GET['message'])) {
-        //      $messageType = $_GET['type'] ?? 'success';
-        //      echo "<div class='" . htmlspecialchars($messageType) . "'>" . htmlspecialchars($_GET['message']) . "</div>";
-        //  }
-        ?> -->
         <form action="" method="POST">
             <label for="name">Name</label>
-            <input type="text" id="full_name" name="full_name" readonly>
+            <input type="text" id="full_name" name="full_name" value="<?php echo $_SESSION['user_name'];?>"readonly>
 
             <label for="email">Email</label>
             <input type="email" id="email_id" name="email" required>
