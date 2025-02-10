@@ -2,6 +2,7 @@
 include('../../Backend/connection.php');
 
 if (!isset($_GET['uid'])) {
+    header('location:../login.php');
     die("User ID not provided.");
 }
 

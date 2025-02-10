@@ -1,5 +1,6 @@
 <?php
-include('../Backend/connection.php');
+    include('../Backend/connection.php');
+    include 'nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -7,211 +8,97 @@ include('../Backend/connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
-    <title>Index Without Login</title>
+    <title>User Login Index</title>
+    <!-- <link rel="stylesheet" href="product_catalogue.css"> -->
     <style>
-        /* Basic Reset */
-         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            line-height: 1.6;
-        }
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+    }
 
-        .menu {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
+    .card {
+        width: 300px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        /* Navbar Styling */
-        .navbar-menu {
-            background-color: #1e2a38;
-            color: white;
-            padding: 10px 20px;
-            position: sticky;
-            top:0;
-            z-index: 1000;
-        }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
 
-        .navbar-menu ul {
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+    .card img {
+        width: 100%;
+        height: 200px; /* Fixed height for consistent display */
+        object-fit: contain; /* Ensures the entire image fits within the area */
+        background-color: #f0f0f0; /* Optional: Add a light background for empty space */
+    }
 
-        .navbar-menu ul li {
-            margin: 0 10px;
-        }
+    .card-content {
+        padding: 15px;
+        text-align: left;
+    }
 
-        .navbar-menu ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            padding: 8px 15px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+    .category {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 5px;
+    }
 
-        .navbar-menu ul li a:hover {
-            background-color: #4CAF50;
-            border-radius: 5px;
-            color: #ffffff;
-        }
+    .product-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
 
-        .navbar-menu ul li a.index {
-            background-color: #4CAF50;
-            border-radius: 5px;
-            color: #ffffff;
-        } 
+    .product-description {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 10px;
+    }
 
-        /* Responsive Navbar */
-        .navbar-toggle {
-            display: none;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            font-size: 18px;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #00b894;
+        margin-bottom: 10px;
+    }
 
-        .navbar-toggle:focus {
-            outline: none;
-        }
+    .button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #00b894;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
 
-        .navbar-menu ul {
-            flex-direction: row;
-        }
+    .button:hover {
+        background-color: #01966c;
+    }
+</style>
 
-        .navbar-menu ul.show {
-            flex-direction: column;
-        }
-
-        @media (max-width: 768px) {
-            .navbar-menu ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background-color: #1e2a38;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                z-index: 10;
-            }
-
-            .navbar-menu ul.show {
-                display: flex;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-        }
-
-        .card {
-            width: 300px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
-            transition: transform 0.2s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        .card img {
-            width: 100%;
-            height: 290px;
-            object-fit: cover;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .card-content {
-            padding: 10px;
-        }
-
-        .category {
-            background-color: #17a2b8;
-            color: #ffffff;
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .product-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #343a40;
-            margin-bottom: 5px;
-        }
-
-        .product-description {
-            font-size: 14px;
-            color: #6c757d;
-            margin-bottom: 10px;
-        }
-
-        .price {
-            font-size: 16px;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 10px;
-        }
-
-        .button {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 10px 15px;
-            margin: 15px auto 0;
-            width: 50%;
-            border-radius: 5px;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        ::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
-    <script>
-        function toggleNavbar() {
-            const navbarLinks = document.getElementById('navbar-links');
-            navbarLinks.classList.toggle('show');
-        }
-    </script>
 </head>
 <body>
-    <div class="navbar-menu">
-        <button class="navbar-toggle" onclick="toggleNavbar()">Menu</button>
-        <ul id="navbar-links">
-        <a href="login.php"> <img src="../Backend/image1/profile-user.png" alt="MedDrip Pharmacy Logo" height="50px" width="50px" ></a>
-            
-            <li><a href="index.php" class="index">Home</a></li>
-            <li><a href="lab_test.php">Lab Test</a></li>
-            <li><a href="cart.php">Cart</a></li>
-            <li><a href="order_history.php">Order History</a></li>
-            <li><a href="\user\prescription.php">Prescription</a></li>
-            <li><a href="login.php">Login</a></li>
-        </ul>
-    </div>
 
     <div class="menu">
     <?php
@@ -222,25 +109,59 @@ include('../Backend/connection.php');
                 while ($row = $result->fetch_assoc()) {
                     echo '<a href="product_details.php?pid=' . $row['pid'] . '" style="text-decoration: none; color: inherit;">';
                     echo '<div class="card">';
-                    echo '<img src="../Backend/image1/' . $row['image'] . '" alt="Product Image">';
-                    echo '<div class="card-content">';
-                    echo '<div class="category">' . $row['name'] . '</div>';
-                    echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
-                    echo '<div class="product-description"><strong>Description:</strong>' . $row['descript'] . '</div>';
-                    echo '<div class="price">₹' . $row['price'] . '</div>';
+                        echo '<img src="../Backend/image1/' . $row['image'] . '" alt="Product Image">';
+                        echo '<div class="card-content">';
+                            echo '<div class="category">' . $row['name'] . '</div>';
+                            echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
+                            echo '<div class="product-description"><strong>Description:</strong>' . $row['descript'] . '</div>';
+                            echo '<div class="price">₹' . $row['price'] . '</div>';
+                            echo '<form method="POST">';
+                            echo '<input type="hidden" name="pid" value="' . $row['pid'] . '">';
+                            echo '<input type="hidden" name="pname" value="' . $row['pname'] . '">';
+                            echo '<input type="hidden" name="image" value="' . $row['image'] . '">';
+                            echo '<input type="hidden" name="price" value="' . $row['price'] . '">';
+                            echo '<button type="submit" class="button">Add to Cart</button>';
+                            echo '</form>';
+                        echo '</div>';
                     echo '</div>';
-                    echo '</div>';
-                    echo'</a>';
+                    echo '</a>';
                 }
             } else {
                 echo '<p>No products found.</p>';
             }
         ?>
     </div>
-
-    
-
     <!-- Footer -->
     <?php include('footer.php'); ?>
 </body>
 </html>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $pid = $_POST['pid'];
+    $pname = $_POST['pname'];
+    $image = $_POST['image'];
+    $price = $_POST['price'];
+    $uid = $_SESSION['uid']; // Replace with the logged-in user ID from session
+
+    // Check if the product is already in the cart
+    $check_cart = "SELECT * FROM cart WHERE pid = $pid AND uid = $uid";
+    $result = mysqli_query($conn, $check_cart);
+
+    if (mysqli_num_rows($result) > 0) {
+        // Update quantity if already in the cart
+        $update_cart1 = "UPDATE cart SET qty = qty + 1 WHERE pid = $pid AND uid = $uid";
+        mysqli_query($conn, $update_cart1);
+        $update_cart2 = "UPDATE cart SET final_order = price * qty WHERE pid = $pid AND uid = $uid";
+        mysqli_query($conn, $update_cart2);
+    } else {
+        // Insert into cart
+        $final_order = $price * 1;
+        $insert_cart = "INSERT INTO `cart` (`uid`, `pid`, `pname`, `image`, `price`,`qty`,`final_order`) VALUES ('$uid', '$pid', '$pname', '$image', '$price','1','$final_order')";
+        mysqli_query($conn, $insert_cart);
+    }
+
+    // header("Location: cart.php");
+    exit;
+}
+?>

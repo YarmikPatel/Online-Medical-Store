@@ -15,6 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $row = mysqli_fetch_assoc($result); // Fetch one row as an associative array
             $uid = $row['uid']; // Access the 'uid' column
             $_SESSION['uid'] = $uid;
+            $_SESSION['user_name'] = $row['full_name'];
            echo "<script>alert('Loging successfuly...');</script>";
            header("Location: user/user_login_index.php");  
         }

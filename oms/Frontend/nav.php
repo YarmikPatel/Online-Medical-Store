@@ -164,23 +164,16 @@
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
     <nav class="navbar">
-        <div class="hi-user">
-        <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
-        <?php
-        // session_start();
-        //     echo '<p>Hi,</p>' . $_SESSION['user_name'];
-        ?>
+        <div>
+        <a href="login.php"><img src="../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
+        &nbsp;&nbsp;<a href="#" class="logo">MediStore</a>
         </div>
-        <a href="#" class="logo">MediStore</a>
         <span class="menu-toggle">&#9776;</span>
         <ul>
-            <li><a href="user_login_index.php" class="<?php echo ($current_page == 'user_login_index.php' || $current_page == '') ? 'active' : ''; ?>">HOME</a></li>
+            <li><a href="index.php" class="<?php echo ($current_page == 'index.php' || $current_page == '') ? 'active' : ''; ?>">HOME</a></li>
             <li><a href="lab_test.php" class="<?php echo ($current_page == 'lab_test.php') ? 'active' : ''; ?>">Lab Test</a></li>
-            <li><a href="cart.php" class="<?php echo ($current_page == 'cart.php') ? 'active' : ''; ?>"> My Cart</a></li>
-            <li><a href="orders.php" class="<?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">My Orders</a></li>
-            <li><a href="prescription.php" class="<?php echo ($current_page == 'prescription.php') ? 'active' : ''; ?>">Prescription</a></li>
-            <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="login.php" class="<?php echo ($current_page == 'login.php') ? 'active' : ''; ?>">Feedback</a></li>
+            <li><a href="login.php">Login</a></li>
         </ul>
     </nav>
 

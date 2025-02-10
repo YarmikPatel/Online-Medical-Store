@@ -126,8 +126,8 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid'])) {
                        // echo $row['stock'] > 0 ? 'In Stock' : 'Out of Stock'; 
                         ?>
                     </p>
-                    <a href="add_to_cart.php?pid=<?php echo $product_id; ?>" class="add-to-cart">Add to Cart</a>
-                    <a href="buy.php?pid=<?php echo $product_id; ?>" class="add-to-cart">Buy Now</a>
+                    <a href="login.php" class="add-to-cart">Add to Cart</a>
+                    <a href="login.php" class="add-to-cart">Buy Now</a>
                 </div>
             </div>
 
