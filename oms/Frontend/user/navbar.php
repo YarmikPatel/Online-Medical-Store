@@ -240,7 +240,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
                     <?php
                     // session_start();
-                    //     echo '<p>Hi,</p>' . $_SESSION['user_name'];
+                        // echo '<p>Hi,</p>' . $_SESSION['user_name'];
+                    echo 'Hi,' . $_SESSION['user_name'];
                     ?>
                 </div>
             </a></li>
@@ -253,7 +254,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <!-- <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a> -->
          <?php
         // session_start();
-             echo 'Hi,' . $_SESSION['user_name'];
+            //  echo 'Hi,' . $_SESSION['user_name'];
         ?>
         </div>
         <a href="#" class="logo">MediStore</a>
