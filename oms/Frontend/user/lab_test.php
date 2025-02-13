@@ -38,6 +38,17 @@ include 'navbar.php';
             border-bottom: 1px solid #ddd;
         }
 
+        .age-group h2::after { /* Style the icon */
+            content: '+'; /* Initial icon */
+            font-size: 20px;
+            transition: transform 0.3s ease; /* Smooth rotation */
+        }
+
+        .age-group h2.active::after { /* Icon when active */
+            content: '-';
+            transform: rotate(180deg); /* Rotate 180 degrees */
+        }
+
         .age-content {
             padding: 20px; /* Increased padding */
             display: none;
@@ -107,6 +118,7 @@ include 'navbar.php';
 
         .category {
             text-align: center;
+            margin-left: 9px;
         }
 
         .category-name {
@@ -159,22 +171,22 @@ include 'navbar.php';
         <h1>Understanding Your Lab Test Results</h1>
 
         <div class="age-group">
-            <h2>Kids (0–12 years) <span class="toggle-icon">+</span></h2>
+            <h2>Kids (0–12 years) <span class="toggle-icon"></span></h2>
             <div class="age-content">
                 <div class="test-item">
                     <div class="test-name">Complete Blood Count (CBC) - Hemoglobin</div>
                     <div class="progress-container">
                         <div class="progress-bar">
-                            <div class="segment very-good" style="width: 30%;">
+                            <div class="segment very-good" style="width: 45%;">
                                 <span class="percentage-label">12-13 g/dL</span>
                             </div>
-                            <div class="segment good-normal" style="width: 50%;">
+                            <div class="segment good-normal" style="width: 55%;">
                                 <span class="percentage-label">11-12 g/dL</span>
                             </div>
-                            <div class="segment not-good" style="width: 15%;">
+                            <div class="segment not-good" style="width: 40%;">
                                 <span class="percentage-label">10-11 g/dL</span>
                             </div>
-                            <div class="segment needs-treatment" style="width: 5%;">
+                            <div class="segment needs-treatment" style="width: 45%;">
                                 <span class="percentage-label">Below 10 g/dL</span>
                             </div>
                         </div>
@@ -209,10 +221,10 @@ include 'navbar.php';
                             <div class="segment good-normal" style="width: 50%;">
                                 <span class="percentage-label">20-50 ng/mL</span>
                             </div>
-                            <div class="segment not-good" style="width: 10%;">
+                            <div class="segment not-good" style="width: 25%;">
                                 <span class="percentage-label">10-20 ng/mL</span>
                             </div>
-                            <div class="segment needs-treatment" style="width: 0%;">
+                            <div class="segment needs-treatment" style="width: 30%;">
                                 <span class="percentage-label">Below 10 ng/mL</span>
                             </div>
                         </div>
@@ -507,7 +519,7 @@ include 'navbar.php';
         </div>
 
         <div class="age-group">
-            <h2>Teenagers (12-18 years) <span class="toggle-icon">+</span></h2>
+            <h2>Teenagers (12-18 years) <span class="toggle-icon"></span></h2>
             <div class="age-content">
             <div class="test-item">
                     <div class="test-name">CBC - Hemoglobin (Female)</div>
@@ -931,7 +943,7 @@ include 'navbar.php';
         </div>
 
         <div class="age-group">
-            <h2>Men (18+ years) <span class="toggle-icon">+</span></h2>
+            <h2>Men (18+ years) <span class="toggle-icon"></span></h2>
             <div class="age-content">
             <div class="test-item">
                     <div class="test-name">Lipid Panel - Total Cholesterol</div>
@@ -1317,7 +1329,7 @@ include 'navbar.php';
         </div>
 
         <div class="age-group">
-            <h2>Women (18+ years) <span class="toggle-icon">+</span></h2>
+            <h2>Women (18+ years) <span class="toggle-icon"></span></h2>
             <div class="age-content">
             <div class="test-item">
                     <div class="test-name">Lipid Panel - Total Cholesterol</div>
@@ -1703,7 +1715,7 @@ include 'navbar.php';
         </div>
 
         <div class="age-group">
-            <h2>Senior Citizens (60+ years) <span class="toggle-icon">+</span></h2>
+            <h2>Senior Citizens (60+ years) <span class="toggle-icon"></span></h2>
             <div class="age-content">
             <div class="test-item">
                     <div class="test-name">Comprehensive Metabolic Panel - Creatinine</div>
