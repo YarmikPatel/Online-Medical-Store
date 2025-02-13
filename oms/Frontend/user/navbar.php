@@ -16,6 +16,44 @@
             background-color: #f5f5f5;
         }
 
+        /* Top Navbar Styling */
+        .top-navbar {
+            position: fixed; /* Fixed for scroll effect */
+            top: 0;
+            width: 100%;
+            background-color: #333; /* Darker background */
+            display: flex;
+            justify-content: space-between; /* Align items to the right */
+            align-items: center;
+            padding: 10px 30px;
+            z-index: 1001; /* Higher z-index than main navbar */
+            /* transition: transform 0.3s ease; For smooth show/hide */
+            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
+            transition: opacity 0.3s ease, transform 0.3s ease, top 0.3s ease; /* Use opacity for smoother show/hide */
+            opacity: 1; /* Initially visible */
+        }
+
+        .top-navbar ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-navbar ul li {
+            margin-left: 20px; /* Reduced margin */
+        }
+
+        .top-navbar ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 16px; /* Smaller font size */
+            transition: color 0.3s ease;
+        }
+
+        .top-navbar ul li a:hover {
+            color: #1abc9c;
+        }
+
         /* Navbar Styling */
         .navbar {
             position: sticky;
@@ -28,6 +66,8 @@
             padding: 20px 30px;
             z-index: 1000;
             transition: background-color 0.3s ease;
+            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
+            transition: transform 0.3s ease;
         }
 
         .navbar .logo {
@@ -95,6 +135,34 @@
             z-index: 1100;
         }
 
+        /* Categories Navbar Styling */
+        .categories-navbar {
+            position: sticky;
+            top: 70px; /* Positioned below the main navbar. Adjust as needed */
+            width: 100%;
+            background-color: #f0f0f0; /* Light background for categories */
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-around; /* Distribute categories evenly */
+            z-index: 999; /* Below the main navbar */
+            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
+            transition: transform 0.3s ease;
+        }
+
+        .categories-navbar a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 5px 10px; /* Add some padding around the text */
+            border-radius: 5px; /* Optional: Add rounded corners */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .categories-navbar a:hover {
+            background-color: #ddd; /* Slightly darker background on hover */
+            color: #1abc9c;
+        }
+        
         /* Responsive Styles */
         @media (max-width: 1097px) {
             .navbar ul {
@@ -164,10 +232,26 @@
 // Get the current page name
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
+
+    <nav class="top-navbar">
+        <ul>
+            <li><a href="profile.php">
+                <div class="hi-user">
+                    <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
+                    <?php
+                    // session_start();
+                    //     echo '<p>Hi,</p>' . $_SESSION['user_name'];
+                    ?>
+                </div>
+            </a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
+    </nav>
+
     <nav class="navbar">
-        <div class="hi-user">
-        <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
-        <?php
+        <!-- <div class="hi-user"> -->
+        <!-- <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a> -->
+         <?php
         // session_start();
              echo 'Hi,' . $_SESSION['user_name'];
         ?>
@@ -181,20 +265,33 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li><a href="orders.php" class="<?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">My Orders</a></li>
             <li><a href="prescription.php" class="<?php echo ($current_page == 'prescription.php') ? 'active' : ''; ?>">Prescription</a></li>
             <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <!-- <li><a href="logout.php">Logout</a></li> -->
         </ul>
     </nav>
 
+    <nav class="categories-navbar">
+        <a href="#">Kids</a>
+        <a href="#">Teenagers</a>
+        <a href="#">Men</a>
+        <a href="#">Women</a>
+        <a href="#">Senior Citizen</a>
+    </nav>
+
+
     <script>
         const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.navbar ul');
+        const navLinks = document.querySelector('.navbar ul');  
         const navbar = document.querySelector('.navbar');
+        const topNavbar = document.querySelector('.top-navbar');  // Get the top navbar
+        const categoriesNavbar = document.querySelector('.categories-navbar'); // Declare categoriesNavbar!
         const navItems = document.querySelectorAll('.navbar ul li a');
 
         // Toggle menu visibility on click
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('show');
         });
+
+        let prevScrollPos = window.pageYOffset; // Store previous scroll position
 
         // Change navbar background on scroll
         window.addEventListener('scroll', () => {
@@ -203,6 +300,24 @@ $current_page = basename($_SERVER['PHP_SELF']);
             } else {
                 navbar.classList.remove('scrolled');
             }
+
+            // let scrollPosition = window.scrollY;
+            let currentScrollPos = window.pageYOffset;
+
+            // Hide/Show top navbar on scroll
+            if (window.scrollY > 0) {  // Adjust the scroll threshold as needed
+                topNavbar.style.opacity = 0; // Hide top navbar
+                topNavbar.style.transform = 'translateY(-100%)'; // Hide
+                navbar.style.transform = 'translateY(0)'; // Main Nav Fixed
+                categoriesNavbar.style.transform = 'translateY(0.1px)'; // Categories Nav Fixed
+            } else {
+                topNavbar.style.opacity = 1; // Show top navbar
+                topNavbar.style.transform = 'translateY(0)'; // Show top navbar
+                navbar.style.transform = 'translateY(70px)'; // Main Nav Below Top Nav
+                categoriesNavbar.style.transform = 'translateY(70px)'; // Categories Nav Below Main Nav
+            }
+
+            prevScrollPos = currentScrollPos; // Update previous scroll position
         });
 
 
