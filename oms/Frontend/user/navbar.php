@@ -150,6 +150,7 @@
     display: none; /* Initially hidden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: opacity 0.3s, background-color 0.3s;
+    z-index: 999;
 }
 
 #backToTopBtn:hover {
@@ -168,7 +169,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
         <?php
         // session_start();
-        //     echo '<p>Hi,</p>' . $_SESSION['user_name'];
+             echo 'Hi,' . $_SESSION['user_name'];
         ?>
         </div>
         <a href="#" class="logo">MediStore</a>

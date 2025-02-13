@@ -1,7 +1,7 @@
 <?php
 // Include database connection and navbar
 include('../Backend/connection.php');
-include 'user/navbar.php';
+include 'nav.php';
 
 // Check if the product ID is passed in the URL
 if (isset($_GET['pid']) && is_numeric($_GET['pid'])) {

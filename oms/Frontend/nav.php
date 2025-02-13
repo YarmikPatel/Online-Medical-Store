@@ -66,7 +66,7 @@
             position: absolute;
             width: 0;
             height: 2px;
-            background-color: #1abc9c;
+            background-color: #34495e;
             left: 0;
             bottom: -5px;
             transition: width 0.3s ease;
@@ -78,9 +78,12 @@
 
         /* Active links */
         .navbar ul li a.active {
-            color: #1abc9c;
+            color: #34495e;
             padding: 5px 10px;
         }
+
+
+        
 
         .navbar ul li a.active::after {
             width: 100%;
@@ -150,6 +153,7 @@
     display: none; /* Initially hidden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: opacity 0.3s, background-color 0.3s;
+    z-index: 100;
 }
 
 #backToTopBtn:hover {
@@ -192,6 +196,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
+                // navbar.style = 
             } else {
                 navbar.classList.remove('scrolled');
             }

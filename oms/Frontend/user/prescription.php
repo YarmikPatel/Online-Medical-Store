@@ -11,6 +11,26 @@ $result = mysqli_query($conn, $query);
 if (!$result) {
     die("Query failed: " . mysqli_error($conn));
 }
+
+if(isset($_POST['insert_priscription'])){
+
+    $date = 
+    $illeness =
+    $dosage_schedule =
+    $doctor_name =
+    $hospital_name =
+
+    <label for="date">Date:</label>
+    <input type="date" name="date" required>
+    <label for="illness">illness:</label>
+    <input type="text" name="illness" required>
+    <label for="dosage_schedule">Dosage Schedule:</label>
+    <input type="text" name="dosage_schedule" required>
+    <label for="doctor_name">Doctor Name:</label>
+    <input type="text" name="doctor_name" required>
+    <label for="hospital_name">Hospital Name:</label>
+    <input type="text" name="hospital_name" required>
+}
 ?>
 
 <!DOCTYPE html>
@@ -176,17 +196,25 @@ if (!$result) {
     <div id="prescription-form">
         <h2>Add Prescription</h2>
         <form method="POST" action="">
-            <label for="date">Date:</label>
-            <input type="date" name="date" required>
-            <label for="illness">Illness:</label>
-            <input type="text" name="illness" required>
-            <label for="dosage_schedule">Dosage Schedule:</label>
-            <input type="text" name="dosage_schedule" required>
-            <label for="doctor_name">Doctor Name:</label>
-            <input type="text" name="doctor_name" required>
             <label for="hospital_name">Hospital Name:</label>
             <input type="text" name="hospital_name" required>
-            <button type="submit">Save</button>
+        
+            <label for="date">Date:</label>
+            <input type="date" name="date" required>
+
+            <label for="doctor_name">Doctor Name:</label>
+            <input type="text" name="doctor_name" required>
+
+            <label for="illness">Illness:</label>
+            <input type="text" name="illness" required>
+
+            <label for="mname">Medicine Name:</label>
+            <input type="text" name="mname" required>
+
+            <label for="dosage_schedule">Dosage Schedule:</label>
+            <input type="text" name="dosage_schedule" required>
+
+            <button type="submit" name="insert_priscription">Save</button>
         </form>
     </div>
 
