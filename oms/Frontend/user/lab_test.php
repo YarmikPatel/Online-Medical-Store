@@ -79,19 +79,23 @@ include 'navbar.php';
         }
 
         .very-good {
-            background-color: #4CAF50;
+            /*background-color: #4CAF50;*/
+            background-color: #008000;
         }
 
         .good-normal {
-            background-color: #FFC107;
+            /*background-color: #FFC107;*/
+            background-color: #008080;
         }
 
         .not-good {
-            background-color: #FF9800;
+            /*background-color: #FF9800;*/
+            background-color: #FFA500;
         }
 
         .needs-treatment {
-            background-color: #F44336;
+            /*background-color: #F44336;*/
+            background-color: #FF0000;
         }
 
         .progress-info {
