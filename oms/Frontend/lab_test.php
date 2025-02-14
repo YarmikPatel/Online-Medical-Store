@@ -1,5 +1,5 @@
 <?php 
-include 'navbar.php';
+include 'nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -2081,6 +2081,6 @@ include 'navbar.php';
     </script>
 
     <!-- Footer -->
-    <?php include('../footer.php'); ?>
+    <?php include('footer.php'); ?>
 </body>
 </html>
