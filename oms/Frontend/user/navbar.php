@@ -149,8 +149,7 @@
             background-color: #f0f0f0; 
             /* Light background for categories */
             padding: 10px 30px;
-            display: flex;
-            justify-content: space-around; /* Distribute categories evenly */
+            
             z-index: 999; /* Below the main navbar */
             /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
             transition: transform 0.3s ease;
@@ -177,6 +176,15 @@
             border: 2px solid green;
         }
         
+        .navbar-nav {
+            display: flex;
+            justify-content: space-around; /* Distribute categories evenly */
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 20px 10px;
+        }
         /* Responsive Styles */
         @media (max-width: 1097px) {
             .navbar ul {
@@ -299,13 +307,13 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
                         <img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px">
                     <?php
                     // session_start();
-                        echo '<p class="user">Hi,' . $_SESSION['user_name'] . '</p>';
+                        echo '<p class="user">Hi, ' . $_SESSION['user_name'] . '</p>';
                     // echo 'Hi,' . $_SESSION['user_name'];
                     ?>
                     </a>
                 </div>
                 <div class="logout-area">
-                    <a href="logout.php" class="logout">Logout</a>
+                    <a href="logout.php" class="logout">Log Out</a>
                 </div>
     </nav>
 
@@ -325,12 +333,27 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
 
     <?php if ($is_home_page): ?>
     <nav class="categories-navbar">
-        <a href="user_login_index.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">All Products</a>
-        <a href="kids.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Kids</a>
-        <a href="teenagers.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Teenagers</a>
-        <a href="men.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Men</a>
-        <a href="women.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Women</a>
-        <a href="senior_citizen.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Senior Citizen</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="user_login_index.php" class="category-name" style=" border-radius: 30px;  color: green; ">All Products</a>
+            </li>
+            <li class="nav-item">
+                <a href="kids.php" class="category-name" style="border-radius: 30px; color: green;">Kids</a>
+            </li>
+            <li class="nav-item">
+                <a href="teenagers.php" class="category-name" style="border-radius: 30px; color: green;">Teenagers</a>
+            </li>
+            <li class="nav-item">
+                <a href="men.php" class="category-name" style="border-radius: 30px; color: green;">Men</a>
+            </li>
+            <li class="nav-item">
+                <a href="women.php" class="category-name" style="border-radius: 30px; color: green;">Women</a>
+            </li>
+            <li class="nav-item">
+                <a href="senior_citizen.php" class="category-name" style="border-radius: 30px; color: green;">Senior Citizen</a>
+            </li>
+        </ul>
+        
     </nav>
     <?php endif; ?>
 

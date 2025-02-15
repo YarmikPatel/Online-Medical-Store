@@ -28,6 +28,11 @@
             padding: 20px 30px;
             z-index: 1000;
             transition: background-color 0.3s ease;
+            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
+            transition: transform 0.3s ease;
+            /* top: 70px; Position below top-navbar initially */
+            height: 75px;
+            /* margin-top: 14px; */
         }
 
         .navbar .logo {
@@ -36,6 +41,7 @@
             font-weight: bold;
             text-decoration: none;
             letter-spacing: 1px;
+            margin-top: 10px;
         }
 
         /* Menu Items */
@@ -66,7 +72,7 @@
             position: absolute;
             width: 0;
             height: 2px;
-            background-color: #34495e;
+            background-color: #1abc9c;
             left: 0;
             bottom: -5px;
             transition: width 0.3s ease;
@@ -78,17 +84,13 @@
 
         /* Active links */
         .navbar ul li a.active {
-            color: #34495e;
+            color: #1abc9c;
             padding: 5px 10px;
         }
-
-
-        
 
         .navbar ul li a.active::after {
             width: 100%;
         }
-
         /* Hamburger Menu */
         .menu-toggle {
             display: none;
@@ -96,6 +98,51 @@
             font-size: 30px;
             cursor: pointer;
             z-index: 1100;
+        }
+
+        /* Categories Navbar Styling */
+    .categories-navbar {
+            position: sticky;
+            top: 70px; /* Positioned below the main navbar. Adjust as needed */
+            width: 100%;
+            background-color: #f0f0f0; 
+            /* Light background for categories */
+            padding: 10px 30px;
+            
+            z-index: 999; /* Below the main navbar */
+            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
+            transition: transform 0.3s ease;
+            /* top: 140px; Position below navbar initially */
+            height: 75px;
+        }
+
+        .categories-navbar a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 5px 10px; /* Add some padding around the text */
+            border-radius: 5px; /* Optional: Add rounded corners */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .categories-navbar a:hover {
+            background-color: #ddd; /* Slightly darker background on hover */
+            color: #1abc9c;
+        }
+
+        .category-name {
+            margin-top:10px;
+            border: 2px solid green;
+        }
+        
+        .navbar-nav {
+            display: flex;
+            justify-content: space-around; /* Distribute categories evenly */
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 20px 10px;
         }
 
         /* Responsive Styles */
@@ -169,8 +216,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 ?>
     <nav class="navbar">
         <div>
-        <a href="login.php"><img src="../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
-        &nbsp;&nbsp;<a href="#" class="logo">MedDrip</a>
+            <a href="#" class="logo">MedDrip</a>
         </div>
         <span class="menu-toggle">&#9776;</span>
         <ul>
@@ -178,6 +224,29 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li><a href="lab_test.php" class="<?php echo ($current_page == 'lab_test.php') ? 'active' : ''; ?>">Lab Test</a></li>
             <li><a href="login.php" class="<?php echo ($current_page == 'login.php') ? 'active' : ''; ?>">Feedback</a></li>
             <li><a href="login.php">Login</a></li>
+        </ul>
+    </nav>
+
+    <nav class="categories-navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="user_login_index.php" class="category-name" style=" border-radius: 30px;  color: green; ">All Products</a>
+            </li>
+            <li class="nav-item">
+                <a href="user/kids.php" class="category-name" style="border-radius: 30px; color: green;">Kids</a>
+            </li>
+            <li class="nav-item">
+                <a href="teenagers.php" class="category-name" style="border-radius: 30px; color: green;">Teenagers</a>
+            </li>
+            <li class="nav-item">
+                <a href="men.php" class="category-name" style="border-radius: 30px; color: green;">Men</a>
+            </li>
+            <li class="nav-item">
+                <a href="women.php" class="category-name" style="border-radius: 30px; color: green;">Women</a>
+            </li>
+            <li class="nav-item">
+                <a href="senior_citizen.php" class="category-name" style="border-radius: 30px; color: green;">Senior Citizen</a>
+            </li>
         </ul>
     </nav>
 

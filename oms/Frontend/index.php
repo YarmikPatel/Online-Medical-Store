@@ -21,7 +21,7 @@
     .menu {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
+        /* gap: 20px; */
         justify-content: center;
         padding: 20px;
     }
@@ -34,6 +34,7 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 10px 10px;
     }
 
     .card:hover {
@@ -80,6 +81,14 @@
     }
 
     .button {
+        /* display: inline-block;
+        padding: 10px 20px;
+        background-color: #00b894;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease; */
         display: inline-block;
         padding: 10px 15px;
         background-color: #00b894;
@@ -90,6 +99,7 @@
         cursor: pointer;
         text-align: center;
         transition: background-color 0.3s ease;
+        text-decoration: none;
     }
 
     .button:hover {
@@ -120,7 +130,7 @@
                             echo '<input type="hidden" name="pname" value="' . $row['pname'] . '">';
                             echo '<input type="hidden" name="image" value="' . $row['image'] . '">';
                             echo '<input type="hidden" name="price" value="' . $row['price'] . '">';
-                            echo '<button type="submit" class="button">Add to Cart</button>';
+                            echo '<a class="button" href="login.php">Add to Cart</a>';
                             echo '</form>';
                         echo '</div>';
                     echo '</div>';
