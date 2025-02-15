@@ -155,7 +155,7 @@
             /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
             transition: transform 0.3s ease;
             top: 140px; /* Position below navbar initially */
-            height: 65px;
+            height: 75px;
         }
 
         .categories-navbar a {
@@ -175,7 +175,6 @@
         .category-name {
             margin-top:10px;
             border: 2px solid green;
-            padding: 6px 15px;
         }
         
         /* Responsive Styles */
@@ -326,12 +325,12 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
 
     <?php if ($is_home_page): ?>
     <nav class="categories-navbar">
-        <a href="user_login_index.php" class="category-name" style="border-radius: 20px; color: green;">All Products</a>
-        <a href="kids.php" class="category-name" style="border-radius: 20px; color: green;">Kids</a>
-        <a href="teenagers.php" class="category-name" style="border-radius: 20px; color: green;">Teenagers</a>
-        <a href="men.php" class="category-name" style="border-radius: 20px; color: green;">Men</a>
-        <a href="women.php" class="category-name" style="border-radius: 20px; color: green;">Women</a>
-        <a href="senior_citizen.php" class="category-name" style="border-radius: 20px; color: green;">Senior Citizen</a>
+        <a href="user_login_index.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">All Products</a>
+        <a href="kids.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Kids</a>
+        <a href="teenagers.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Teenagers</a>
+        <a href="men.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Men</a>
+        <a href="women.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Women</a>
+        <a href="senior_citizen.php" class="category-name" style="border-radius: 30px; color: green; padding: 10px 10px;">Senior Citizen</a>
     </nav>
     <?php endif; ?>
 
