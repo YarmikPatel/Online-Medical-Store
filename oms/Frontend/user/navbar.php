@@ -21,7 +21,7 @@
             position: fixed; /* Fixed for scroll effect */
             top: 0;
             width: 100%;
-            background-color: #333; /* Darker background */
+            background-color: #161937; /* Darker background */
             display: flex;
             justify-content: space-between; /* Align items to the right */
             align-items: center;
@@ -32,6 +32,7 @@
             transition: opacity 0.3s ease, transform 0.3s ease, top 0.3s ease; /* Use opacity for smoother show/hide */
             opacity: 1; /* Initially visible */
             top: 0; /* Make sure it is at the top */
+            height: 80px;
         }
 
         .top-navbar ul {
@@ -70,6 +71,8 @@
             /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
             transition: transform 0.3s ease;
             top: 70px; /* Position below top-navbar initially */
+            height: 75px;
+            margin-top: 14px;
         }
 
         .navbar .logo {
@@ -78,6 +81,7 @@
             font-weight: bold;
             text-decoration: none;
             letter-spacing: 1px;
+            margin-top: 10px;
         }
 
         /* Menu Items */
@@ -142,7 +146,8 @@
             position: sticky;
             top: 70px; /* Positioned below the main navbar. Adjust as needed */
             width: 100%;
-            background-color: #f0f0f0; /* Light background for categories */
+            background-color: #f0f0f0; 
+            /* Light background for categories */
             padding: 10px 30px;
             display: flex;
             justify-content: space-around; /* Distribute categories evenly */
@@ -150,6 +155,7 @@
             /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
             transition: transform 0.3s ease;
             top: 140px; /* Position below navbar initially */
+            height: 65px;
         }
 
         .categories-navbar a {
@@ -164,6 +170,12 @@
         .categories-navbar a:hover {
             background-color: #ddd; /* Slightly darker background on hover */
             color: #1abc9c;
+        }
+
+        .category-name {
+            margin-top:10px;
+            border: 2px solid green;
+            padding: 6px 15px;
         }
         
         /* Responsive Styles */
@@ -228,6 +240,49 @@
     background-color: darkgreen;
     opacity: 0.9;
 }
+
+/* .user {
+    display: inline;
+    text-decoration: none;
+    color: white;
+    margin-left: 25px;
+    font-size: 22px;
+} */
+
+.user-area {
+    /* display: flex; Enable flexbox for user area */
+    /* flex-direction: row; */
+    /* align-items: center;  */
+    /* Vertically center items */
+    /* gap: 20px; Add spacing between user info and logout */
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: white;
+    font-size:20px;
+}
+
+/*.user-profile img {
+    border-radius: 50%;
+}
+
+.user-profile .user {
+    margin: 0;
+} */
+
+.logout {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    background-color: transparent;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 2px solid white;
+}
     </style>
 </head>
 <body>
@@ -240,29 +295,22 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
 ?>
 
     <nav class="top-navbar">
-        <ul>
-            <li><a href="profile.php">
-                <div class="hi-user">
-                    <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
+                <div class="user-area">
+                    <a href="profile.php" class="user-profile">
+                        <img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px">
                     <?php
                     // session_start();
-                        // echo '<p>Hi,</p>' . $_SESSION['user_name'];
-                    echo 'Hi,' . $_SESSION['user_name'];
+                        echo '<p class="user">Hi,' . $_SESSION['user_name'] . '</p>';
+                    // echo 'Hi,' . $_SESSION['user_name'];
                     ?>
+                    </a>
                 </div>
-            </a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
+                <div class="logout-area">
+                    <a href="logout.php" class="logout">Logout</a>
+                </div>
     </nav>
 
     <nav class="navbar">
-        <!-- <div class="hi-user"> -->
-        <!-- <a href="profile.php"><img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a> -->
-         <?php
-        // session_start();
-            //  echo 'Hi,' . $_SESSION['user_name'];
-        ?>
-        </div>
         <a href="#" class="logo">MediStore</a>
         <span class="menu-toggle">&#9776;</span>
         <ul>
@@ -278,12 +326,12 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
 
     <?php if ($is_home_page): ?>
     <nav class="categories-navbar">
-        <a href="user_login_index.php">All Products</a>
-        <a href="kids.php">Kids</a>
-        <a href="teenagers.php">Teenagers</a>
-        <a href="men.php">Men</a>
-        <a href="women.php">Women</a>
-        <a href="senior_citizen.php">Senior Citizen</a>
+        <a href="user_login_index.php" class="category-name" style="border-radius: 20px; color: green;">All Products</a>
+        <a href="kids.php" class="category-name" style="border-radius: 20px; color: green;">Kids</a>
+        <a href="teenagers.php" class="category-name" style="border-radius: 20px; color: green;">Teenagers</a>
+        <a href="men.php" class="category-name" style="border-radius: 20px; color: green;">Men</a>
+        <a href="women.php" class="category-name" style="border-radius: 20px; color: green;">Women</a>
+        <a href="senior_citizen.php" class="category-name" style="border-radius: 20px; color: green;">Senior Citizen</a>
     </nav>
     <?php endif; ?>
 
