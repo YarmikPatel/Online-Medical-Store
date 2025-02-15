@@ -31,6 +31,7 @@
             /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
             transition: opacity 0.3s ease, transform 0.3s ease, top 0.3s ease; /* Use opacity for smoother show/hide */
             opacity: 1; /* Initially visible */
+            top: 0; /* Make sure it is at the top */
         }
 
         .top-navbar ul {
@@ -68,6 +69,7 @@
             transition: background-color 0.3s ease;
             /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
             transition: transform 0.3s ease;
+            top: 70px; /* Position below top-navbar initially */
         }
 
         .navbar .logo {
@@ -135,7 +137,34 @@
             z-index: 1100;
         }
 
-        
+        /* Categories Navbar Styling */
+    .categories-navbar {
+            position: sticky;
+            top: 70px; /* Positioned below the main navbar. Adjust as needed */
+            width: 100%;
+            background-color: #f0f0f0; /* Light background for categories */
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-around; /* Distribute categories evenly */
+            z-index: 999; /* Below the main navbar */
+            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
+            transition: transform 0.3s ease;
+            top: 140px; /* Position below navbar initially */
+        }
+
+        .categories-navbar a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 5px 10px; /* Add some padding around the text */
+            border-radius: 5px; /* Optional: Add rounded corners */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .categories-navbar a:hover {
+            background-color: #ddd; /* Slightly darker background on hover */
+            color: #1abc9c;
+        }
         
         /* Responsive Styles */
         @media (max-width: 1097px) {
@@ -205,6 +234,9 @@
 <?php
 // Get the current page name
 $current_page = basename($_SERVER['PHP_SELF']);
+// Check if it's the home page (e.g., 'user_login_index.php')
+$is_home_page = ($current_page == 'user_login_index.php' || $current_page == ''); // Add other home page names if needed
+
 ?>
 
     <nav class="top-navbar">
@@ -244,23 +276,34 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </ul>
     </nav>
 
-    
-
+    <?php if ($is_home_page): ?>
+    <nav class="categories-navbar">
+        <a href="user_login_index.php">All Products</a>
+        <a href="kids.php">Kids</a>
+        <a href="teenagers.php">Teenagers</a>
+        <a href="men.php">Men</a>
+        <a href="women.php">Women</a>
+        <a href="senior_citizen.php">Senior Citizen</a>
+    </nav>
+    <?php endif; ?>
 
     <script>
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.navbar ul');  
         const navbar = document.querySelector('.navbar');
         const topNavbar = document.querySelector('.top-navbar');  // Get the top navbar
-        
         const navItems = document.querySelectorAll('.navbar ul li a');
+        const categoriesNavbar = document.querySelector('.categories-navbar'); // Declare categoriesNavbar!
+
+        let hasScrolled = false; // Flag to track if the user has scrolled
+        let isInitialLoad = true; // New flag to track initial load
 
         // Toggle menu visibility on click
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('show');
         });
 
-        let prevScrollPos = window.pageYOffset; // Store previous scroll position
+        // let prevScrollPos = window.pageYOffset; // Store previous scroll position
 
         // Change navbar background on scroll
         window.addEventListener('scroll', () => {
@@ -273,20 +316,30 @@ $current_page = basename($_SERVER['PHP_SELF']);
             // let scrollPosition = window.scrollY;
             let currentScrollPos = window.pageYOffset;
 
-            // Hide/Show top navbar on scroll
-            if (window.scrollY > 0) {  // Adjust the scroll threshold as needed
-                topNavbar.style.opacity = 0; // Hide top navbar
-                topNavbar.style.transform = 'translateY(-100%)'; // Hide
-                navbar.style.transform = 'translateY(0)'; // Main Nav Fixed
-                //categoriesNavbar.style.transform = 'translateY(0.1px)'; // Categories Nav Fixed
-            } else {
-                topNavbar.style.opacity = 1; // Show top navbar
-                topNavbar.style.transform = 'translateY(0)'; // Show top navbar
-                navbar.style.transform = 'translateY(70px)'; // Main Nav Below Top Nav
-                //categoriesNavbar.style.transform = 'translateY(70px)'; // Categories Nav Below Main Nav
+            if (isInitialLoad) { // Handle initial load behavior
+                isInitialLoad = false; // Set flag after initial load
             }
 
-            prevScrollPos = currentScrollPos; // Update previous scroll position
+            // Hide/Show top navbar on scroll
+            if (currentScrollPos > 0) {  // Adjust the scroll threshold as needed
+                hasScrolled = true; // Set the flag
+                topNavbar.style.opacity = 0; // Hide top navbar
+                topNavbar.style.transform = 'translateY(-100%)'; // Hide
+                navbar.style.transform = 'translateY(-70px)'; // Main Nav Fixed
+                categoriesNavbar.style.transform = 'translateY(-70px)'; // Categories Nav Fixed
+            } else if (!hasScrolled) {// At the very TOP AND hasn't scrolled yet // Initial load (at the top)
+                topNavbar.style.opacity = 1; // Show top navbar
+                topNavbar.style.transform = 'translateY(0)'; // Show top navbar
+                // navbar.style.transform = 'translateY(70px)'; // Main Nav Below Top Nav
+                // categoriesNavbar.style.transform = 'translateY(140px)'; // Categories Nav Below Main Nav
+            } else{// At the very TOP BUT has scrolled before // Scrolling UP (after initial scroll)
+                topNavbar.style.opacity = 1; // Hide it after initial scroll
+                topNavbar.style.transform = 'translateY(0)';
+                navbar.style.transform = 'translateY(2px)';
+                categoriesNavbar.style.transform = 'translateY(2px)';
+            }
+
+            // prevScrollPos = currentScrollPos; // Update previous scroll position
         });
 
 
