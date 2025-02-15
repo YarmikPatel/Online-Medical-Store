@@ -22,6 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }else{
             echo "<script>alert('Invalid Credentials');</script>";
         }
+        
      }
 ?>
 
