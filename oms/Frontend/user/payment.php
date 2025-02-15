@@ -1,39 +1,53 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['uid'])){
+        die('user not logged in. UID not found in session');
+    }
+    include('../../Backend/connection.php');
+    include 'navbar.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Interface</title>
+    <title></title>
     <style>
         body {
             font-family: sans-serif;
             background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .payment-container {
+        .payment-container10 {
             background: #fff;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             width: 500px;
+            /* display: flex;*/
+            /* justify-content: center; */
+            /* align-items: center; */
+            height: 100vh; 
+            margin: 111px auto;
         }
 
-        h2 {
+        .py {
             text-align: center;
             margin-bottom: 30px;
             color: #333;
         }
 
-        .payment-method {
+        .payment-method10 {
             margin-bottom: 30px;
         }
 
-        .payment-method label {
+        .payment-method10 label {
             display: inline-block; /* Make labels inline */
             margin-right: 20px; /* Add space between labels */
             margin-bottom: 10px; /* Keep some vertical margin for alignment */
@@ -41,13 +55,13 @@
             color: #555;
         }
 
-        .payment-method input[type="radio"] {
+        .payment-method10 input[type="radio"] {
             margin-right: 5px; /* Reduce space after radio button */
             transform: scale(1.2);
             accent-color: #4CAF50;
         }
 
-        .card-details, .cod-details {
+        .card-details10, .cod-details10 {
             margin-bottom: 30px;
         }
 
@@ -74,12 +88,12 @@
             box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
         }
 
-        .input-group {
+        .input-group10 {
             display: flex;
             gap: 10px;
         }
 
-        .input-group input[type="text"], .input-group input[type="password"], .input-group input[type="month"], .input-group input[type="tel"] {
+        .input-group10 input[type="text"], .input-group input[type="password"], .input-group input[type="month"], .input-group input[type="tel"] {
             width: calc(50% - 5px);
         }
 
@@ -100,7 +114,7 @@
             box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
         }
 
-        .btn {
+        .btn10 {
             background-color: #4CAF50;
             color: white;
             padding: 12px 20px;
@@ -112,22 +126,25 @@
             transition: background-color 0.3s ease;
         }
 
-        .btn:hover {
+        .btn10:hover {
             background-color: #45a049;
         }
 
-        .btn:active {
+        .btn10:active {
             background: #3e8e41;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) inset;
         }
     </style>
+
+
+
 </head>
 <body>
 
-<div class="payment-container">
-    <h2>Payment Interface</h2>
+<div class="payment-container10">
+    <h2 class="py">Payment Comfirm here</h2>
 
-    <div class="payment-method">
+    <div class="payment-method10">
         <label>
             <input type="radio" name="payment-method" id="credit-card" checked> Credit Card
         </label>
@@ -138,18 +155,18 @@
             <input type="radio" name="payment-method" id="cod"> Cash on Delivery
         </label>
 
-        <div class="card-details">
-            <div class="input-group">
+        <div class="card-details10">
+            <div class="input-group10">
                 <input type="text" placeholder="Card Number" required>
                 <input type="text" placeholder="Card Holder Name" required>
             </div>
-            <div class="input-group">
+            <div class="input-group10">
                 <input type="month" placeholder="MM/YY" required>
                 <input type="password" placeholder="CVV" required>
             </div>
         </div>
 
-        <div class="cod-details" style="display: none;">
+        <div class="cod-details10" style="display: none;">
             <p>You will pay when you receive the goods.</p>
         </div>
     </div>
@@ -160,7 +177,7 @@
     <label for="address">Delivery Address</label>
     <textarea id="address" placeholder="Enter your delivery address" rows="4" required></textarea>
 
-    <button class="btn" onclick="processPayment()">Continue</button>
+    <button class="btn10" onclick="processPayment()">Continue</button>
 </div>
 
 <script>
@@ -189,6 +206,5 @@
         alert('Payment Successful!');
     }
 </script>
-
 </body>
 </html>

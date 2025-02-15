@@ -120,20 +120,21 @@
             <div class="footer-section links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="user_login_index.php">Home</a></li>
+                    <li><a href="lab_test.php">Lab Test</a></li>
+                    <li><a href="cart.php">My cart</a></li>
+                    <li><a href="orders.php">My Orders</a></li>
+                    <li><a href="prescription.php">Prescription</a></li>
+                    <li><a href="feedback.php">Feedback</a></li>
                 </ul>
             </div>
 
             <!-- Contact Information -->
             <div class="footer-section contact">
                 <h3>Contact Us</h3>
-                <p>Email: <a href="mailto:support@meddrip.com">support@meddrip.com</a></p>
-                <p>Phone: +91-9876543210</p>
-                <p>Address: 123, MedDrip Street, Ahmedabad, Gujarat, India</p>
+                <p>Email: <a href="#">support@meddrip.com</a></p>
+                <p>Phone: +91-9725259041 <br> +91-9313810977</p>
+                <p>Address: 6659, MedDrip Street, Anand, Gujarat, India</p>
             </div>
 
             <!-- Social Media -->

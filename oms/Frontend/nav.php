@@ -170,7 +170,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <nav class="navbar">
         <div>
         <a href="login.php"><img src="../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px"></a>
-        &nbsp;&nbsp;<a href="#" class="logo">MediStore</a>
+        &nbsp;&nbsp;<a href="#" class="logo">MedDrip</a>
         </div>
         <span class="menu-toggle">&#9776;</span>
         <ul>
