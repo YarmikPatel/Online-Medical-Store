@@ -135,33 +135,7 @@
             z-index: 1100;
         }
 
-        /* Categories Navbar Styling */
-        .categories-navbar {
-            position: sticky;
-            top: 70px; /* Positioned below the main navbar. Adjust as needed */
-            width: 100%;
-            background-color: #f0f0f0; /* Light background for categories */
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-around; /* Distribute categories evenly */
-            z-index: 999; /* Below the main navbar */
-            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
-            transition: transform 0.3s ease;
-        }
-
-        .categories-navbar a {
-            color: #333;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 5px 10px; /* Add some padding around the text */
-            border-radius: 5px; /* Optional: Add rounded corners */
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .categories-navbar a:hover {
-            background-color: #ddd; /* Slightly darker background on hover */
-            color: #1abc9c;
-        }
+        
         
         /* Responsive Styles */
         @media (max-width: 1097px) {
@@ -270,13 +244,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </ul>
     </nav>
 
-    <nav class="categories-navbar">
-        <a href="#">Kids</a>
-        <a href="#">Teenagers</a>
-        <a href="#">Men</a>
-        <a href="#">Women</a>
-        <a href="#">Senior Citizen</a>
-    </nav>
+    
 
 
     <script>
@@ -284,7 +252,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         const navLinks = document.querySelector('.navbar ul');  
         const navbar = document.querySelector('.navbar');
         const topNavbar = document.querySelector('.top-navbar');  // Get the top navbar
-        const categoriesNavbar = document.querySelector('.categories-navbar'); // Declare categoriesNavbar!
+        
         const navItems = document.querySelectorAll('.navbar ul li a');
 
         // Toggle menu visibility on click
@@ -310,12 +278,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 topNavbar.style.opacity = 0; // Hide top navbar
                 topNavbar.style.transform = 'translateY(-100%)'; // Hide
                 navbar.style.transform = 'translateY(0)'; // Main Nav Fixed
-                categoriesNavbar.style.transform = 'translateY(0.1px)'; // Categories Nav Fixed
+                //categoriesNavbar.style.transform = 'translateY(0.1px)'; // Categories Nav Fixed
             } else {
                 topNavbar.style.opacity = 1; // Show top navbar
                 topNavbar.style.transform = 'translateY(0)'; // Show top navbar
                 navbar.style.transform = 'translateY(70px)'; // Main Nav Below Top Nav
-                categoriesNavbar.style.transform = 'translateY(70px)'; // Categories Nav Below Main Nav
+                //categoriesNavbar.style.transform = 'translateY(70px)'; // Categories Nav Below Main Nav
             }
 
             prevScrollPos = currentScrollPos; // Update previous scroll position

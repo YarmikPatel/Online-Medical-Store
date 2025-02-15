@@ -1,102 +1,182 @@
-<?php
-session_start();
-if(!isset($_SESSION['uid'])){
-    die('user not logged in. UID not found in session');
-}
-include('../../Backend/connection.php');
-include 'navbar.php';
-/*if(isset($_GET['pid']))
-{
-    $pid=$_GET['pid'];
-    echo "<script>alert('$pid');</script>";
-}*/
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Interface</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        .card {
-        max-width: 600px;
-        background: transparent;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-    .card-content {
-        padding: 15px;
-        text-align: left;
-    }
+        .payment-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
 
-    .product-name {
-        font-size: 18px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-    }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
 
-    .price {
-        font-size: 16px;
-        font-weight: bold;
-        color: #00b894;
-        margin-bottom: 10px;
-    }
+        .payment-method {
+            margin-bottom: 30px;
+        }
+
+        .payment-method label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .payment-method input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: #4CAF50; /* Modern way to color radio buttons */
+        }
+
+        .card-details, .cod-details {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%; /* Inputs take full width within their container */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px; /* Consistent gap between inputs */
+        }
+
+        .input-group input[type="text"], .input-group input[type="password"] {
+            width: calc(50% - 5px); /* Adjust width for the gap */
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .btn:active {
+            background: #3e8e41;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) inset;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Payment Interface</h1>
-        <form action="address.php" method="POST">
-            <div class="payment-method">
-                <label>
-                    <input type="radio" name="payment_method" value="card">
-                    Pay with Card
-                </label>
-                <div class="card-details">
-                    <input type="text" name="card_number" placeholder="Card Number" pattern="\d{16}">
-                    <input type="text" name="card_holder" placeholder="Card Holder Name">
-                    <input type="month" name="expiry_date" placeholder="Expiry Date">
-                    <input type="text" name="cvv" placeholder="CVV" pattern="\d{3}">
-                </div>
+
+<div class="payment-container">
+    <h2>Payment Interface</h2>
+
+    <div class="payment-method">
+        <label>
+            <input type="radio" name="payment-method" id="pay-card" checked> Pay with Card
+        </label>
+        <div class="card-details">
+            <div class="input-group">
+                <input type="text" placeholder="Card Number" required>
+                <input type="text" placeholder="Card Holder Name" required>
             </div>
-            <label>
-                <input type="radio" name="payment_method" value="cash">
-                Cash on Delivery
-            </label>
-            <a href="address.php"><button type="submit">Continue</button></a>
-        </form>
+            <div class="input-group">
+                <input type="date" placeholder="MM/YY" required>
+                <input type="password" placeholder="CVV" required>
+            </div>
+        </div>
     </div>
-    <div class="container">
-        <?php
-            if(isset($_GET['pid']))
-            {
-                $pid=$_GET['pid'];
-                // echo "<script>alert('$pid');</script>";
 
-                $sql = "SELECT pid, pname, image, price, qty, final_order FROM cart WHERE pid=$pid";
-                $result = mysqli_query($conn,$sql);
-                $row = mysqli_fetch_assoc($result);
-                echo '<a href="product_details.php?pid=' . $row['pid'] . '" style="text-decoration: none; color: inherit;">';
-                    echo '<div class="card">';
-                        echo '<img src="../../Backend/image1/' . $row['image'] . '" alt="Product Image">';
-                        echo '<div class="card-content">';
-                            echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
-                            echo '<div class="price"><strong>Price:</strong>₹' . $row['price'] . '</div>';
-                            echo '<div class="price"><strong>Quantity:</strong>' . $row['qty'] . '</div>';
-                            echo '<div class="price"><strong>SubTotal:</strong>' . $row['final_order'] . '</div>';
-                        echo '</div>';
-                    echo '</div>';
-                    echo '</a>';
-
-            }
-        ?>
+    <div class="payment-method">
+        <label>
+            <input type="radio" name="payment-method" id="cod"> Cash on Delivery
+        </label>
+        <div class="cod-details" style="display: none;">
+            <p>You will pay when you receive the goods.</p>
+        </div>
     </div>
-    <script src="script.js"></script>
+
+    <label for="address">Delivery Address</label>
+    <textarea id="address" placeholder="Enter your delivery address" rows="4" required></textarea>
+
+    <button class="btn" onclick="processPayment()">Continue</button>
+</div>
+
+<script>
+    const cardDetails = document.querySelector('.card-details');
+    const codDetails = document.querySelector('.cod-details');
+    const payCardRadio = document.getElementById('pay-card'); // Use getElementById
+    const codRadio = document.getElementById('cod');       // Use getElementById
+
+    payCardRadio.addEventListener('change', () => {
+        cardDetails.style.display = 'block';
+        codDetails.style.display = 'none';
+    });
+
+    codRadio.addEventListener('change', () => {
+        cardDetails.style.display = 'none';
+        codDetails.style.display = 'block';
+    });
+
+    function processPayment() {
+        alert('Payment Successful!');
+    }
+</script>
+
 </body>
 </html>

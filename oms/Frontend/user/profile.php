@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../../Backend/connection.php');
+include'navbar.php';
 
 // Redirect if not logged in
 if (!isset($_SESSION['uid'])) {
@@ -62,7 +63,7 @@ $conn->close();
             display: flex;
             justify-content: center;
         }
-        .container {
+        .container1 {
             max-width: 800px;
             background: white;
             padding: 20px;
@@ -75,16 +76,16 @@ $conn->close();
             padding-bottom: 5px;
             margin-bottom: 15px;
         }
-        .section {
+        .section1 {
             margin-bottom: 20px;
             padding: 10px;
             background: #fafafa;
             border-radius: 5px;
         }
-        .section p {
+        .section1 p {
             margin: 5px 0;
         }
-        .section img {
+        .section1 img {
             max-width: 120px;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -99,10 +100,10 @@ $conn->close();
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container1">
         <h2>User Profile</h2>
         <?php if ($user): ?>
-            <div class="section">
+            <div class="section1">
                 <p><strong>Username:</strong> <?php echo htmlspecialchars($user['uname']); ?></p>
                 <p><strong>Full Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
                 <p><strong>Mobile:</strong> <?php echo htmlspecialchars($user['mobile']); ?></p>
@@ -115,7 +116,7 @@ $conn->close();
 
         <h2>Cart Items</h2>
         <?php foreach ($cart as $item): ?>
-            <div class="section">
+            <div class="section1">
                 <p><strong>Product Name:</strong> <?php echo htmlspecialchars($item['pname']); ?></p>
                 <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="Product Image">
                 <p><strong>Price:</strong> ₹<?php echo htmlspecialchars($item['price']); ?></p>
@@ -126,7 +127,7 @@ $conn->close();
 
         <h2>Order History</h2>
         <?php foreach ($orders as $order): ?>
-            <div class="section">
+            <div class="section1">
                 <p><strong>Product ID:</strong> <?php echo htmlspecialchars($order['pid']); ?></p>
                 <p><strong>Order Date:</strong> <?php echo htmlspecialchars($order['order_date']); ?></p>
                 <p><strong>Status:</strong> <?php echo htmlspecialchars($order['status']); ?></p>
@@ -135,5 +136,7 @@ $conn->close();
             <hr>
         <?php endforeach; ?>
     </div>
+
+    <?php include '../footer.php'; ?>
 </body>
 </html>

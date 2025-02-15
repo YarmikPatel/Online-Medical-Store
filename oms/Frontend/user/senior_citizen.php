@@ -144,7 +144,14 @@
     </nav>
     <div class="menu">
     <?php
-            $sql = "SELECT p.pid, p.pname, p.descript, p.illeness, p.dosage_schedule, p.price, p.image, c.name FROM product p INNER JOIN category c ON p.category_id = c.category_id ORDER BY RAND()";
+            // $sql = "SELECT p.pid, p.pname, p.descript, p.illeness, p.dosage_schedule, p.price, p.image, c.name FROM product p INNER JOIN category c where p.category_id=1 ON p.category_id = c.category_id ORDER BY RAND()";
+            $sql = "SELECT p.pid, p.pname, p.descript, p.illeness, p.dosage_schedule, p.price, p.image, c.name 
+                    FROM product p 
+                    INNER JOIN category c ON p.category_id = c.category_id 
+                    WHERE p.category_id = 5
+                    ORDER BY RAND()";
+
+            
             $result = mysqli_query($conn, $sql);
 
             if ($result && mysqli_num_rows($result) > 0) {
