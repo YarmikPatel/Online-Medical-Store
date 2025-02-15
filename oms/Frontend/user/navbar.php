@@ -311,7 +311,7 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
     </nav>
 
     <nav class="navbar">
-        <a href="#" class="logo">MediStore</a>
+        <a href="#" class="logo">MediDrip</a>
         <span class="menu-toggle">&#9776;</span>
         <ul>
             <li><a href="user_login_index.php" class="<?php echo ($current_page == 'user_login_index.php' || $current_page == '') ? 'active' : ''; ?>">HOME</a></li>
