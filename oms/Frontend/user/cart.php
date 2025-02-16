@@ -128,6 +128,10 @@ form button {
     }
 }
 
+.main_cart_container {
+margin-top: 84px;;
+}
+
 </style>
 </head>
 <body>
@@ -139,13 +143,14 @@ form button {
         $result = mysqli_query($conn, $sql);
         if($result){
             if(mysqli_num_rows($result) > 0 ){
+                echo '<div class="main_cart_container">';
                 while ($row = $result->fetch_assoc()) {
-                    echo '<div class="cart-container">';
-                       echo '<a href="payment.php?pid=' . $row['pid'] . '"><button class="product-button" id="purchase-button">Buy Now</button></a>';
-                       echo '<p class="product-info"><strong>Product:</strong> ' . $row['pname'] . '</p>';
-                        echo '<p class="product-info"><strong>Price:</strong> ₹' . $row['price'] . '</p>';
-                        echo '<p class="product-info"><strong>Quantity:</strong> ' . $row['qty'] . '</p>';
-                        echo '<p class="product-info"><strong>SubTotal:</strong> ' . $row['final_order'] . '</p>';
+                        echo '<div class="cart-container">';
+                            echo '<a href="payment.php?pid=' . $row['pid'] . '"><button class="product-button" id="purchase-button">Buy Now</button></a>';
+                            echo '<p class="product-info"><strong>Product:</strong> ' . $row['pname'] . '</p>';
+                            echo '<p class="product-info"><strong>Price:</strong> ₹' . $row['price'] . '</p>';
+                            echo '<p class="product-info"><strong>Quantity:</strong> ' . $row['qty'] . '</p>';
+                            echo '<p class="product-info"><strong>SubTotal:</strong> ' . $row['final_order'] . '</p>';
                         ?>
                         <form action="" method="post">
                             <input type="hidden" name="pid" value="<?php echo $row['pid']; ?>">
@@ -154,9 +159,9 @@ form button {
                             <button type="submit" name="delete_cart_item" id="delete-item-button"><img src="../../Backend/image1/delete.png" alt="Delete Item" height="25px"></button>
                         </form>
                         <?php 
-                        echo '<hr>';
                         echo '</div>';
                 }
+                echo '</div>';
             }else{
                 echo "<p id='empty-cart-message'>Your cart is empty</p>";
             }

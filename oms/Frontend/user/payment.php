@@ -3,8 +3,10 @@
     if(!isset($_SESSION['uid'])){
         die('User not logged in. UID not found in session.');
     }
+    $uid = $_SESSION['uid'];
     include('../../Backend/connection.php');
     include 'navbar.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -126,23 +128,97 @@
             border-left: 3px solid #d9534f;
             border-radius: 3px;
         }
+
+.container_product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    margin: 61px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-size: 16px;
+    color: #4CAF50;
+    margin-bottom: 5px;
+}
+
     </style>
 </head>
 <body>
 
+
+<div class="container_product">
+        <?php
+            if(isset($_GET['pid']))
+            {
+                $pid=$_GET['pid'];
+                // echo "<script>alert('$pid');</script>";
+
+                $sql = "SELECT pid, pname, image, price, qty, final_order FROM cart WHERE pid=$pid AND uid=$uid";
+                $result = mysqli_query($conn,$sql);
+                $row = mysqli_fetch_assoc($result);
+                $amount = $row['final_order'];
+                $qty = $row['qty'];
+                echo '<a href="product_details.php?pid=' . $row['pid'] . '" style="text-decoration: none; color: inherit;">';
+                    echo '<div class="card">';
+                        echo '<img src="../../Backend/image1/' . $row['image'] . '" alt="Product Image">';
+                        echo '<div class="card-content">';
+                            echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
+                            echo '<div class="price"><strong>Price:</strong>₹' . $row['price'] . '</div>';
+                            echo '<div class="price"><strong>Quantity:</strong>' . $qty . '</div>';
+                            echo '<div class="price"><strong>Total Amount:</strong>' . $amount . '</div>';
+                        echo '</div>';
+                    echo '</div>';
+                    echo '</a>';
+
+            }
+        ?>
+    </div>
+
 <div class="payment-container10">
+    <form action="" method="post">
     <h2 class="py">Payment Confirm Here</h2>
 
     <div class="payment-method10">
-        <label>
-            <input type="radio" name="payment-method" id="credit-card" checked> Credit Card
-        </label>
-        <label>
-            <input type="radio" name="payment-method" id="debit-card"> Debit Card
-        </label>
-        <label>
-            <input type="radio" name="payment-method" id="cod"> Cash on Delivery
-        </label>
+        
+            <input type="radio" name="payment-method" value="Credit_Card" id="credit-card" checked> <label>Credit Card</label>
+            <input type="radio" name="payment-method" value="Debit_Card" id="debit-card"><label>Debit Card</label>
+            <input type="radio" name="payment-method" value="Cash_on_Delivery" id="cod"> <label>Cash on Delivery</label>
 
         <div class="card-details10">
             <div class="input-group10">
@@ -161,18 +237,92 @@
     </div>
 
     <label for="mobile">Mobile Number</label>
-    <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+    <input type="text" id="mobile" name="mobile_no" placeholder="Enter your mobile number" required>
     <span id="mobile-error" class="error-message">Please enter a valid 10-digit mobile number.</span>
 
     <label for="address">Delivery Address</label>
     <textarea id="address" name="address" placeholder="Enter your delivery address" rows="4" required></textarea>
     <span id="address-error" class="error-message">Please enter your delivery address.</span>
-
-    <button class="btn10" onclick="processPayment()">Continue</button>
+    <button type="submit" name="comfirm_payment" class="btn10" onclick="processPayment()">Confirm Payment</button>
+    </form>
 </div>
 
+
+
+
+
+
+    
 <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const mobileInput = document.getElementById("mobile");
+    const mobileError = document.getElementById("mobile-error");
+
+    form.addEventListener("submit", function (event) {
+        let isValid = true;
+        const mobile = mobileInput.value.trim();
+        const mobileRegex = /^[6-9]\d{9}$/;
+
+        // Reset previous error
+        mobileError.style.display = "none";
+
+        // Validate mobile number
+        if (!mobileRegex.test(mobile)) {
+            mobileError.textContent = "Please enter a valid 10-digit mobile number.";
+            mobileError.style.display = "block";
+            isValid = false;
+        }
+
+        // Prevent form submission if validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+});
+
+
+    function processPayment(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const mobileInput = document.getElementById("mobile");
+    const mobileError = document.getElementById("mobile-error");
+    const addressInput = document.getElementById("address");
+    const addressError = document.getElementById("address-error");
+
+    const mobile = mobileInput.value.trim();
+    const address = addressInput.value.trim();
+    const mobileRegex = /^[6-9]\d{9}$/;
+    let isValid = true;
+
+    // Hide error messages initially
+    mobileError.style.display = "none";
+    addressError.style.display = "none";
+
+    // Validate mobile number
+    if (!mobileRegex.test(mobile)) {
+        mobileError.style.display = "block";
+        isValid = false;
+    }
+
+    // Validate address field
+    if (address === "") {
+        addressError.style.display = "block";
+        isValid = false;
+    }
+
+    // If all validations pass, submit the form
+    if (isValid) {
+        event.target.closest("form").submit();
+    }
+}
+
+// Attach event listener to the button
+document.querySelector(".btn10").addEventListener("click", processPayment);
+
     function processPayment() {
+        e.preventDefault();
         const mobileInput = document.getElementById("mobile");
         const mobileError = document.getElementById("mobile-error");
         const addressInput = document.getElementById("address");
@@ -193,12 +343,8 @@
 
         if (address === "") {
             addressError.style.display = "block";
-            isValid = false;
-        }
-
-        if (isValid) {
-            alert('Payment Successful!');
-        }
+            }    isValid = false;
+        
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -233,3 +379,28 @@
 <?php include '../footer.php'; ?>
 </body>
 </html>
+<?php
+
+if (isset($_POST['comfirm_payment'])) {
+    $payment_type = $_POST["payment-method"];
+    $card_no = $_POST['card-number'];
+    $card_holder_name = $_POST['card-holder'];
+    $exdate = $_POST['expiry-date'];
+    $cvv = $_POST['cvv'];
+
+    $sql = "INSERT INTO `payment` (`uid`,`amout`,`payment_type`,`card_no`,`exdate`,`cvv`,`card_holder_name`) VALUES ('$uid','$amount','$payment_type','$card_no','$exdate','$cvv','$card_holder_name')";
+    $result = mysqli_query($conn,$sql);
+
+    if($result){
+        echo "<script>alert('thank you for payment');</script>";
+        
+        $sql = "UPDATE product SET stock=stock-$qty WHERE pid=$pid";
+        $result = mysqli_query($conn,$sql);
+
+        $sql = "INSERT INTO `order_history` (`uid`,`pid`,`order_date`,`status`,`price`,`qty`,`total_amount`,`mobile_no`,`payid`,`temp_address`) VALUES ()";
+        $result = mysqli_query($conn,$sql);
+    }
+    
+}
+
+?>

@@ -35,9 +35,9 @@ if (!$result || !$row = $result->fetch_assoc()) {
             padding: 0;
             background-color: #f9f9f9;
         }
-        .container {
+        .container123 {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 85px auto;
             padding: 20px;
             background: #fff;
             border-radius: 10px;
@@ -46,41 +46,41 @@ if (!$result || !$row = $result->fetch_assoc()) {
             flex-wrap: wrap;
             gap: 20px;
         }
-        .product-image {
+        .product-image123 {
             flex: 1 1 40%;
             text-align: center;
         }
-        .product-image img {
+        .product-image123 img {
             max-width: 100%;
             height: auto;
             border-radius: 10px;
         }
-        .product-details {
+        .product-details123 {
             flex: 1 1 55%;
         }
-        .product-details h1 {
+        .product-details123 h1 {
             color: #2c3e50;
             font-size: 28px;
             margin-bottom: 10px;
         }
-        .product-details p {
+        .product-details123 p {
             font-size: 16px;
             line-height: 1.6;
             color: #555;
             margin: 10px 0;
         }
-        .product-details .price {
+        .product-details123 .price123 {
             font-size: 24px;
             color: #00b894;
             margin: 20px 0;
         }
-        .product-details .stock {
+        .product-details123 .stock123 {
             font-size: 18px;
         }
-        .stock.in-stock { color: #27ae60; }
-        .stock.limited { color: #f39c12; }
-        .stock.out-of-stock { color: #e74c3c; }
-        .action-buttons a {
+        .stock.in-stock123 { color: #27ae60; }
+        .stock.limited123 { color: #f39c12; }
+        .stock.out-of-stock123 { color: #e74c3c; }
+        .action-buttons123 a {
             display: inline-block;
             padding: 10px 20px;
             margin-right: 10px;
@@ -91,24 +91,24 @@ if (!$result || !$row = $result->fetch_assoc()) {
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-        .action-buttons a:hover { background-color: #01966c; }
+        .action-buttons123 a:hover { background-color: #01966c; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="product-image">
+    <div class="container123">
+        <div class="product-image123">
             <img src="../../Backend/image1/<?= htmlspecialchars($row['image']) ?>" alt="Product Image">
         </div>
-        <div class="product-details">
+        <div class="product-details123">
             <h1><?= htmlspecialchars($row['pname']) ?></h1>
             <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($row['descript'])) ?></p>
             <p><strong>Illness:</strong> <?= htmlspecialchars($row['illeness']) ?></p>
             <p><strong>Dosage Schedule:</strong> <?= htmlspecialchars($row['dosage_schedule']) ?></p>
-            <p class="price"><strong>Price:</strong> ₹<?= htmlspecialchars($row['price']) ?></p>
-            <p class="stock <?= $row['stock'] == 0 ? 'out-of-stock' : ($row['stock'] <= 20 ? 'limited' : 'in-stock') ?>">
+            <p class="price123"><strong>Price:</strong> ₹<?= htmlspecialchars($row['price']) ?></p>
+            <p class="stock123 <?= $row['stock'] == 0 ? 'out-of-stock' : ($row['stock'] <= 20 ? 'limited' : 'in-stock') ?>">
                 <strong>Stock:</strong> <?= $row['stock'] == 0 ? 'Out of stock' : ($row['stock'] <= 20 ? 'Limited Stock' : 'In stock') ?>
             </p>
-            <div class="action-buttons">
+            <div class="action-buttons123">
                 <a href="cart.php?pid=<?= $product_id ?>">Add to Cart</a>
                 <a href="payment.php?pid=<?= $product_id ?>">Buy Now</a>
             </div>

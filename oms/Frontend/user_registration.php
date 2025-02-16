@@ -1,6 +1,6 @@
 <?php
 include('../Backend/connection.php');
-ob_start(); // Helps prevent header issues
+// ob_start(); // Helps prevent header issues
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,6 @@ ob_start(); // Helps prevent header issues
     <title>MedDrip - User Sign Up</title>
     <style>
         /* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&display=swap');
 
 /* General Styles */
 body {

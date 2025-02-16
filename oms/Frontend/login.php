@@ -16,6 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $uid = $row['uid']; // Access the 'uid' column
             $_SESSION['uid'] = $uid;
             $_SESSION['user_name'] = $row['full_name'];
+            $_SESSION['user_address'] = $row['address'];
            echo "<script>alert('Loging successfuly...');</script>";
            header("Location: user/user_login_index.php");  
         }
