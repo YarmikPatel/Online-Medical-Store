@@ -101,47 +101,10 @@
     .button:hover {
         background-color: #01966c;
     }
-
-    /* Categories Navbar Styling */
-    .categories-navbar {
-            position: sticky;
-            top: 70px; /* Positioned below the main navbar. Adjust as needed */
-            width: 100%;
-            background-color: #f0f0f0; /* Light background for categories */
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-around; /* Distribute categories evenly */
-            z-index: 999; /* Below the main navbar */
-            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
-            transition: transform 0.3s ease;
-            /* transform: translateY(0px); */
-        }
-
-        .categories-navbar a {
-            color: #333;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 5px 10px; /* Add some padding around the text */
-            border-radius: 5px; /* Optional: Add rounded corners */
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .categories-navbar a:hover {
-            background-color: #ddd; /* Slightly darker background on hover */
-            color: #1abc9c;
-        }
 </style>
 
 </head>
 <body>
-<nav class="categories-navbar">
-        <a href="user_login_index.php">All Products</a>
-        <a href="kids.php">Kids</a>
-        <a href="teenagers.php">Teenagers</a>
-        <a href="men.php">Men</a>
-        <a href="women.php">Women</a>
-        <a href="senior_citizen.php">Senior Citizen</a>
-    </nav>
     <div class="menu">
     <?php
             // $sql = "SELECT p.pid, p.pname, p.descript, p.illeness, p.dosage_schedule, p.price, p.image, c.name FROM product p INNER JOIN category c where p.category_id=1 ON p.category_id = c.category_id ORDER BY RAND()";
@@ -182,23 +145,6 @@
     </div>
     <!-- Footer -->
     <?php include('../footer.php'); ?>
-    <script>
-        const categoriesNavbar = document.querySelector('.categories-navbar'); // Declare categoriesNavbar!
-
-        window.addEventListener('scroll', () => {
-        if (window.scrollY > 0) {  // Adjust the scroll threshold as needed
-                //topNavbar.style.opacity = 0; // Hide top navbar
-                //topNavbar.style.transform = 'translateY(-100%)'; // Hide
-                //navbar.style.transform = 'translateY(0)'; // Main Nav Fixed
-                categoriesNavbar.style.transform = 'translateY(0.1px)'; // Categories Nav Fixed
-            } else {
-                // topNavbar.style.opacity = 1; // Show top navbar
-                // topNavbar.style.transform = 'translateY(0)'; // Show top navbar
-                // navbar.style.transform = 'translateY(70px)'; // Main Nav Below Top Nav
-                categoriesNavbar.style.transform = 'translateY(0px)'; // Categories Nav Below Main Nav
-            }
-        });
-    </script>
 </body>
 </html>
 

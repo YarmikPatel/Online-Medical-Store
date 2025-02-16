@@ -1,5 +1,5 @@
-<?php
-session_start();
+<!-- <?php
+include 'user_session.php';
 include('../../Backend/connection.php');
 include 'navbar.php';
 // Fetch prescription details
@@ -155,7 +155,7 @@ if(isset($_POST['insert_priscription'])){
     </style>
 </head>
 <body>
-    <!-- Navbar (if any) -->
+     Navbar (if any) -->
     <nav>
         <!-- Add your navbar content here -->
     </nav>
@@ -236,3 +236,5 @@ if(isset($_POST['insert_priscription'])){
     <?php include('../footer.php'); ?>
 </body>
 </html>
+
+

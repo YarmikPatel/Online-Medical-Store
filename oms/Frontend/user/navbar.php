@@ -1,9 +1,13 @@
+<?php
+
+$username = $_SESSION['user_name'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedDrip Pharmacy</title>
+    <title>Welcome, <?php echo $username; ?></title>
     <style>
         * {
             margin: 0;
@@ -59,7 +63,7 @@
         /* Navbar Styling */
         .navbar {
             position: sticky;
-            top: 0;
+            /* top: 0; */
             width: 100%;
             background-color: #2c3e50;
             display: flex;
@@ -144,7 +148,7 @@
         /* Categories Navbar Styling */
     .categories-navbar {
             position: sticky;
-            top: 70px; /* Positioned below the main navbar. Adjust as needed */
+            /* top: 170px; Positioned below the main navbar. Adjust as needed */
             width: 100%;
             background-color: #f0f0f0; 
             /* Light background for categories */
@@ -297,7 +301,7 @@
 // Get the current page name
 $current_page = basename($_SERVER['PHP_SELF']);
 // Check if it's the home page (e.g., 'user_login_index.php')
-$is_home_page = ($current_page == 'user_login_index.php' || $current_page == ''); // Add other home page names if needed
+$is_home_page = ($current_page == 'user_login_index.php' || $current_page == 'kids.php' || $current_page == 'teenagers.php' || $current_page == 'men.php' || $current_page == 'women.php' || $current_page == 'senior_citizen.php' || $current_page == ''); // Add other home page names if needed
 
 ?>
 
@@ -307,8 +311,7 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
                         <img src="../../Backend/image1/profile-user.png" alt="Profile" height="50px" width="50px">
                     <?php
                     // session_start();
-                        echo '<p class="user">Hi, ' . $_SESSION['user_name'] . '</p>';
-                    // echo 'Hi,' . $_SESSION['user_name'];
+                        echo '<p class="user">Hi, ' . $username . ' !</p>';
                     ?>
                     </a>
                 </div>
@@ -327,7 +330,6 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
             <li><a href="orders.php" class="<?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">My Orders</a></li>
             <li><a href="prescription.php" class="<?php echo ($current_page == 'prescription.php') ? 'active' : ''; ?>">Prescription</a></li>
             <li><a href="feedback.php" class="<?php echo ($current_page == 'feedback.php') ? 'active' : ''; ?>">Feedback</a></li>
-            <!-- <li><a href="logout.php">Logout</a></li> -->
         </ul>
     </nav>
 
@@ -338,19 +340,19 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
                 <a href="user_login_index.php" class="category-name" style=" border-radius: 30px;  color: green; ">All Products</a>
             </li>
             <li class="nav-item">
-                <a href="kids.php" class="category-name" style="border-radius: 30px; color: green;">Kids</a>
+                <a href="kids.php" class="category-name" style="border-radius: 30px; color: green;">Kids 0-12 years</a>
             </li>
             <li class="nav-item">
-                <a href="teenagers.php" class="category-name" style="border-radius: 30px; color: green;">Teenagers</a>
+                <a href="teenagers.php" class="category-name" style="border-radius: 30px; color: green;">Teenagers 12-18 years</a>
             </li>
             <li class="nav-item">
-                <a href="men.php" class="category-name" style="border-radius: 30px; color: green;">Men</a>
+                <a href="men.php" class="category-name" style="border-radius: 30px; color: green;">Men 18+ years</a>
             </li>
             <li class="nav-item">
-                <a href="women.php" class="category-name" style="border-radius: 30px; color: green;">Women</a>
+                <a href="women.php" class="category-name" style="border-radius: 30px; color: green;">Women 18+ years</a>
             </li>
             <li class="nav-item">
-                <a href="senior_citizen.php" class="category-name" style="border-radius: 30px; color: green;">Senior Citizen</a>
+                <a href="senior_citizen.php" class="category-name" style="border-radius: 30px; color: green;">Senior Citizen 60+ years</a>
             </li>
         </ul>
         
@@ -403,7 +405,7 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == '')
                 // navbar.style.transform = 'translateY(70px)'; // Main Nav Below Top Nav
                 // categoriesNavbar.style.transform = 'translateY(140px)'; // Categories Nav Below Main Nav
             } else{// At the very TOP BUT has scrolled before // Scrolling UP (after initial scroll)
-                topNavbar.style.opacity = 1; // Hide it after initial scroll
+                topNavbar.style.opacity = 1; // Show it after initial scroll
                 topNavbar.style.transform = 'translateY(0)';
                 navbar.style.transform = 'translateY(2px)';
                 categoriesNavbar.style.transform = 'translateY(2px)';

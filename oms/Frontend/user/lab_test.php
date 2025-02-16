@@ -1,5 +1,5 @@
 <?php 
-session_start();
+include 'user_session.php';
 include 'navbar.php';
 ?>
 
@@ -19,7 +19,7 @@ include 'navbar.php';
 
         .container {
             max-width: 960px;
-            margin: 0 auto;
+            margin: 85px auto;
         }
 
         .age-group {

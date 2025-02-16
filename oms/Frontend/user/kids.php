@@ -5,7 +5,7 @@
     }
     include('../../Backend/connection.php');
     include 'navbar.php';
-    echo "<script>alert(".$_SESSION['user_name'].");</script>";
+    // echo "<script>alert(".$_SESSION['user_name'].");</script>";
 ?>
 
 <!DOCTYPE html>
@@ -101,47 +101,18 @@
     .button:hover {
         background-color: #01966c;
     }
-
-    /* Categories Navbar Styling */
-    .categories-navbar {
-            position: sticky;
-            top: 70px; /* Positioned below the main navbar. Adjust as needed */
-            width: 100%;
-            background-color: #f0f0f0; /* Light background for categories */
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-around; /* Distribute categories evenly */
-            z-index: 999; /* Below the main navbar */
-            /* transition: transform 0.3s ease, top 0.3s ease; Add top transition */
-            transition: transform 0.3s ease;
-            /* transform: translateY(0px); */
-        }
-
-        .categories-navbar a {
-            color: #333;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 5px 10px; /* Add some padding around the text */
-            border-radius: 5px; /* Optional: Add rounded corners */
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .categories-navbar a:hover {
-            background-color: #ddd; /* Slightly darker background on hover */
-            color: #1abc9c;
-        }
 </style>
 
 </head>
 <body>
-<nav class="categories-navbar">
+    <!-- <nav class="categories-navbar">
         <a href="user_login_index.php">All Products</a>
         <a href="kids.php">Kids</a>
         <a href="teenagers.php">Teenagers</a>
         <a href="men.php">Men</a>
         <a href="women.php">Women</a>
         <a href="senior_citizen.php">Senior Citizen</a>
-    </nav>
+    </nav> -->
     <div class="menu">
     <?php
             // $sql = "SELECT p.pid, p.pname, p.descript, p.illeness, p.dosage_schedule, p.price, p.image, c.name FROM product p INNER JOIN category c where p.category_id=1 ON p.category_id = c.category_id ORDER BY RAND()";
@@ -182,7 +153,7 @@
     </div>
     <!-- Footer -->
     <?php include('../footer.php'); ?>
-    <script>
+    <!-- <script>
         const categoriesNavbar = document.querySelector('.categories-navbar'); // Declare categoriesNavbar!
 
         window.addEventListener('scroll', () => {
@@ -198,7 +169,7 @@
                 categoriesNavbar.style.transform = 'translateY(0px)'; // Categories Nav Below Main Nav
             }
         });
-    </script>
+    </script> -->
 </body>
 </html>
 

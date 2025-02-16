@@ -1,85 +1,131 @@
-<?php
-session_start();
-include('../../Backend/connection.php');
-include('navbar.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback form</title>
-    <link rel="stylesheet" href="feedback.css">
+    <title>Your Feedback Matters</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333; /* Example color */
+        }
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .rating label {
+            margin-right: 10px;
+        }
+        .rating input[type="radio"] {
+            display: none; /* Hide default radio buttons */
+        }
+        .star {
+            font-size: 24px;
+            color: gray;
+            cursor: pointer;
+        }
+        .star:hover,
+        .star.active {
+            color: gold; /* Highlighted star color */
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            resize: vertical; /* Allow vertical resizing */
+        }
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007bff; /* Example button color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        .thank-you {
+            display: none; /* Initially hidden */
+            margin-top: 10px;
+            color: green;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-        <h2>Feedback Form</h2>
-        <form action="" method="POST">
-            <label for="name">Name</label>
-            <input type="text" id="full_name" name="full_name" value="<?php echo $_SESSION['user_name'];?>"readonly>
 
-            <label for="email">Email</label>
-            <input type="email" id="email_id" name="email" required>
+    <h1>Your Feedback Matters - Help Us Improve!</h1>
 
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" name="phone" readonly>
-            <!-- <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}"> -->
+    <p>We value your opinions and are committed to providing the best possible pharmacy experience. Your feedback helps us understand what we're doing well and where we can improve.</p>
 
-            <label for="message">Feedback</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-
-            <button type="submit">Submit Feedback</button>
-        </form>
-        <p id="errormsg"></p>
+    <div class="rating">
+        <label for="overall">Overall Satisfaction:</label>
+        <div class="stars">
+            <span class="star" data-rating="1">&#9733;</span>
+            <span class="star" data-rating="2">&#9733;</span>
+            <span class="star" data-rating="3">&#9733;</span>
+            <span class="star" data-rating="4">&#9733;</span>
+            <span class="star" data-rating="5">&#9733;</span>
+        </div>
+        <input type="hidden" id="overall" name="overall_rating" value="0">
     </div>
-    
-    <!-- insert feedback into feedback table -->
-    <!-- <?php 
-        // if($_SERVER["REQUEST_METHOD"] == "POST"){
-        //     //retrieve from data 
-        //     $email=trim($_POST['email']);
-        //     $message=trim($_POST['message']);
 
-        //     $sql = "INSERT INTO `feedback` (email_id,msg) VALUES ('$email','$message')";
-        //     $result = mysqli_query($conn,$sql);
-        // }
-    ?> -->
-<script>
-    function fetchUserData(){
-        const email_id = document.getElementById('email_id').value;
 
-        // Create XMLHTTpRequest object.
-        const xhr = new XMLHttpRequest();
+    <textarea id="comments" name="comments" placeholder="What did you like or dislike about your recent experience? How can we improve our services? Is there anything else you'd like to share with us?"></textarea>
 
-        // Set up the request
-        xhr.open("GET",'fetch_user_data.php?email_id=${email_id}',true);
+    <input type="text" id="name" name="name" placeholder="Name (Optional)">
+    <input type="email" id="email" name="email" placeholder="Email (Optional)">
 
-        // Handle the response.
-        xhr.onload = function (){
-            if(xhr.status === 200){
-                const response = xhr.responseText;
+    <button onclick="submitFeedback()">Submit Feedback</button>
 
-                if(response !== "error"){
-                    // Spliting the response the pipe delimiter
-                    const [username,phone] = response.split("|");
+    <div class="thank-you" id="thankYouMessage">Thank you for your feedback! We appreciate your input.</div>
 
-                    // Populate the form fields
-                    document.getElementById("full_name").value = username;
-                    document.getElementById("phone").value = phone;
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const overallRating = document.getElementById('overall');
+        const thankYouMessage = document.getElementById('thankYouMessage');
 
-                }else{
-                    document.getElementById("errormsg").textContent = 'No user found with this email';
-                    document.getElementById("full_name").value = "";
-                    document.getElementById("phone").value = "";   
-                }
-            }
-        };
-        // Send the request
-        xhr.send();
-    }
-</script>
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseInt(star.dataset.rating);
+                overallRating.value = rating;
 
-<!-- Footer -->
-<?php include('../footer.php'); ?>
+                stars.forEach(s => {
+                    if (parseInt(s.dataset.rating) <= rating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        function submitFeedback() {
+            // Here you would typically send the feedback data to your server
+            // using AJAX or a form submission.  For this example, we'll
+            // just show the thank you message.
+
+            thankYouMessage.style.display = 'block';
+
+            // Reset form fields (optional)
+            document.getElementById('comments').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            overallRating.value = 0;
+            stars.forEach(s => s.classList.remove('active')); // Reset stars
+        }
+    </script>
+
 </body>
 </html>
