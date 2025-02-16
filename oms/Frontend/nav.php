@@ -73,6 +73,7 @@
             width: 0;
             height: 2px;
             background-color: #1abc9c;
+            /* background-color: #2c3e50; */
             left: 0;
             bottom: -5px;
             transition: width 0.3s ease;
@@ -85,6 +86,7 @@
         /* Active links */
         .navbar ul li a.active {
             color: #1abc9c;
+            /* color: #2c3e50; */
             padding: 5px 10px;
         }
 

@@ -1,4 +1,5 @@
 <?php
+include 'user_session.php';
 include 'navbar.php';
 ?>
 <!DOCTYPE html>
@@ -24,7 +25,7 @@ body {
 
 .profile-container {
   max-width: 960px; /* Adjust as needed */
-  margin: 20px auto;
+  margin: 110px auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;

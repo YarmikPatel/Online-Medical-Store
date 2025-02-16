@@ -1,12 +1,8 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['uid'])){
-        die('User not logged in. UID not found in session.');
-    }
-    $uid = $_SESSION['uid'];
+    
     include('../../Backend/connection.php');
     include 'navbar.php';
-
+    $uid = $_SESSION['uid'];
 ?>
 
 <!DOCTYPE html>

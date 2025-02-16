@@ -1,3 +1,7 @@
+<?php
+include 'user_session.php';
+include 'navbar.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +11,20 @@
     <style>
         body {
             font-family: sans-serif;
-            margin: 20px;
+            margin: 0p;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            margin: 110px auto;
+            padding: 20px 110px;
         }
         h1 {
             color: #333; /* Example color */
+            text-align: center;
+        }
+        p{
+            padding: 10px 0;
         }
         .rating {
             display: flex;
@@ -64,10 +78,15 @@
     </style>
 </head>
 <body>
-
+<div class="container">
     <h1>Your Feedback Matters - Help Us Improve!</h1>
 
     <p>We value your opinions and are committed to providing the best possible pharmacy experience. Your feedback helps us understand what we're doing well and where we can improve.</p>
+
+    <textarea id="comments" name="comments" placeholder="What did you like or dislike about your recent experience? How can we improve our services? Is there anything else you'd like to share with us?"></textarea>
+
+    <input type="text" id="name" name="name" placeholder="Name (Optional)">
+    <input type="email" id="email" name="email" placeholder="Email (Optional)">
 
     <div class="rating">
         <label for="overall">Overall Satisfaction:</label>
@@ -81,15 +100,10 @@
         <input type="hidden" id="overall" name="overall_rating" value="0">
     </div>
 
-
-    <textarea id="comments" name="comments" placeholder="What did you like or dislike about your recent experience? How can we improve our services? Is there anything else you'd like to share with us?"></textarea>
-
-    <input type="text" id="name" name="name" placeholder="Name (Optional)">
-    <input type="email" id="email" name="email" placeholder="Email (Optional)">
-
     <button onclick="submitFeedback()">Submit Feedback</button>
 
     <div class="thank-you" id="thankYouMessage">Thank you for your feedback! We appreciate your input.</div>
+</div>
 
     <script>
         const stars = document.querySelectorAll('.star');

@@ -1,5 +1,5 @@
 <?php
-
+include 'user_session.php';
 $username = $_SESSION['user_name'];
 ?>
 <!DOCTYPE html>
@@ -182,6 +182,7 @@ $username = $_SESSION['user_name'];
         
         .navbar-nav {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-around; /* Distribute categories evenly */
             list-style: none;
         }

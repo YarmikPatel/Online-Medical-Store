@@ -1,5 +1,4 @@
 <?php
-include 'user_session.php';
 include('../../Backend/connection.php');
 include('navbar.php');
 if (!isset($_SESSION['uid'])) {
