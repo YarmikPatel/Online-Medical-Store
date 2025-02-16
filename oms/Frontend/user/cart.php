@@ -93,10 +93,11 @@ body {
 
 /* Empty Cart Message */
 #empty-cart-message {
+    margin: 279px;
     font-size: 18px;
     color: #e74c3c;
     text-align: center;
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 
 /* Form Styling */
@@ -197,10 +198,5 @@ if(isset($_POST['update_qty'])){
             echo "Quantity can't be updated";
         }
     }
-}
-
-
-if(isset($_POST['buy_now'])){
-    
 }
 ?> 

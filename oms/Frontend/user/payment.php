@@ -188,20 +188,19 @@
                 $sql = "SELECT pid, pname, image, price, qty, final_order FROM cart WHERE pid=$pid AND uid=$uid";
                 $result = mysqli_query($conn,$sql);
                 $row = mysqli_fetch_assoc($result);
+                $price = $row['price'];
                 $amount = $row['final_order'];
                 $qty = $row['qty'];
-                echo '<a href="product_details.php?pid=' . $row['pid'] . '" style="text-decoration: none; color: inherit;">';
+
                     echo '<div class="card">';
                         echo '<img src="../../Backend/image1/' . $row['image'] . '" alt="Product Image">';
                         echo '<div class="card-content">';
                             echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
-                            echo '<div class="price"><strong>Price:</strong>₹' . $row['price'] . '</div>';
+                            echo '<div class="price"><strong>Price:</strong>₹' . $price . '</div>';
                             echo '<div class="price"><strong>Quantity:</strong>' . $qty . '</div>';
                             echo '<div class="price"><strong>Total Amount:</strong>' . $amount . '</div>';
                         echo '</div>';
                     echo '</div>';
-                    echo '</a>';
-
             }
         ?>
     </div>
@@ -233,7 +232,7 @@
     </div>
 
     <label for="mobile">Mobile Number</label>
-    <input type="text" id="mobile" name="mobile_no" placeholder="Enter your mobile number" required>
+    <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
     <span id="mobile-error" class="error-message">Please enter a valid 10-digit mobile number.</span>
 
     <label for="address">Delivery Address</label>
@@ -243,12 +242,6 @@
     </form>
 </div>
 
-
-
-
-
-
-    
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -383,18 +376,38 @@ if (isset($_POST['comfirm_payment'])) {
     $card_holder_name = $_POST['card-holder'];
     $exdate = $_POST['expiry-date'];
     $cvv = $_POST['cvv'];
+    $order_date = date('Y-m-d');
+    $mobile = $_POST['mobile'];
+    $temp_address = $_POST['address'];
 
-    $sql = "INSERT INTO `payment` (`uid`,`amout`,`payment_type`,`card_no`,`exdate`,`cvv`,`card_holder_name`) VALUES ('$uid','$amount','$payment_type','$card_no','$exdate','$cvv','$card_holder_name')";
-    $result = mysqli_query($conn,$sql);
+    // $sql10 = "SELECT payid FROM payment WHERE  AND uid=$uid";
+    // $result10 = mysqli_query($conn,$sql10);
 
-    if($result){
-        echo "<script>alert('thank you for payment');</script>";
+    $payid = 87;
+
+    switch($payment_type){
+        case "Cash_on_Delivery":{
+            $sql = "INSERT INTO `payment` (`uid`,`amout`,`payment_type`) VALUES ('$uid','$amount','$payment_type')";
+            $result = mysqli_query($conn,$sql);
+            }
+            break;
+        default:{
+            $sql = "INSERT INTO `payment` (`uid`,`amout`,`payment_type`,`card_no`,`exdate`,`cvv`,`card_holder_name`) VALUES ('$uid','$amount','$payment_type','$card_no','$exdate','$cvv','$card_holder_name')";
+            $result = mysqli_query($conn,$sql); 
+        }break;
+
+    }
+            if($result){
+                echo "<script>
+                alert('Thank you for your payment.');
+                window.location.href = 'orders.php';
+              </script>";            
         
-        $sql = "UPDATE product SET stock=stock-$qty WHERE pid=$pid";
-        $result = mysqli_query($conn,$sql);
+            $sql = "UPDATE product SET stock=stock-$qty WHERE pid=$pid";
+            $result = mysqli_query($conn,$sql);
 
-        $sql = "INSERT INTO `order_history` (`uid`,`pid`,`order_date`,`status`,`price`,`qty`,`total_amount`,`mobile_no`,`payid`,`temp_address`) VALUES ()";
-        $result = mysqli_query($conn,$sql);
+            $sql = "INSERT INTO `order_history` (`uid`,`pid`,`order_date`,`price`,`qty`,`total_amount`,`mobile_no`,`payid`,`temp_address`) VALUES ('$uid','$pid','$order_date','$price','$qty','$amount','$mobile','$payid','$temp_address')";
+            $result = mysqli_query($conn,$sql);
     }
     
 }
