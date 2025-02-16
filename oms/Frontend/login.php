@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         body {
             font-family: 'Roboto', sans-serif;
-            background: url('https://via.placeholder.com/1500') no-repeat center center fixed; /* Background Image */
+            background:  no-repeat center center fixed; /* Background Image */
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -193,7 +193,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
 
 <div class="login-container">
-    <img src="../Backend/image1/Menopause.png" alt="MedDrip Pharmacy Logo">
+    <!-- <img src="../Backend/image1/Menopause.png" alt="MedDrip Pharmacy Logo"> -->
     <h2>Login to MedDrip Pharmacy</h2>
     <form class="login" action="" method="post">
         <div class="email-id">
