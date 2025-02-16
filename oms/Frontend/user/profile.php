@@ -1,5 +1,4 @@
 <?php
-include 'user_session.php';
 include 'navbar.php';
 ?>
 <!DOCTYPE html>
