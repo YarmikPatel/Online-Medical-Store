@@ -114,17 +114,18 @@
             background: #3e8e41;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) inset;
         }
+
         .error-message {
-    color: #d9534f; /* Bootstrap Danger Red */
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 5px;
-    display: block;
-    padding: 3px 8px;
-    background: rgba(217, 83, 79, 0.1); /* Light Red Background */
-    border-left: 3px solid #d9534f;
-    border-radius: 3px;
-}
+            color: #d9534f;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 5px;
+            display: none;
+            padding: 3px 8px;
+            background: rgba(217, 83, 79, 0.1);
+            border-left: 3px solid #d9534f;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -171,15 +172,41 @@
 </div>
 
 <script>
+    function processPayment() {
+        const mobileInput = document.getElementById("mobile");
+        const mobileError = document.getElementById("mobile-error");
+        const addressInput = document.getElementById("address");
+        const addressError = document.getElementById("address-error");
+        
+        const mobile = mobileInput.value.trim();
+        const address = addressInput.value.trim();
+        const mobileRegex = /^[6-9]\d{9}$/;
+        let isValid = true;
+        
+        mobileError.style.display = "none";
+        addressError.style.display = "none";
+
+        if (!mobileRegex.test(mobile)) {
+            mobileError.style.display = "block";
+            isValid = false;
+        }
+
+        if (address === "") {
+            addressError.style.display = "block";
+            isValid = false;
+        }
+
+        if (isValid) {
+            alert('Payment Successful!');
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
     const cardDetails = document.querySelector('.card-details10');
     const codDetails = document.querySelector('.cod-details10');
     const creditCardRadio = document.getElementById('credit-card');
     const debitCardRadio = document.getElementById('debit-card');
     const codRadio = document.getElementById('cod');
-    const mobileInput = document.getElementById("mobile");
-    const mobileError = document.getElementById("mobile-error");
-    const addressInput = document.getElementById("address");
-    const addressError = document.getElementById("address-error");
 
     function togglePaymentMethod() {
         if (creditCardRadio.checked || debitCardRadio.checked) {
@@ -191,38 +218,18 @@
         }
     }
 
+    // Add event listeners to radio buttons
     creditCardRadio.addEventListener('change', togglePaymentMethod);
     debitCardRadio.addEventListener('change', togglePaymentMethod);
     codRadio.addEventListener('change', togglePaymentMethod);
 
-    togglePaymentMethod(); // Ensure correct visibility on page load
+    // Call function on page load to set initial visibility
+    togglePaymentMethod();
+});
 
-    function processPayment() {
-        let isValid = true;
-        const mobile = mobileInput.value.trim();
-        const address = addressInput.value.trim();
-        const mobileRegex = /^[6-9]\d{9}$/; // Validates a 10-digit Indian mobile number
 
-        // Validate Mobile Number
-        if (!mobileRegex.test(mobile)) {
-            mobileError.style.display = "block";
-            isValid = false;
-        } else {
-            mobileError.style.display = "none";
-        }
-
-        // Validate Address Field
-        if (address === "") {
-            addressError.style.display = "block";
-            isValid = false;
-        } else {
-            addressError.style.display = "none";
-        }
-
-        if (isValid) {
-            alert('Payment Successful!');
-        }
-    }
 </script>
+
+<?php include '../footer.php'; ?>
 </body>
 </html>
