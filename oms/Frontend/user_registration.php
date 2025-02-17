@@ -1,6 +1,6 @@
 <?php
 include('../Backend/connection.php');
-// ob_start(); // Helps prevent header issues
+ob_start(); // Helps prevent header issues
 ?>
 
 <!DOCTYPE html>
@@ -10,151 +10,128 @@ include('../Backend/connection.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedDrip - User Sign Up</title>
     <style>
-        /* Google Font */
 
-/* General Styles */
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    overflow: hidden;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: sans-serif;
+            background: linear-gradient(135deg,rgb(171, 187, 216,1), #2a5298);
+            color: #fff;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            min-height: 100vh; /* Ensure full viewport height */
+        }
 
-/* Floating Bubbles Effect */
-.floating-shape {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    animation: floatAnimation 6s infinite ease-in-out;
-}
-.shape1 { width: 80px; height: 80px; top: 10%; left: 20%; }
-.shape2 { width: 120px; height: 120px; top: 50%; left: 70%; }
-.shape3 { width: 60px; height: 60px; bottom: 10%; right: 30%; }
+        .signup-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px; /* Increased padding */
+            width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Softer shadow */
+            margin: 0 auto;
+        }
 
-@keyframes floatAnimation {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
+        .signup-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
 
-/* Glassmorphism Signup Card */
-.signup-container {
-    position: relative;
-    width: 400px;
-    padding: 30px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
+        .inputBx {
+            margin-bottom: 20px;
+        }
 
-    display: flex;
-    flex-direction: column;  /* Stacks items vertically */
-    align-items: center;
-}
+        .inputBx label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #eee; /* Slightly lighter label color */
+        }
 
-/* Interactive Inputs */
-.inputBx {
-    margin: 15px 0;
-    text-align: left;
-}
-.inputBx input, .inputBx textarea {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    transition: 0.3s;
-}
-/* .inputBx input:focus, .inputBx textarea:focus {
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.05);
-} */
-
-/* Floating Signup Button */
-.inputBx button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    background: linear-gradient(90deg, #ff6f61, #ff4757);
-    color: white;
-    font-size: 18px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-    animation: floatButton 3s infinite ease-in-out;
-}
-.signup-button {
-    position: fixed;
-    bottom: 20px;
-    /*right: 20px;
-    background-color: red;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-size: 18px;
-    cursor: pointer;*/
-} 
-
-@keyframes floatButton {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-
-/* Error Messages (Inline) */
-.error-msg {
-    color: #e74c3c;
-    font-size: 14px;
-    display: none;
-}
-
-/* Toast Notifications */
-.toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px;
+        .inputBx input,
+        .inputBx textarea {
+            width: calc(100% - 22px); /* Account for padding */
+            padding: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
+            color: #fff; /* White input text */
+            box-sizing: border-box;
+            transition: background 0.3s ease; /* Smooth background transition */
+        }
+
+        .inputBx input:focus,
+        .inputBx textarea:focus {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none; /* Remove default outline */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Add a subtle glow on focus */
+        }
+
+        .inputBx textarea {
+            /* resize: vertical; Allow vertical resizing of textarea */
+            /* margin-top: 20px; */
+        }
+
+        .signup-button {
+            margin-top: 20px; /* Space above the button */
+        }
+
+        .signup-button button {
+            padding: 12px;
+            border: none;
+            background: linear-gradient(90deg, #ff6f61, #ff4757);
             color: white;
-            font-weight: bold;
+            font-size: 16px;
+            border-radius: 35px; /* Less rounded button */
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: absolute;
+            left: 46%;
+            top: 90%;
+        }
+
+        .signup-button button:hover {
+            background: linear-gradient(90deg, #e05f52, #e03743); /* Darker on hover */
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
             display: none;
-            z-index: 1000;
         }
-        .toast.error { background-color: red; }
-        .toast.success { background-color: green; }
 
-        /* Modal Popup */
-        .modal {
-            position: fixed;
-            top: 10px;  /* Moves to the top */
-            left: 50%;
-            transform: translateX(-50%); /* Centers horizontally */
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
+        #form-message {
+            margin-top: 20px;
+            padding: 10px;
             border-radius: 5px;
-            z-index: 9999;
-            font-weight: bold;
+            display: none;
         }
-        .modal.success { border: 2px solid green; }
-        .modal.error { border: 2px solid red; }
+
+        #form-message.success {
+            background-color: #d4edda; /* Light green */
+            color: #155724; /* Dark green */
+            border: 1px solid #c3e6cb;
+        }
+
+        #form-message.error {
+            background-color: #f8d7da; /* Light red */
+            color: #721c24; /* Dark red */
+            border: 1px solid #f5c6cb;
+        }
 
     </style>
 </head>
 <body>
-    <!-- Floating Shapes -->
-    <div class="floating-shape shape1"></div>
-    <div class="floating-shape shape2"></div>
-    <div class="floating-shape shape3"></div>
 <div class="signup-container">
-    <div class="toast" id="toast"></div>
-    <div class="modal" id="modal"></div>
-    <div class="alert-box success modal" id="successalertbox"></div>
-    <div class="alert-box error" id="erroralertbox"></div>
+    
+    <!-- <div class="alert-box success modal" id="successalertbox"></div> -->
+    <!-- <div class="alert-box error" id="erroralertbox"></div> -->
     
     <h1>User - Sign Up</h1>
         <form action="" method="post" id="registrationForm">
@@ -194,8 +171,12 @@ body {
             <div class="inputBx signup-button" id="signup">
                 <button type="submit">Sign Up</button>
             </div>
+            <div id="form-message"></div>
         </form>
 </div>
+
+
+
 
 <!-- JavaScript Validation Script (Vanilla JS) -->
 <script>
@@ -233,20 +214,12 @@ body {
         }
       });
     });
-    function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast ' + type;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 5000);
-        }
-
-        function showModal(message, type) {
-            const modal = document.getElementById('modal');
-            modal.textContent = message;
-            modal.className = 'modal ' + type;
-            modal.style.display = 'block';
-            setTimeout(() => { modal.style.display = 'none'; }, 5000);
+    
+    function showMessage(message, type) {
+            const messageArea = document.getElementById('form-message');
+            messageArea.textContent = message;
+            messageArea.className = ` ${type}`; // Set class based on type
+            messageArea.style.display = 'block'; // Show the message
         }
   </script>
 </body>
@@ -282,19 +255,16 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     // If there are any errors, set error messages in the alert boxes
     if($usernameTaken || $emailTaken){
 
-        echo "";
-
         $errorMessage = "";
         if($usernameTaken){
-            echo "<script>showToast('Username already exists!', 'error');</script>";
+            echo "<script>showMessage('Username already exists!', 'error');</script>";
         }
         if($emailTaken){
-            echo "<script>showToast('Email already exists!', 'error');</script>";
+            echo "<script>showMessage('Email already exists!', 'error');</script>";
         }
     }else if(!$usernameTaken && !$emailTaken){
         //SQL query to post data into database.
-        $hashed_password = password_hash($upass, PASSWORD_BCRYPT);
-        $sql = "INSERT INTO `registration` (`uname`,`full_name`,`upass`,`mobile`,`email_id`,`address`)VALUES   ('$uname','$full_name','$hashed_password','$mobile','$email_id','$address')";
+        $sql = "INSERT INTO `registration` (`uname`,`full_name`,`upass`,`mobile`,`email_id`,`address`)VALUES   ('$uname','$full_name','$upass','$mobile','$email_id','$address')";
         $result = mysqli_query($conn,$sql);
         if($result){
             //Set session variables 
@@ -305,14 +275,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             $_SESSION['mobile']=$mobile;
             $_SESSION['email_id']=$email_id;
             $_SESSION['address']=$address;
-            echo "<script>showModal('Registration successful!', 'success');
+            echo "<script>showMessage('Registration successful!', 'success');
             setTimeout(function() {
                 window.location.href = 'login.php';
             }, 3000); // Redirect after 3 seconds
             </script>"; 
         }
         else{
-            echo "<script>showModal('Registration failed!', 'error')    ;
+            echo "<script>showMessage('Registration failed!', 'error')    ;
             </script>";
         }
     }

@@ -20,6 +20,16 @@
             box-sizing: border-box;
         }
 
+        .container_product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
         .payment-container10 {
             background: #fff;
             padding: 40px;
@@ -27,16 +37,20 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             width: 500px;
             height: auto;
-            margin: 111px auto;
+            margin: 25px;
         }
 
         .py {
             text-align: center;
             margin-bottom: 30px;
             color: #333;
+            margin-top: 10px;
         }
 
         .payment-method10 {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             margin-bottom: 30px;
         }
 
@@ -125,17 +139,10 @@
             border-radius: 3px;
         }
 
-.container_product {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-}
+
 
 .card {
-    margin: 61px;
+    margin-top: 80px;
     background: #fff;
     padding: 15px;
     border-radius: 8px;
@@ -143,6 +150,7 @@
     width: 300px;
     text-align: center;
     transition: transform 0.3s ease-in-out;
+    width: 30%;
 }
 
 .card:hover {
@@ -193,8 +201,9 @@
                 $qty = $row['qty'];
 
                     echo '<div class="card">';
-                        echo '<img src="../../Backend/image1/' . $row['image'] . '" alt="Product Image">';
+                        // echo '<img src="../../Backend/image1/' . $row['image'] . '" alt="Product Image">';
                         echo '<div class="card-content">';
+                            echo '<h2 class="py">Order Summary</h2>';
                             echo '<div class="product-name"><strong>Medicine:</strong>' . $row['pname'] . '</div>';
                             echo '<div class="price"><strong>Price:</strong>₹' . $price . '</div>';
                             echo '<div class="price"><strong>Quantity:</strong>' . $qty . '</div>';
@@ -203,43 +212,43 @@
                     echo '</div>';
             }
         ?>
-    </div>
 
-<div class="payment-container10">
-    <form action="" method="post">
-    <h2 class="py">Payment Confirm Here</h2>
+    <div class="payment-container10">
+        <h2 class="py">Payment Details</h2>
+        <form action="" method="post">
 
-    <div class="payment-method10">
+            <div class="payment-method10">
         
-            <input type="radio" name="payment-method" value="Credit_Card" id="credit-card" checked> <label>Credit Card</label>
-            <input type="radio" name="payment-method" value="Debit_Card" id="debit-card"><label>Debit Card</label>
-            <input type="radio" name="payment-method" value="Cash_on_Delivery" id="cod"> <label>Cash on Delivery</label>
-
-        <div class="card-details10">
-            <div class="input-group10">
-                <input type="text" name="card-number" placeholder="Card Number" required>
-                <input type="text" name="card-holder" placeholder="Card Holder Name" required>
+                <input type="radio" name="payment-method" value="Credit_Card" id="credit-card" checked> <label style="margin-top: 10px;">Credit Card</label>
+                <input type="radio" name="payment-method" value="Debit_Card" id="debit-card"><label style="margin-top: 10px;">Debit Card</label>
+                <input type="radio" name="payment-method" value="Cash_on_Delivery" id="cod"> <label style="margin-top: 10px;">Cash on Delivery</label>
             </div>
-            <div class="input-group10">
-                <input type="month" name="expiry-date" required>
-                <input type="password" name="cvv" placeholder="CVV" required>
-            </div>
-        </div>
+                <div class="card-details10">
+                    <div class="input-group10">
+                        <input type="text" name="card-number" placeholder="Card Number" required>
+                        <input type="text" name="card-holder" placeholder="Card Holder Name" required>
+                    </div>
+                    <div class="input-group10">
+                        <input type="month" name="expiry-date" required>
+                        <input type="password" name="cvv" placeholder="CVV" required>
+                    </div>
+                </div>
 
-        <div class="cod-details10">
-            <p>You will pay when you receive the goods.</p>
-        </div>
+                <div class="cod-details10">
+                    <p>You will pay when you receive the goods.</p>
+                </div>
+            
+        <h2 class="py">Contact Details</h2>
+        <label for="mobile">Mobile Number</label>
+        <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+        <span id="mobile-error" class="error-message">Please enter a valid 10-digit mobile number.</span>
+
+        <label for="address">Delivery Address</label>
+        <textarea id="address" name="address" placeholder="Enter your delivery address" rows="4" required></textarea>
+        <span id="address-error" class="error-message">Please enter your delivery address.</span>
+        <button type="submit" name="comfirm_payment" class="btn10" onclick="processPayment()">Confirm Payment</button>
+        </form>
     </div>
-
-    <label for="mobile">Mobile Number</label>
-    <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
-    <span id="mobile-error" class="error-message">Please enter a valid 10-digit mobile number.</span>
-
-    <label for="address">Delivery Address</label>
-    <textarea id="address" name="address" placeholder="Enter your delivery address" rows="4" required></textarea>
-    <span id="address-error" class="error-message">Please enter your delivery address.</span>
-    <button type="submit" name="comfirm_payment" class="btn10" onclick="processPayment()">Confirm Payment</button>
-    </form>
 </div>
 
 <script>

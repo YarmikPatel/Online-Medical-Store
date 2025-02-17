@@ -3,28 +3,32 @@ include('../Backend/connection.php');
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $conn->real_escape_string($_POST['email']);
-    $pass = $conn->real_escape_string($_POST['pass']);
+    $upass = $conn->real_escape_string($_POST['pass']);
    
-    $sql = "SELECT * FROM `registration` WHERE upass='$pass' and email_id='$email'";
+    $sql = "SELECT * FROM `registration` WHERE upass='$upass' and email_id='$email'";
     $result = mysqli_query($conn,$sql);
-
-        if($result){
-            if(mysqli_num_rows($result) > 0){
+     
+    // Fetch the data
+    if($result){ // Check if a user with that email exists
+            // Login successful!
+        if(mysqli_num_rows($result) > 0){
             session_start();
-            $_SESSION['is_user_logged_in'] == true;
+            $_SESSION['is_user_logged_in'] = true;
             $row = mysqli_fetch_assoc($result); // Fetch one row as an associative array
-            $uid = $row['uid']; // Access the 'uid' column
-            $_SESSION['uid'] = $uid;
+                 // Access the 'uid' column
+            $_SESSION['uid'] = $row['uid'];
             $_SESSION['user_name'] = $row['full_name'];
             $_SESSION['user_address'] = $row['address'];
-           echo "<script>alert('Loging successfuly...');</script>";
-           header("Location: user/user_login_index.php");  
-        }
+            echo "<script>alert('Loging successfuly...');</script>";
+            header("Location: user/user_login_index.php");  
+            exit(); // Essential to stop script execution after redirect
         }else{
             echo "<script>alert('Invalid Credentials');</script>";
-        }
-        
-     }
+        }  
+    }else {
+        echo "<script>alert('User not found.');</script>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -182,6 +186,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         }
 
+        .registration{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        p{
+            display: inline-block;
+            color: black;
+            font-size: 15px
+        }
+        #register{
+            text-decoration: none;
+            font-size: 15px
+        }
+        #forgotpwd{
+            display: block;
+            text-align: left;
+            /* margin-left: 28px; */
+            margin-bottom: 5px;
+            font-size: 15px;
+            text-decoration: none;
+        }
         @media (max-width: 768px) {
             .login-container {
                 width: 80%;
@@ -207,8 +233,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <input type="submit" value="Login" class="submit-btn" id="check_data">
         </div>
         <div class="registration">
-           NEW USER? <a href="user_registration.php">Register here</a> | 
-           Forgot Password? <a href="forgot_pass.php">Click Here</a>
+            <a href="forgot_pass.php" id="forgotpwd">Forgot Password?</a>
+            <p>Don't have an account? <a href="user_registration.php" id="register">Register here</a></p>
         </div>
     </form>
 </div>

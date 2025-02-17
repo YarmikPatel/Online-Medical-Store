@@ -1,6 +1,5 @@
 <?php
 // Start session and include dependencies
-session_start();
 include('../../Backend/connection.php');
 include 'navbar.php';
 

@@ -122,6 +122,17 @@ $username = $_SESSION['user_name'];
             transition: width 0.3s ease;
         }
 
+        .navbar.scrolled ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #2c3e50;
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+        }
+
         .navbar ul li a:hover::after {
             width: 100%;
         }
@@ -129,6 +140,11 @@ $username = $_SESSION['user_name'];
         /* Active links */
         .navbar ul li a.active {
             color: #1abc9c;
+            padding: 5px 10px;
+        }
+
+        .navbar.scrolled ul li a.active {
+            color: #2c3e50;
             padding: 5px 10px;
         }
 
@@ -175,9 +191,9 @@ $username = $_SESSION['user_name'];
             color: #1abc9c;
         }
 
-        .category-name {
-            margin-top:10px;
-            border: 2px solid green;
+        .categories-navbar ul li a.category-active{
+            background-color: green;
+            color: white !important;
         }
         
         .navbar-nav {
@@ -301,6 +317,7 @@ $username = $_SESSION['user_name'];
 <?php
 // Get the current page name
 $current_page = basename($_SERVER['PHP_SELF']);
+$current_category_page = basename($_SERVER['PHP_SELF']);
 // Check if it's the home page (e.g., 'user_login_index.php')
 $is_home_page = ($current_page == 'user_login_index.php' || $current_page == 'kids.php' || $current_page == 'teenagers.php' || $current_page == 'men.php' || $current_page == 'women.php' || $current_page == 'senior_citizen.php' || $current_page == ''); // Add other home page names if needed
 
@@ -338,22 +355,22 @@ $is_home_page = ($current_page == 'user_login_index.php' || $current_page == 'ki
     <nav class="categories-navbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="user_login_index.php" class="category-name" style=" border-radius: 30px;  color: green; ">All Products</a>
+                <a href="user_login_index.php" class="<?php echo ($current_category_page == 'user_login_index.php' || $current_category_page == '') ? 'category-active' : ''; ?>" style=" border-radius: 30px;  color: green; margin-top:10px; border: 2px solid green;">All Products</a>
             </li>
             <li class="nav-item">
-                <a href="kids.php" class="category-name" style="border-radius: 30px; color: green;">Kids 0-12 years</a>
+                <a href="kids.php" class="<?php echo ($current_category_page == 'kids.php' || $current_category_page == '') ? 'category-active' : ''; ?>" style="border-radius: 30px; color: green; margin-top:10px; border: 2px solid green;">Kids 0-12 years</a>
             </li>
             <li class="nav-item">
-                <a href="teenagers.php" class="category-name" style="border-radius: 30px; color: green;">Teenagers 12-18 years</a>
+                <a href="teenagers.php" class="<?php echo ($current_category_page == 'teenagers.php' || $current_category_page == '') ? 'category-active' : ''; ?>" style="border-radius: 30px; color: green; margin-top:10px; border: 2px solid green;">Teenagers 12-18 years</a>
             </li>
             <li class="nav-item">
-                <a href="men.php" class="category-name" style="border-radius: 30px; color: green;">Men 18+ years</a>
+                <a href="men.php" class="<?php echo ($current_category_page == 'men.php' || $current_category_page == '') ? 'category-active' : ''; ?>" style="border-radius: 30px; color: green; margin-top:10px; border: 2px solid green;">Men 18+ years</a>
             </li>
             <li class="nav-item">
-                <a href="women.php" class="category-name" style="border-radius: 30px; color: green;">Women 18+ years</a>
+                <a href="women.php" class="<?php echo ($current_category_page == 'women.php' || $current_category_page == '') ? 'category-active' : ''; ?>" style="border-radius: 30px; color: green; margin-top:10px; border: 2px solid green;">Women 18+ years</a>
             </li>
             <li class="nav-item">
-                <a href="senior_citizen.php" class="category-name" style="border-radius: 30px; color: green;">Senior Citizen 60+ years</a>
+                <a href="senior_citizen.php" class="<?php echo ($current_category_page == 'senior_citizen.php' || $current_category_page == '') ? 'category-active' : ''; ?>" style="border-radius: 30px; color: green; margin-top:10px; border: 2px solid green;">Senior Citizens 60+ years</a>
             </li>
         </ul>
         
