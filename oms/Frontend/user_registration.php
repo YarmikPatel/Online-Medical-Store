@@ -161,9 +161,9 @@ ob_start(); // Helps prevent header issues
 <body>
 <div class="signup-container">
     
-    <!-- <div class="alert-box success modal" id="successalertbox"></div> -->
-    <!-- <div class="alert-box error" id="erroralertbox"></div> -->
-    
+    <div class="alert-box success modal" id="successalertbox"></div>
+    <div class="alert-box error" id="erroralertbox"></div>
+    <div id="form-message"></div>
     <h1>MedDrip Pharmacy</h1>
     <h2>User - Sign Up</h2>
         <form action="" method="post" id="registrationForm">
@@ -209,7 +209,7 @@ ob_start(); // Helps prevent header issues
                     <div class="inputBx signup-button" id="signup">
                         <button type="submit">Sign Up</button>
                     </div>
-                    <div id="form-message"></div>
+                    
         </form>
 </div>
 
