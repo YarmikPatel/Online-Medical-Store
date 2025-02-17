@@ -18,10 +18,6 @@ $result = $stmt->get_result();
 
 // Check if product exists
 if (!$result || !$row = $result->fetch_assoc()) {
-    die('<p>Product not found.</p>');
-    // Bind the product ID to the query
-    $stmt->bind_param("i", $product_id);
-    $stmt->execute();
 
     // Get the result
     $result = $stmt->get_result();
@@ -148,7 +144,7 @@ if (!$result || !$row = $result->fetch_assoc()) {
     }
 } else {
     // If no product ID is provided or invalid, display an error
-    echo '<p>No product selected or invalid product ID.</p>';
+    // echo '<p>No product selected or invalid product ID.</p>';
 }
 ?>
 <!DOCTYPE html>
@@ -239,7 +235,7 @@ if (!$result || !$row = $result->fetch_assoc()) {
             </p>
             <div class="action-buttons123">
                 <a href="cart.php?pid=<?= $product_id ?>">Add to Cart</a>
-                <a href="payment.php?pid=<?= $product_id ?>">Buy Now</a>
+                <!-- <a href="payment.php?pid=<?= $product_id ?>">Buy Now</a> -->
             </div>
         </div>
     </div>
