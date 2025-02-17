@@ -18,7 +18,8 @@ ob_start(); // Helps prevent header issues
         }
         body {
             font-family: sans-serif;
-            background: linear-gradient(135deg,rgb(171, 187, 216,1), #2a5298);
+            background: linear-gradient(135deg,rgb(171, 187, 216,1),rgb(85, 183, 113));
+            /* background: linear-gradient(to bottom right, #F5F5F5, #D6EAF8 #F9E79F, #A3C4BC, #FFFFFF); */
             color: #fff;
             display: flex;
             justify-content: center; /* Center horizontally */
@@ -31,12 +32,12 @@ ob_start(); // Helps prevent header issues
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 40px; /* Increased padding */
-            width: 500px;
+            width: 890px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Softer shadow */
             margin: 0 auto;
         }
 
-        .signup-container h1 {
+        .signup-container h1, h2 {
             text-align: center;
             margin-bottom: 30px;
             color: #fff;
@@ -75,6 +76,9 @@ ob_start(); // Helps prevent header issues
         .inputBx textarea {
             /* resize: vertical; Allow vertical resizing of textarea */
             /* margin-top: 20px; */
+            width: calc(95.4%);
+            position: relative;
+            left: 3%;
         }
 
         .signup-button {
@@ -82,21 +86,24 @@ ob_start(); // Helps prevent header issues
         }
 
         .signup-button button {
+            width: 800px;
             padding: 12px;
             border: none;
-            background: linear-gradient(90deg, #ff6f61, #ff4757);
+            background: transparent;
             color: white;
             font-size: 16px;
             border-radius: 35px; /* Less rounded button */
             cursor: pointer;
             transition: background 0.3s ease;
             position: absolute;
-            left: 46%;
-            top: 90%;
+            left: 23%;
+            top: 77%;
+            font-size: 20px;
         }
 
         .signup-button button:hover {
-            background: linear-gradient(90deg, #e05f52, #e03743); /* Darker on hover */
+            background: linear-gradient(135deg,rgb(171, 187, 216,1),rgb(85, 183, 113)); /* Darker on hover */
+            border: none;
         }
 
         .error-msg {
@@ -125,6 +132,30 @@ ob_start(); // Helps prevent header issues
             border: 1px solid #f5c6cb;
         }
 
+        .reg_details_container{
+            display: flex;
+            position: relative;
+            left: 3%;
+        }
+
+        #registraionForm{
+            
+        }
+
+        ::placeholder {
+            color: whitesmoke;
+            opacity: 1; /* Firefox */
+            font-size: 15px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        h2, h1, button{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }       
+
+        h1  {
+            font-family: 'Times New Roman', Times, serif;
+        }
     </style>
 </head>
 <body>
@@ -133,45 +164,52 @@ ob_start(); // Helps prevent header issues
     <!-- <div class="alert-box success modal" id="successalertbox"></div> -->
     <!-- <div class="alert-box error" id="erroralertbox"></div> -->
     
-    <h1>User - Sign Up</h1>
+    <h1>MedDrip Pharmacy</h1>
+    <h2>User - Sign Up</h2>
         <form action="" method="post" id="registrationForm">
-            <div class="inputBx" id="username">
-                <label for="uname">Enter User Name:</label>
-                <input type="text" id="uname" name="uname" required>
-                <p class="error-msg" id="unameerrormsg"></p>
+            <div class="reg_details_container">
+                    <div class="inputBx" id="username">
+                        <!-- <label for="uname">Enter User Name:</label> -->
+                        <input type="text" id="uname" size="55" name="uname" placeholder="Enter your user name that will be used in the website" required>
+                        <p class="error-msg" id="unameerrormsg"></p>
+                    </div>
+                    <div class="inputBx" id="fullname">
+                        <!-- <label for="full_name">Enter Full Name:</label> -->
+                        <input type="text" id="full_name" size="55" name="full_name" placeholder="Enter your full name" required>
+                    </div>
             </div>
-            <div class="inputBx" id="fullname">
-                <label for="full_name">Enter Full Name:</label>
-                <input type="text" id="full_name" name="full_name" required>
+            <div class="reg_details_container">
+                    <div class="inputBx" id="userpass">
+                        <!-- <label for="upass">Enter User Password:</label> -->
+                        <input type="password" id="upass" size="55" name="upass" placeholder="Enter your password" required>
+                    </div>
+                    <div class="inputBx" id="confirmuserpass">
+                        <!-- <label for="confirmupass">Enter Confirm User Password:</label> -->
+                        <input type="password" id="confirmupass" size="55" name="confirmupass" placeholder="Enter your password again to confirm" required>
+                        <p class="error-msg" id="passerrormsg"></p>
+                    </div>
             </div>
-            <div class="inputBx" id="userpass">
-                <label for="upass">Enter User Password:</label>
-                <input type="password" id="upass" name="upass" required>
+            <div class="reg_details_container">
+                    <div class="inputBx" id="usermobile">
+                        <!-- <label for="moble">Enter Mobile number:</lable> -->
+                        <input type="text" id="mobile" size="55" name="mobile" placeholder="Enter your mobile number" required>
+                        <p class="error-msg" id="mobileerrormsg"></p>
+                    </div>
+                    <div class="inputBx" id="useremailid">
+                        <!-- <label for="email_id">Enter Email id:</label> -->
+                        <input type="email" id="email_id" size="55" name="email_id" placeholder="Enter your email ID" required>
+                        <p class="error-msg" id="emailerrormsg"></p>
+                    </div>
             </div>
-            <div class="inputBx" id="confirmuserpass">
-                <label for="confirmupass">Enter Confirm User Password:</label>
-                <input type="password" id="confirmupass" name="confirmupass" required>
-                <p class="error-msg" id="passerrormsg"></p>
-            </div>
-            <div class="inputBx" id="usermobile">
-                <label for="moble">Enter Mobile number:</lable>
-                <input type="text" id="mobile" name="mobile" required>
-                <p class="error-msg" id="mobileerrormsg"></p>
-            </div>
-            <div class="inputBx" id="useremailid">
-                <label for="email_id">Enter Email id:</label>
-                <input type="email" id="email_id" name="email_id" required>
-                <p class="error-msg" id="emailerrormsg"></p>
-            </div>
-            <div class="inputBx" id="useraddress">
-                <label for="address">Enter Address:</label>
-                <textarea id="address" name="address" rows="3" required></textarea>
-            </div>
-            </div>
-            <div class="inputBx signup-button" id="signup">
-                <button type="submit">Sign Up</button>
-            </div>
-            <div id="form-message"></div>
+                    <div class="inputBx" id="useraddress">
+                        <!-- <label for="address">Enter Address:</label> -->
+                        <textarea id="address" name="address" rows="5" placeholder="Enter your address to get your delivery" required></textarea>
+                    </div>
+                    </div>
+                    <div class="inputBx signup-button" id="signup">
+                        <button type="submit">Sign Up</button>
+                    </div>
+                    <div id="form-message"></div>
         </form>
 </div>
 
