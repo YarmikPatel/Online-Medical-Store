@@ -166,6 +166,20 @@ form input {
 .btn-cancel:hover {
     background-color: #c82333;
 }
+
+.delete-data {
+    width: 100%;
+    padding: 10px;
+    margin: 237px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+
+}
     </style>
 </head>
 <body>
@@ -178,12 +192,16 @@ form input {
         <?php if ($result->num_rows > 0){ ?>
             <?php while ($row = $result->fetch_assoc()){ ?>
                 <div class="card">
+                    <?php $pre_id=$row['pre_id']; ?>
                     <h3>Date: <?= htmlspecialchars($row['date']) ?></h3>
                     <p><strong>Illness:</strong> <?= htmlspecialchars($row['illeness']) ?></p>
                     <p><strong>Medicine Name:</strong> <?= htmlspecialchars($row['mname']) ?></p>
                     <p><strong>Dosage schedule:</strong> <?= htmlspecialchars($row['dosage_schedule']) ?></p>
                     <p><strong>Doctor Name:</strong> <?= htmlspecialchars($row['doctor_name']) ?></p>
                     <p><strong>Hospital Name:</strong> <?= htmlspecialchars($row['hospital_name']) ?></p>
+                    <p> 
+                        <a href="delete_prescription.php?pre_id=<?php echo $pre_id; ?>" class="delete-data">Delete Data</a>
+                    </p>
                 </div>
             <?php } 
         }else{ ?>
