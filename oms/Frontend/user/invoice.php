@@ -1,89 +1,80 @@
 <?php
-include 'navbar.php';
 include('../../Backend/connection.php');
+include 'navbar.php';
 
-// Function to generate a unique order ID
-function generateOrderId() {
-    return rand(100000, 999999); //  A simple random number generator, consider a more robust method in production.
-}
+// Function to fetch order details and items from order_history
+function getOrderHistory($conn, $orderId) {
+    $sql = "SELECT oh.order_date, oh.total_amount, oh.user_id, u.user_name, u.user_address,
+                   oh.product_name, oh.quantity, oh.price  -- Select all necessary fields
+            FROM order_history oh
+            JOIN users u ON oh.user_id = u.user_id  -- Assuming you have a users table
+            WHERE oh.order_id = '$orderId'"; // Filter by order ID
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['place_order'])) {
-        $orderId = generateOrderId();
-        $userId = $_SESSION['user_id']; // Assuming you have user authentication and session management
-        $orderDate = date("Y-m-d H:i:s");
-        $totalAmount = $_POST['total_amount']; // Get total from the form
+    $result = $conn->query($sql);
 
-        // Insert order details into the database
-        $sql = "INSERT INTO orders (order_id, user_id, order_date, total_amount) 
-                VALUES ('$orderId', '$userId', '$orderDate', '$totalAmount')";
-
-        if ($conn->query($sql) === TRUE) {
-
-            // Insert order items (assuming you have a cart or order items)
-            if (isset($_SESSION['cart'])) {  // Example using a cart session
-                foreach ($_SESSION['cart'] as $item) {
-                    $productId = $item['product_id'];
-                    $quantity = $item['quantity'];
-                    $price = $item['price']; // Get price per item
-
-                    $orderItemsSql = "INSERT INTO order_items (order_id, product_id, quantity, price)
-                                      VALUES ('$orderId', '$productId', '$quantity', '$price')";
-                    $conn->query($orderItemsSql); // Error handling could be added here
-                }
-            }
-
-
-            // Generate and download the invoice
-            ob_start(); // Start output buffering
-
-            // Include the invoice template (you can create a separate HTML file)
-            include 'invoice_template.php'; // See the invoice_template.php content below
-
-            $invoiceContent = ob_get_clean(); // Get the buffered output
-
-            // Set headers for download
-            header('Content-Type: application/pdf'); // Or application/octet-stream for generic download
-            header('Content-Disposition: attachment; filename="invoice_' . $orderId . '.pdf"');
-
-            // Use a PDF library (like TCPDF or dompdf) to generate the PDF
-            require_once('tcpdf/tcpdf.php'); // Example using TCPDF (you'll need to install it)
-
-            $pdf = new TCPDF();
-            $pdf->AddPage();
-            $pdf->writeHTML($invoiceContent, true, false, true, false, '');  // Pass the invoice HTML content
-            $pdf->Output('invoice_' . $orderId . '.pdf', 'D'); // 'D' for download, 'I' for inline display
-
-            // Clear the cart after successful order
-            unset($_SESSION['cart']);
-
-            exit(); // Important: Stop further script execution after download
-        } else {
-            echo "Error placing order: " . $conn->error;
+    $orderData = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $orderData[] = $row;  // Store each row (item) of the order
         }
     }
+    return $orderData;
 }
 
-$conn->close();
+if (isset($_GET['order_id'])) {
+    $orderId = $_GET['order_id'];
+    $orderHistory = getOrderHistory($conn, $orderId);
+
+    if (!empty($orderHistory)) { // Check if order data was found
+        $orderDetails = $orderHistory[0]; // Get general order details from the first row
+        ob_start();
+
+        include 'invoice_template.php';
+
+        $invoiceContent = ob_get_clean();
+
+        require_once('tcpdf/tcpdf.php');
+
+        $pdf = new TCPDF();
+        $pdf->AddPage();
+        $pdf->writeHTML($invoiceContent, true, false, true, false, '');
+        $pdf->Output('invoice_' . $orderId . '.pdf', 'D');
+        exit();
+    } else {
+        echo "Order not found.";
+    }
+} else {
+    echo "Order ID is missing.";
+}
+
+// $conn->close();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Invoice</title>
+    <title>Invoice - Order #<?php echo $orderId; ?></title>
     <style>
-        /* Add your CSS styling here */
         body { font-family: sans-serif; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .container { width: 80%; margin: 20px auto; border: 1px solid #ddd; padding: 20px; } /* Improved container */
+        h1 { text-align: center; margin-bottom: 20px; }
+        .customer-info { margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #f2f2f2; }
+        .total { text-align: right; font-weight: bold; }
+        .footer { text-align: center; color: #777; margin-top: 20px; }
     </style>
 </head>
 <body>
-
+<div class="container">
     <h1>Invoice - Order #<?php echo $orderId; ?></h1>
 
-    <p>Date: <?php echo $orderDate; ?></p>
+    <div class="customer-info">
+        <p><strong>Customer:</strong> <?php echo $orderDetails['user_name']; ?></p>
+        <p><strong>Address:</strong> <?php echo $orderDetails['user_address']; ?></p>
+        <p><strong>Date:</strong> <?php echo $orderDetails['order_date']; ?></p>
+    </div>
 
     <table>
         <thead>
@@ -95,32 +86,29 @@ $conn->close();
             </tr>
         </thead>
         <tbody>
-            <?php
-            if (isset($_SESSION['cart'])) {
-                foreach ($_SESSION['cart'] as $item) {
-                    $productName = $item['product_name']; // Make sure product name is in session
-                    $quantity = $item['quantity'];
-                    $price = $item['price'];
-                    $subtotal = $quantity * $price;
-                    echo "<tr>";
-                    echo "<td>" . $productName . "</td>";
-                    echo "<td>" . $quantity . "</td>";
-                    echo "<td>$" . $price . "</td>";
-                    echo "<td>$" . $subtotal . "</td>";
-                    echo "</tr>";
-                }
-            }
-            ?>
+            <?php foreach ($orderHistory as $item): ?>  <tr>
+                    <td><?php echo $item['product_name']; ?></td>
+                    <td><?php echo $item['quantity']; ?></td>
+                    <td>$<?php echo $item['price']; ?></td>
+                    <td>$<?php echo $item['quantity'] * $item['price']; ?></td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
-                <td>$<?php echo $totalAmount; ?></td>
+                <td colspan="3" class="total"><strong>Total:</strong></td>
+                <td>$<?php echo $orderDetails['total_amount']; ?></td>
             </tr>
         </tfoot>
     </table>
 
-    <p>Thank you for your purchase!</p>
-
+    <div class="footer">
+        <p>Thank you for your purchase!</p>
+    </div>
+</div>
 </body>
 </html>
+
+
+// Generate and download the invoice
+            ob_start(); // Start output buffering
