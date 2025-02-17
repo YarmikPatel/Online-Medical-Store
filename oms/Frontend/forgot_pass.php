@@ -24,12 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            // Hash the new password
-            $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
 
             // Update password in the database
             $update_stmt = $conn->prepare("UPDATE registration SET upass = ? WHERE email_id = ?");
-            $update_stmt->bind_param("ss", $hashed_password, $email);
+            $update_stmt->bind_param("ss", $new_password, $email);
             $update_stmt->execute();
 
             if ($update_stmt->affected_rows > 0) {

@@ -274,12 +274,14 @@ $uid =  $_SESSION['uid'];
         <?php if ($result->num_rows > 0): ?>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="card">
+                <?php $order_id1 = $row['oid']; ?>
                     <h3>Order ID: <?= htmlspecialchars($row['oid']) ?></h3>
                     <p><strong>Order Date:</strong> <?= htmlspecialchars($row['order_date']) ?></p>
                     <p><strong>Status:</strong> <?= htmlspecialchars($row['status']) ?></p>
                     <p><strong>Price:</strong> ₹<?= htmlspecialchars($row['price']) ?></p>
                     <p><strong>Quantity:</strong> <?= htmlspecialchars($row['qty']) ?></p>
                     <p><strong>Total Amount:</strong> ₹<?= htmlspecialchars($row['total_amount']) ?></p>
+                    <a href="invoice.php?oid=<?php echo $order_id1; ?>" class="dow_invoice" id="dow_invoice">Download Invoice</a>
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
