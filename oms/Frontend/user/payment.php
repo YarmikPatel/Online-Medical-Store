@@ -392,7 +392,7 @@ if (isset($_POST['comfirm_payment'])) {
     // $sql10 = "SELECT payid FROM payment WHERE  AND uid=$uid";
     // $result10 = mysqli_query($conn,$sql10);
 
-    $payid = 87;
+    $payid = 106;
 
     switch($payment_type){
         case "Cash_on_Delivery":{
@@ -407,17 +407,18 @@ if (isset($_POST['comfirm_payment'])) {
 
     }
             if($result){
-                echo "<script>
-                alert('Thank you for your payment.');
-                window.location.href = 'orders.php';
-              </script>";            
-        
             $sql = "UPDATE product SET stock=stock-$qty WHERE pid=$pid";
             $result = mysqli_query($conn,$sql);
 
             $sql = "INSERT INTO `order_history` (`uid`,`pid`,`order_date`,`price`,`qty`,`total_amount`,`mobile_no`,`payid`,`temp_address`) VALUES ('$uid','$pid','$order_date','$price','$qty','$amount','$mobile','$payid','$temp_address')";
             $result = mysqli_query($conn,$sql);
-    }
+   
+            echo "<script>
+            alert('Thank you for your payment.');
+            window.location.href = 'orders.php';
+          </script>";
+
+            }
     
 }
 
