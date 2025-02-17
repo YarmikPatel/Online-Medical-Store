@@ -215,7 +215,7 @@ $uid =  $_SESSION['uid'];
         <h1>Your Pending Order</h1>
         <?php
             // Fetch data from order_history table
-            $sql = "SELECT * FROM order_history WHERE uid=$uid AND status='pending'";
+            $sql = "SELECT * FROM order_history WHERE uid=$uid AND status !='delivered' AND status !='cancelled'";
             $result = $conn->query($sql);
         ?>
         <?php if ($result->num_rows > 0): ?>
@@ -230,7 +230,7 @@ $uid =  $_SESSION['uid'];
                     <p><strong>Quantity:</strong> <?= htmlspecialchars($row['qty']) ?></p>
                     <p><strong>Total Amount:</strong> ₹<?= htmlspecialchars($row['total_amount']) ?></p>
                 <?php
-                if($row['status'] == "pending"){
+                if($row['status'] == "pending" || $row['status'] == "shipped"){
                     ?>
                   <button type="submit" id="cancel_order" class="cancel_order" name="cancel_order">Cancel Order</button>
                     <?php 
@@ -248,7 +248,7 @@ $uid =  $_SESSION['uid'];
         <h1>Your Order History</h1>
         <?php
             // Fetch data from order_history table
-            $sql = "SELECT * FROM order_history WHERE uid=$uid AND status!='pending'";
+            $sql = "SELECT * FROM order_history WHERE uid=$uid AND status ='delivered'";
             $result = $conn->query($sql);
         ?>
         <?php if ($result->num_rows > 0): ?>
@@ -274,7 +274,7 @@ $uid =  $_SESSION['uid'];
 
 <?php
     if(isset($_POST['cancel_order'])){
-        $sql = "DELETE FROM order_history WHERE uid=$uid AND oid=$order_id";
+        $sql = "UPDATE order_history SET status='cancelled' WHERE uid=$uid AND oid=$order_id";
         $result = mysqli_query($conn,$sql);
 
         echo "<script>window.location.href = 'orders.php';</script>";
