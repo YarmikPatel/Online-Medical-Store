@@ -1,0 +1,76 @@
+
+Description of developed project:
+	
+	1. Backend descriptions and screenshots:
+		
+		1. Page 1 - Admin code access:
+			
+		Description: Admin enter a code that has required field client-side validation and invalid credentials server-side validation to get access of the admin login page.
+		Screenshot:
+
+		2. Page 2 - Admin login access:
+		
+		Description: Admin enters user name and password that has required fields and password length client-side validation and invalid credentials server-side validation to get access of the admin dashboard panel.
+		Screenshot:
+
+		3. Page 3 - Admin dashboard panel:
+		
+		Description: We have three navigation bars first consists of admin name and log out link, second consists of to multiple page links that are "Manage Inventory", "Manage Users", "Manage Orders", "Report" and third is a side navigation bar consists of the same page links as the second navigation and home page link to get back to admin dashboard panel with a hamburger button that has "Java Script" onClick event functionality that displays menu in a animated way and a cross button with same JS functionality to disappear menu/side navigation and this side navigation bar is present in all pages and a stocks alert bar is also displayed to get alerts of product stock if less than 20 with product name, stock quantity number and a link to update product page to update that specific product stock.
+		Screenshot:  
+
+		4. Page 4 - Manage Inventory:
+		
+		Description: We have a title card of manage inventory and a navigation bar consists of to multiple page links that are "Add Categories", "Add Products", "Update Categories", "Update Products", "Update Categories", "Delete Categories", "Delete Products".
+		Screenshot:
+
+		5. Page 5 - Add Categories:
+		
+		Description: We have a table that shows categories fetched from database with a show form button that has "Java Script" onClick event functionality that displays form consists of input box with an add category button to perform insert query to add categories into database and hide form button as same show form to disappear form.
+		Screenshot:
+
+		6. Page 6 - Add Products:
+	
+		Description: We have a table that shows products fetched from database with a show form button that has "Java Script" onClick event functionality that displays form consists of input box with an add product button to perform insert query to add products into database and hide form button as same show form to disappear form.
+		Screenshot:
+
+		7. Page 7 - Update Categories:
+
+		Description: We have a table that shows categories fetched from database with a show form button that has "Java Script" onClick event functionality that displays form consists of input box with an update category button to perform update query to update categories into database and hide form button as same show form to disappear form.		
+		Screenshot:
+
+		8. Page 8 - Update Products:
+	
+		Description: We have a table that shows products fetched from database with a show form button that has "Java Script" onClick event functionality that displays form consists of input box with a dropdown list with an update product button to perform update query to update products into database and hide form button as same show form to disappear form.
+		Screenshot:
+
+		9. Page 9 - Delete Categories:
+
+		Description: We have a table that shows categories fetched from database with a show form button that has "Java Script" onClick event functionality that displays form consists of input box with an update category button to perform update query to update categories into database and hide form button as same show form to disappear form.
+		Screenshot:
+
+		10. Page 10 - Manage Users:
+
+		Description: We have a title of manage users and two links that are written in "Java Script" to dynamically display registered user and their saved medical prescription without page reload that comes from different files fetched from database with one click event and for deleting user we have a functionality show form button that has "Java Script" onClick event functionality that displays form consists of input box to enter user ID  with an delete user button to perform delete query to delete user from database and hide form button as same show form to disappear form .
+		Screenshot:
+
+		11. Page 11 - Manage Orders:
+	
+		Description: We have a table that shows orders placed by registered users fetched from database and we have functionality to manually manage order status with the specific order ID, with a show form button that has "Java Script" onClick event functionality that displays form consists of input box to enter order Id and a dropdown list to select order status stage, with an update status button to perform update query to update status into database and hide form button as same show form to disappear form.
+		Screenshot:
+
+		12. Page 12 - Report:
+
+		Description: We have a two tables first table shows all "Delivered Orders" as sales report and second table shows "Cancelled Orders" as purchase cancel report fetched from database.
+		Screenshot:
+
+
+	2. Frontend descriptions and screenshots
+
+		1. Page 1 - Index:
+
+		Description: This page is for guest users, we have two navigation bars at the top they are positioned to stick on top while scrolling the website first navigation bar displays our website name and multiple page links that are access by guest users and web page's one of page link is for login user second navigation bar shows the multiple categories page links that are "Kids", "Teenagers", "Men", "Women", "Senior Citizens", and we have a products catalogue consists of "Product Category", "Product Name", "Description", "Price" and a "Add to cart" button that will help user to login the website in products catalogue every product has a link to it's product details page.
+		Screenshot: 
+
+
+		
+		

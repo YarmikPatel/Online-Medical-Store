@@ -33,6 +33,7 @@ body {
 
 .profile-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd; /* Subtle separator */
@@ -66,10 +67,9 @@ body {
     background-color: #0056b3; /* Darker blue on hover */
   }
 
-.profile-info h1 {
+.profile-header h1 {
   margin-bottom: 5px;
   color: #007bff; /* Example: Blue heading */
-
 }
 
 .profile-info p {
@@ -168,16 +168,17 @@ button:hover {
 <body>
 <div class="profile-container">
   <div class="profile-header">
-    <div class="profile-avatar">
+    <!-- <div class="profile-avatar">
       <img src="path/to/avatar.jpg" alt="Profile Picture">
-      <button class="edit-avatar">Edit</button> </div>
-    <div class="profile-info">
-      <h1>User Name</h1>
+      <button class="edit-avatar">Edit</button> </div> -->
+    <!-- <div class="profile-info"> -->
+      <h1>User Profile</h1>
+      <p>User Name</p>
       <p>Email: user@example.com</p>
       <p>Phone: +1-555-123-4567</p>
       <p>Address: 123 Main St, Anytown, CA 91234</p>
       <button class="edit-profile">Edit Profile</button>
-    </div>
+    <!-- </div> -->
   </div>
 
   <div class="profile-navigation">
