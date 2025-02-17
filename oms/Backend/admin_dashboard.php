@@ -156,11 +156,12 @@ include('connection.php');
                          if(mysqli_num_rows($result) > 0){
                                 echo "<strong>Stock Alerts:</strong><br>";
                                 echo "<table class='alert-table'>";
-                                echo "<thead><tr><th>Product Name</th><th>Stock Left</th></tr></thead>";
+                                echo "<thead><tr><th>Product ID</th><th>Product Name</th><th>Stock Left</th></tr></thead>";
                                 echo "<tbody>";
                                 // Loop through the results and display each product with low stock in table rows
                                         while($row = $result->fetch_assoc()){
                                              echo "<tr>";
+                                             echo "<td>" . $row['pid'] . "</td>";
                                              echo "<td>" . $row['pname'] . "</td>";
                                              echo "<td>" . $row['stock'] . "</td>";
                                              echo "</tr>";
