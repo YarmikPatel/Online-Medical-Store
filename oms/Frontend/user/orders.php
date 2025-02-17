@@ -4,9 +4,6 @@ ini_set('display_errors', 1);
 include('../../Backend/connection.php');
 include 'navbar.php';
 $uid =  $_SESSION['uid'];
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -207,6 +204,28 @@ $uid =  $_SESSION['uid'];
     background-color: #cc0000; /* Darker red on hover */
 }
 
+
+#dow_invoice {
+    text-decoration: none;
+    background-color: #007bff; /* Blue color */
+    margin-left: 378px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#dow_invoice:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+#dow_invoice:active {
+    background-color: #004494; /* Even darker blue on click */
+}
+
     </style>
 </head>
 <body>
@@ -236,6 +255,7 @@ $uid =  $_SESSION['uid'];
                     <?php 
                 }
                     ?>
+                   <a href="invoice.php?oid=<?php echo $order_id; ?>" class="dow_invoice" id="dow_invoice">Download Invoice</a>
                     </form>
                 </div>
             <?php endwhile; ?>
@@ -279,5 +299,6 @@ $uid =  $_SESSION['uid'];
 
         echo "<script>window.location.href = 'orders.php';</script>";
     }
-    
+
+       
 ?>

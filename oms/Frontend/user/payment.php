@@ -394,6 +394,11 @@ if (isset($_POST['comfirm_payment'])) {
 
     $payid = 106;
 
+    $sql_name = "SELECT * FROM registration WHERE uid=$uid";
+    $result_name = mysqli_query($conn,$sql_name);
+    $row = $result_name->fetch_assoc();
+    $customer_name = $row['full_name'];
+    
     switch($payment_type){
         case "Cash_on_Delivery":{
             $sql = "INSERT INTO `payment` (`uid`,`amout`,`payment_type`) VALUES ('$uid','$amount','$payment_type')";
@@ -410,7 +415,7 @@ if (isset($_POST['comfirm_payment'])) {
             $sql = "UPDATE product SET stock=stock-$qty WHERE pid=$pid";
             $result = mysqli_query($conn,$sql);
 
-            $sql = "INSERT INTO `order_history` (`uid`,`pid`,`order_date`,`price`,`qty`,`total_amount`,`mobile_no`,`payid`,`temp_address`) VALUES ('$uid','$pid','$order_date','$price','$qty','$amount','$mobile','$payid','$temp_address')";
+            $sql = "INSERT INTO `order_history` (`uid`,`pid`,`order_date`,`price`,`qty`,`total_amount`,`mobile_no`,`payid`,`temp_address`,`customer_name`) VALUES ('$uid','$pid','$order_date','$price','$qty','$amount','$mobile','$payid','$temp_address','$customer_name')";
             $result = mysqli_query($conn,$sql);
    
             echo "<script>
