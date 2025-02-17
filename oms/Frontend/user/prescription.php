@@ -1,4 +1,4 @@
-<!-- <?php
+ <?php
 include 'user_session.php';
 include('../../Backend/connection.php');
 include 'navbar.php';
@@ -14,23 +14,23 @@ if (!$result) {
 
 if(isset($_POST['insert_priscription'])){
 
-    $date = 
-    $illeness =
-    $dosage_schedule =
-    $doctor_name =
-    $hospital_name =
+//     $date = 
+//     $illeness =
+//     $dosage_schedule =
+//     $doctor_name =
+//     $hospital_name =
 
-    <label for="date">Date:</label>
-    <input type="date" name="date" required>
-    <label for="illness">illness:</label>
-    <input type="text" name="illness" required>
-    <label for="dosage_schedule">Dosage Schedule:</label>
-    <input type="text" name="dosage_schedule" required>
-    <label for="doctor_name">Doctor Name:</label>
-    <input type="text" name="doctor_name" required>
-    <label for="hospital_name">Hospital Name:</label>
-    <input type="text" name="hospital_name" required>
-}
+//     <label for="date">Date:</label>
+//     <input type="date" name="date" required>
+//     <label for="illness">illness:</label>
+//     <input type="text" name="illness" required>
+//     <label for="dosage_schedule">Dosage Schedule:</label>
+//     <input type="text" name="dosage_schedule" required>
+//     <label for="doctor_name">Doctor Name:</label>
+//     <input type="text" name="doctor_name" required>
+//     <label for="hospital_name">Hospital Name:</label>
+//     <input type="text" name="hospital_name" required>
+ }
 ?>
 
 <!DOCTYPE html>
