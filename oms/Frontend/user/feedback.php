@@ -1,6 +1,6 @@
 <?php
 include('../../Backend/connection.php');
-include 'user_session.php';
+// include 'user_session.php';
 include 'navbar.php';
 $uid = $_SESSION['uid'];
 ?>
@@ -25,7 +25,7 @@ $uid = $_SESSION['uid'];
             color: #333; /* Example color */
             text-align: center;
         }
-        p{
+        .msg{
             padding: 10px 0;
         }
         .rating {
@@ -82,7 +82,7 @@ $uid = $_SESSION['uid'];
 <body>
     <div class="container">
         <h1>Your Feedback Matters - Help Us Improve!</h1>
-        <p>We value your opinions and are committed to providing the best possible pharmacy experience. Your feedback helps us understand what we're doing well and where we can improve.</p>
+        <p class="msg">We value your opinions and are committed to providing the best possible pharmacy experience. Your feedback helps us understand what we're doing well and where we can improve.</p>
 
         <form action="" method="post">
             <textarea id="msg" name="msg" placeholder="What did you like or dislike about your recent experience? How can we improve our services?" rows="4" required></textarea>
@@ -123,6 +123,7 @@ $uid = $_SESSION['uid'];
             });
         });
     </script>
+    <?php include('../footer.php'); ?>
 </body>
 </html>
 
